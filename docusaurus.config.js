@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'RGS Carbide',
   tagline: 'Securing your cloud-native mission',
-  url: 'https://ranchergovernment.com',
+  url: 'https://rancherfederal.github.io/carbide-docs',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
