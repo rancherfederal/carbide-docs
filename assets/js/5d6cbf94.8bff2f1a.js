@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[437],{4163:e=>{e.exports=JSON.parse('{"label":"facebook","permalink":"/carbide-docs/blog/tags/facebook","allTagsPath":"/carbide-docs/blog/tags","count":1}')}}]);
