@@ -26,7 +26,7 @@ jobs:
       # Install and build Docusaurus website
       - name: Build Docusaurus website
         run: |
-          cd website
+          cd carbide-docs
           npm install 
           npm run build
 
