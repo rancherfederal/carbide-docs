@@ -6,13 +6,13 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'RGS Carbide',
+  title: 'Rancher Government Carbide',
   tagline: 'Securing your cloud-native mission',
   url: 'https://rancherfederal.github.io',
   baseUrl: '/carbide-docs/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/carbide-logo.ico',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
