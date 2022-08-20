@@ -23,6 +23,7 @@ cd carbide-docs
 
 # install docusaurus & dependencies from package.json
 npm install # make sure you are in the root of the dir containing `package.json`
+# yarn install # if npm install did not work
 
 # test the installation
 npx docusaurus --version

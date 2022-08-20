@@ -4,32 +4,29 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Easy to Use',
+    title: 'Trusted Container Registry',
+    Svg: require('@site/static/img/carbide-logo.svg').default,
+    description: (
+      <>
+        SLSA 3 compliant Container Registry hosting RGS digitally-signed Rancher images.
+      </>
+    ),
+  },
+  {
+    title: 'STIGATRON',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Day 2 operator tactically built to monitor the DISA STIG integrity of your downrange RKE2 Kubernetes clusters.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'World Class Support',
+    Svg: require('@site/static/img/rancher-logo-stacked-white.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
-      </>
-    ),
-  },
-  {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
-    description: (
-      <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Rancher Government is your trusted provider of Rancher, Kubernetes and cloudnative enterprise support. Learn more at <a href="https://ranchergovernment.com">ranchergovernment.com</a>.
       </>
     ),
   },
