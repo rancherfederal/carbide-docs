@@ -1,41 +1,40 @@
-# Website
+# Rancher Government Carbide Docs
+```bash
+               ,        ,  _______________________________
+   ,-----------|'------'|  |                             |
+  /.           '-'    |-'  |_____________________________|
+ |/|             |    |    
+   |   .________.'----'    _______________________________
+   |  ||        |  ||      |                             |
+   \__|'        \__|'      |_____________________________|
 
-This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
+|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|
+|________________________________________________________|
 
-### Installation
-
-```
-$ yarn
-```
-
-### Local Development
-
-```
-$ yarn start
-```
-
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
-
-### Build
-
-```
-$ yarn build
+|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|
+|________________________________________________________|
 ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+## Local Development
+### Installing Dependencies (docusaurus)
+```bash
+git clone https://github.com/rancherfederal/carbide-docs
+cd carbide-docs 
 
-### Deployment
+# install docusaurus & dependencies from package.json
+npm install # make sure you are in the root of the dir containing `package.json`
 
-Using SSH:
-
-```
-$ USE_SSH=true yarn deploy
-```
-
-Not using SSH:
-
-```
-$ GIT_USER=<Your GitHub username> yarn deploy
+# test the installation
+npx docusaurus --version
 ```
 
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+### Deploy Locally
+```bash
+npm run start # this will open your default browser to http://localhost:3000
+```
+
+## Creating Content
+[Official Docusaurus Documentation](https://docusaurus.io/docs/creating-pages)
+
+## Publishing Content
+This docs site is served using github-pages. There is an [action](.github/workflows/deploy.yml) that will trigger upon commit to the `main` branch and deploy the new build to https://rancherfederal.github.io/carbide-docs/. 
