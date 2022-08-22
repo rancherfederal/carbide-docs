@@ -8,11 +8,6 @@ The full configuration using the shared alpha account is below:
 
 ```yaml
 # /etc/rancher/k3s/registries.yaml
-mirrors:
-  docker.io:
-    endpoint:
-      - "https://rgcrprod.azurecr.us"
-
 configs:
   "rgcrprod.azurecr.us":
     auth:
@@ -20,9 +15,11 @@ configs:
       password: <redacted>
 ```
 
-NOTE: The above configuration "registers" `rgcrprod.azurecr.us` as a potential mirror for _all_ images that come from `docker.io`.  For example: `nginx:latest` will also try to mirror from `rgcrprod.azurecr.us`, but since it is not available, it will silently fallback to `docker.io/nginx:latest`.
+You will also need to utilize the `system-default-registry` flag when installing K3s to ensure it uses the registry. For instance:
 
-WARNING: When validating the images with `ctr` or `crictl`, the loaded images will still maintain their pre-mirror naming (`rancher/system-agent:v0.1.1-suc:`).
+```bash
+curl -sfL https://get.k3s.io | sh - --system-default-registry rgcrprod.azurecr.us
+```
 
 ### Usage with `rke2`
 
@@ -32,14 +29,33 @@ The full configuration using the shared alpha account is below:
 
 ```yaml
 # /etc/rancher/rke2/registries.yaml
-mirrors:
-  docker.io:
-    endpoint:
-      - "https://rgcrprod.azurecr.us"
-
 configs:
   "rgcrprod.azurecr.us":
     auth:
       username: internal-tester-read
       password: <redacted>
 ```
+
+You will also need to utilize the `system-default-registry` flag when installing RKE2 to ensure it uses the registry. For instance, if using the configuration file:
+
+```bash
+# /etc/rancher/rke2/config.yaml
+node-name: controlplane1
+write-kubeconfig-mode: 0640
+system-default-registry: rgcrprod.azurecr.us
+...
+```
+
+### Usage with `Rancher`
+
+When installing Rancher, to utilize the private registry, you'll need to set the following values in your Helm values:
+
+```bash
+helm install rancher rancher-latest/rancher \
+  --namespace cattle-system \
+  --set hostname=rancher.my.org \
+  --set replicas=3 \
+  --set rancherImage: rgcrprod.azurecr.us/rancher/ancher
+  --set systemDefaultRegistry: rgcrprod.azurecr.us
+
+NOTE: This requires configuring your above K3s/RKE2 `registries.yaml` to work.
