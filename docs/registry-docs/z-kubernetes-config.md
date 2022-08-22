@@ -55,7 +55,7 @@ helm install rancher rancher-latest/rancher \
   --namespace cattle-system \
   --set hostname=rancher.my.org \
   --set replicas=3 \
-  --set rancherImage: rgcrprod.azurecr.us/rancher/ancher
+  --set rancherImage: rgcrprod.azurecr.us/rancher/rancher
   --set systemDefaultRegistry: rgcrprod.azurecr.us
 
 NOTE: This requires configuring your above K3s/RKE2 `registries.yaml` to work.
