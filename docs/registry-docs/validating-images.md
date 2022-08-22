@@ -25,18 +25,18 @@ cosign verify --key $KEY rgcrprod.azurecr.us/rancher/system-agent:v0.1.1-suc
 
 ### Software Bill of Materials
 ```bash
-# Viewing the image's SBOM
-cosign download sbom rgcrprod.azurecr.us/rancher/system-agent:v0.1.1-suc
-
 # Verifying the image's SBOM attestation by validating the supplied signature
 cosign verify --key $KEY rgcrprod.azurecr.us/rancher/system-agent:v0.1.1-suc --attachment sbom
+
+# Viewing the image's SBOM
+cosign download sbom rgcrprod.azurecr.us/rancher/system-agent:v0.1.1-suc
 ```
 
 ### Vulnerability Scan Results
 ```bash
-# Viewing the image's vulnerability scan results
-oras download rgcrprod.azurecr.us/rancher/system-agent:v0.1.1-suc.trivy.json
-
 # Verifying the image's SBOM attestation by validating the supplied signature
 cosign verify --key $KEY rgcrprod.azurecr.us/rancher/system-agent:v0.1.1-suc.trivy.json
+
+# Viewing the image's vulnerability scan results
+oras download rgcrprod.azurecr.us/rancher/system-agent:v0.1.1-suc.trivy.json
 ```
