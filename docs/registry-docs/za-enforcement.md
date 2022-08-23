@@ -12,7 +12,7 @@ See the docs on how to install [Kubewarden](https://docs.kubewarden.io/quick-sta
 
 ### Private Registry
 
-If your Rancher system images are in a private registry requiring authentication, you'll need to configure your Kubewarden policy-server with an [Pull Secret](https://docs.kubewarden.io/operator-manual/policy-servers/private-registry) in order for it to validate the signature.
+If your Rancher system images are in a private registry requiring authentication, you'll need to configure your Kubewarden policy-server with a [Pull Secret](https://docs.kubewarden.io/operator-manual/policy-servers/private-registry) in order for it to validate the signature.
 
 ### Creating the Policy
 
