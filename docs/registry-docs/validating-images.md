@@ -35,8 +35,8 @@ cosign download sbom rgcrprod.azurecr.us/rancher/system-agent:v0.1.1-suc
 ### Vulnerability Scan Results
 ```bash
 # Verifying the image's SBOM attestation by validating the supplied signature
-cosign verify --key $KEY rgcrprod.azurecr.us/rancher/system-agent:v0.1.1-suc.trivy.json
+cosign verify-attestation --key $KEY --type vuln rgcrprod.azurecr.us/rancher/system-agent:v0.1.1-suc --type vuln > /dev/null
 
 # Viewing the image's vulnerability scan results
-oras download rgcrprod.azurecr.us/rancher/system-agent:v0.1.1-suc.trivy.json
+cosign verify-attestation --key $KEY rgcrprod.azurecr.us/rancher/system-agent:v0.1.1-suc  --type vuln | jq -r '.payload' | base64 -d | jq
 ```
