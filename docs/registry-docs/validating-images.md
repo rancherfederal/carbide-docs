@@ -13,7 +13,6 @@ tCAZva7CLlk/6gxvCM0QkIKznfaGTRMMYTaHMdQSau6yulDLlpokA++i8Q==
 ### Prerequisites
 
 * [Cosign CLI](https://docs.sigstore.dev/cosign/installation/)
-* [Oras CLI](https://oras.land/cli/)
 
 ### Checking the Digital Signature
 ```bash
