@@ -1,6 +1,6 @@
 # Validating Images
 
-This page will guide you through how to validate the secured images against our public key to ensure provenance. It also details how to download the SBOMs and vulnerability scans for those images.
+This will guide you through validating the signatures and attestations of each image in the secured registry, as well as how to download artifacts about the image (SBOM, Trivy Vulnerability Scan).
 
 #### ssf-key.pub
 ```bash
