@@ -9,6 +9,50 @@
 | * (non eks/aks) | Rancher (Custom provisioner) | Authenticated Registry requires manual registries.yaml creation  |             |
 | *               | Imported Cluster             | UNKNOWN                                                          |             |
 
+## Configuring Cert Manager
+
+As Rancher has a dependency on Cert Manager, you'll need to update your Helm install of Cert Manager to use SSF images that are validated/signed. 
+
+If you're following Rancher's [Connected](https://rancher.com/docs/rancher/v2.5/en/installation/install-rancher-on-k8s/#4-install-cert-manager) installation instructions, you'll need to follow the next steps to use the SSF images for cert-manager. 
+
+If using the [Airgapped](https://rancher.com/docs/rancher/v2.5/en/installation/other-installation-methods/air-gap/install-rancher/#1-add-the-cert-manager-repo) instructions, make sure you've pulled the [SSF cert-manager images](pulling-images.md) to your local/airgapped registry.
+
+### Cert Manager Helm Install
+
+After adding the Cert Manager repo and installing the CRDs, use the following to create a temporary `values.yaml` for your chart, subsituting your registry domain:
+
+```
+cat <<EOT > /tmp/cert-manager-values.yaml
+image:
+  registry: YOUR_REGISTRY_DOMAIN_HERE
+  repository: jetstack/cert-manager-controller
+
+webhook:
+  image:
+    registry: YOUR_REGISTRY_DOMAIN_HERE
+    repository: jetstack/cert-manager-webhook
+  
+cainjector:
+  image:
+    registry: YOUR_REGISTRY_DOMAIN_HERE
+    repository: jetstack/cert-manager-cainjector
+
+startupapicheck:
+  image:
+    registry: YOUR_REGISTRY_DOMAIN_HERE
+    repository: jetstack/cert-manager-ctl
+EOT
+```
+
+Then use the following `helm install` command to use the SSF images:
+```
+helm install cert-manager jetstack/cert-manager \
+  --namespace cert-manager \
+  --create-namespace \
+  --version v1.9.1 \
+  -f /tmp/values.yaml
+```
+
 ## Registry Auth Scenarios
 ### Global Registry
 
