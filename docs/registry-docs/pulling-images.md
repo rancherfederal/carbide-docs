@@ -53,11 +53,11 @@ done
 
 ```bash
 # To login with the shared credentials
-docker login -u internal-tester-read -p <redacted> rgcrprod.azurecr.us
+cosign login -u internal-tester-read -p <redacted> rgcrprod.azurecr.us
 
 # Your target registry (and login if it requires authentication)
 TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
-# docker login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY  
+# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY  
 
 # Set the specific release of Longhorn you're targeting: https://github.com/longhorn/longhorn/releases
 LONGHORN_RELEASE=v1.3.1
@@ -96,11 +96,11 @@ See [Rancher Manager Configuration](z-rancher-config.md) for configuring the Cer
 
 ```bash
 # To login with the shared credentials
-docker login -u internal-tester-read -p <redacted> rgcrprod.azurecr.us
+cosign login -u internal-tester-read -p <redacted> rgcrprod.azurecr.us
 
 # Your target registry (and login if it requires authentication)
 TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
-# docker login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY  
+# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY  
 
 # Set the specific release of Rancher you're targeting: https://github.com/rancher/rancher/releases
 RANCHER_RELEASE=v2.6.7
