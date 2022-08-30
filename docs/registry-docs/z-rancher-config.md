@@ -13,9 +13,9 @@
 
 As Rancher has a dependency on Cert Manager, you'll need to update your Helm install of Cert Manager to use SSF images that are validated/signed. 
 
-If you're following Rancher's [Connected](https://rancher.com/docs/rancher/v2.5/en/installation/install-rancher-on-k8s/#4-install-cert-manager) installation instructions, you'll need to follow the next steps to use the SSF images for cert-manager. 
+If you're following Rancher's [Connected](https://rancher.com/docs/rancher/v2.6/en/installation/install-rancher-on-k8s/#4-install-cert-manager) installation instructions, you'll need to follow the next steps to use the SSF images for cert-manager. 
 
-If using the [Airgapped](https://rancher.com/docs/rancher/v2.5/en/installation/other-installation-methods/air-gap/install-rancher/#1-add-the-cert-manager-repo) instructions, make sure you've pulled the [SSF cert-manager images](pulling-images.md) to your local/airgapped registry.
+If using the [Airgapped](https://rancher.com/docs/rancher/v2.6/en/installation/other-installation-methods/air-gap/install-rancher/#1-add-the-cert-manager-repo) instructions, make sure you've pulled the [SSF cert-manager images](pulling-images.md) to your local/airgapped registry.
 
 ### Cert Manager Helm Install
 
@@ -49,7 +49,7 @@ Then use the following `helm install` command to use the SSF images:
 helm install cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.9.1 \
+  --version v1.7.1 \
   -f /tmp/values.yaml
 ```
 
