@@ -4,12 +4,47 @@
 
 * [Cosign](https://docs.sigstore.dev/cosign/installation/)
 
-## TODO
+## Pulling images
 
-How do we compile a list of images to copy?
+Make sure you've checked out the section on [Pulling Images](pulling-images.md) and that you've saved your images using the save script on that page. It is required to collect the manifest that the load script will use.
+
+**NOTE**: `cosign` requires that your target registry is secured with a valid certificate. If necessary, you may need to set-up/add the CA to your host's CA chain so it interprets the secured.
 
 ## Copying a Local Image to a Registry
 
+Update/run the following script to load your images from the generated TAR (will work for any component TAR):
+
 ```bash
-cosign copy image-name YOUR_REGISTRY_DOMAIN_HERE/image-name
+# Remote Registry
+TARGET_REGISTRY=YOUR_REGISTRY_HERE
+TARGET_REGISTRY_USER=YOUR_REGISTRY_USER_HERE
+TARGET_REGISTRY_PASSWORD=YOUR_REGISTRY_PASSWORD_HERE
+
+# Source and Working Files
+SOURCE_TAR=IMAGE_TAR_PATH
+WORKING_DIR=/tmp/images  # Change this if desired/necessary
+
+if [[ ! -f "$SOURCE_TAR" ]]; then
+    echo "ERROR: Tarball '$SOURCE_TAR' not found."
+    exit 1
+fi
+
+if [[ -d "$WORKING_DIR" ]]; then
+    echo "ERROR: Working directory '$WORKING_DIR' exists."
+    echo "Remove it or change the value."
+    exit 1
+fi
+
+cosign login -u $TARGET_REGISTRY_USER -p $TARGET_REGISTRY_PASSWORD $TARGET_REGISTRY
+
+mkdir -p "$WORKING_DIR"
+tar zxf "$SOURCE_TAR" -C "$WORKING_DIR"
+
+for image in $(cat $WORKING_DIR/manifest.txt); do
+    IFS="|" read -r img_id source_image <<< $image
+    dest_image=$(echo $source_image | sed "s|TARGET_REGISTRY|$TARGET_REGISTRY|g")
+    cosign load --dir "$WORKING_DIR/$img_id" $dest_image
+done
+
+rm -rf $WORKING_DIR
 ```
