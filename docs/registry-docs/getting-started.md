@@ -8,7 +8,7 @@ As our product is still in the beta phase, there are some expectations to level-
 * Beta users can expect tooling and processes to be changed, improved and streamlined continuously throughout the beta.
 * Beta users can expect throttling of the LHOCR registry at IOC (standard practice will be to use your own registry).
 
-If you see issues and areas for improvement, please submit Github issues [here](https://github.com/rancherfederal/ssf-feedback/issues/)
+If you see issues and areas for improvement, please submit Github issues [here](https://github.com/rancherfederal/ssf-feedback/issues/).
 
 ## What is this?
 Here at Rancher Government Solutions, we take the security of our products seriously.  Products like `rke2` are tailor built to address the "secure by default" needs of the federal government, while still maintaining the same ease of deployments that our users have come to love from Rancher products.
