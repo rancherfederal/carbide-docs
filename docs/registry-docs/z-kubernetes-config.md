@@ -11,7 +11,7 @@ The full configuration using the shared alpha account is below:
 configs:
   "rgcrprod.azurecr.us":
     auth:
-      username: internal-tester-read
+      username: <redacted>
       password: <redacted>
 ```
 
@@ -32,7 +32,7 @@ The full configuration using the shared alpha account is below:
 configs:
   "rgcrprod.azurecr.us":
     auth:
-      username: internal-tester-read
+      username: <redacted>
       password: <redacted>
 ```
 
@@ -45,18 +45,3 @@ write-kubeconfig-mode: 0640
 system-default-registry: rgcrprod.azurecr.us
 ...
 ```
-
-### Usage with `Rancher`
-
-When installing Rancher, to utilize the private registry, you'll need to set the following values in your Helm values:
-
-```bash
-helm install rancher rancher-latest/rancher \
-  --namespace cattle-system \
-  --set hostname=rancher.my.org \
-  --set replicas=3 \
-  --set rancherImage=rgcrprod.azurecr.us/rancher/rancher
-  --set systemDefaultRegistry=rgcrprod.azurecr.us
-```
-
-NOTE: This requires configuring your above K3s/RKE2 `registries.yaml` to work.

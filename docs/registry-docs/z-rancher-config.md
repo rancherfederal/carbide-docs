@@ -19,6 +19,8 @@ If using the [Airgapped](https://rancher.com/docs/rancher/v2.6/en/installation/o
 
 ### Cert Manager Helm Install
 
+Follow Rancher's [Connected](https://rancher.com/docs/rancher/v2.6/en/installation/install-rancher-on-k8s/#4-install-cert-manager) installation instructions, but using the following steps instead of the `helm install` command from the docs.
+
 After adding the Cert Manager repo and installing the CRDs, use the following to create a temporary `values.yaml` for your chart, subsituting your registry domain:
 
 ```
@@ -94,7 +96,7 @@ mirrors:
 configs:
   "rgcrprod.azurecr.us":
     auth:
-      username: internal-tester-read
+      username: <redacted>
       password: <redacted>
 ```
 
@@ -104,6 +106,24 @@ configs:
 | Use of a 'golden image'     | Pre-configure `registries.yaml` on golden image before host provisioning |   
 | Rancher provisioned cluster | Embed a `cloud-init` file into cluster provisioning (Example below)          |   
 | Ansible/Saltstack/Manual    | Pre-configure `registries.yaml` on host before cluster provisioning      |   
+
+
+### Usage with `Rancher`
+
+Follow Rancher's [Installation Guide](https://rancher.com/docs/rancher/v2.5/en/installation/install-rancher-on-k8s/), adding in the following steps to your `helm install` command.
+
+When installing Rancher, to utilize the private registry, you'll need to set the following values in your Helm values:
+
+```bash
+helm install rancher rancher-latest/rancher \
+  --namespace cattle-system \
+  --set hostname=rancher.my.org \
+  --set replicas=3 \
+  --set rancherImage=rgcrprod.azurecr.us/rancher/rancher
+  --set systemDefaultRegistry=rgcrprod.azurecr.us
+```
+
+NOTE: This requires configuring your above K3s/RKE2 `registries.yaml` to work.
 
 #### Example `cloud-init` (`RKE2`)
 ```yaml
@@ -122,7 +142,7 @@ write_files:
         configs:
         "rgcrprod.azurecr.us":
             auth:
-            username: internal-tester-read
+            username: <redacted>
             password: <redacted>
     permissions: "0644"
 ```

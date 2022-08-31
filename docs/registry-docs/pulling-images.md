@@ -11,7 +11,7 @@
 
 ```bash
 # To login with the shared credentials
-cosign login -u internal-tester-read -p <redacted> rgcrprod.azurecr.us
+cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # Your target registry (and login if it requires authentication)
 TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
@@ -32,7 +32,7 @@ done
 
 ```bash
 # To login with the shared credentials
-cosign login -u internal-tester-read -p <redacted> rgcrprod.azurecr.us
+cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # Your target registry (and login if it requires authentication)
 TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
@@ -53,7 +53,7 @@ done
 
 ```bash
 # To login with the shared credentials
-cosign login -u internal-tester-read -p <redacted> rgcrprod.azurecr.us
+cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # Your target registry (and login if it requires authentication)
 TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
@@ -76,7 +76,7 @@ done
 
 ```bash
 # Log into the registry
-cosign login -u internal-tester-read -p <redacted> rgcrprod.azurecr.us
+cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # Add the cert manager repo (required Helm)
 helm repo add jetstack https://charts.jetstack.io
@@ -96,7 +96,7 @@ See [Rancher Manager Configuration](z-rancher-config.md) for configuring the Cer
 
 ```bash
 # To login with the shared credentials
-cosign login -u internal-tester-read -p <redacted> rgcrprod.azurecr.us
+cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # Your target registry (and login if it requires authentication)
 TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
