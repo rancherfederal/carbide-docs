@@ -1,5 +1,7 @@
 # RKE2/K3s Configuration
 
+This page will walk you through how to configure Rancher Kubernetes distributions (K3s, RKE2) to utilize the secured images instead of the upstream Docker hub images.
+
 ### Usage with `k3s`
 
 To modify the system images that `k3s` uses upon bootstrapping, configure k3s' mirror settings as described [here](https://rancher.com/docs/k3s/latest/en/installation/private-registry/#mirrors).

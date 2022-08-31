@@ -1,5 +1,7 @@
 # Getting Started
 
+This page will walk through beta expectations of the hardened registry and what exactly the hardened registry provides.
+
 ## Beta Expectations
 As our product is still in the beta phase, there are some expectations to level-set:
 

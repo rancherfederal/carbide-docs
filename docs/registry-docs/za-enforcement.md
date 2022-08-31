@@ -1,5 +1,7 @@
 # Enforcement
 
+This page will walk you through configuring Policy Enforcement (Kubewarden, Open Policy Agent) to ensure images running in your cluster that come from the hardened registry are validated against our public key before deploying.
+
 ## Kubewarden Enforcement 
 
 ### Installation
