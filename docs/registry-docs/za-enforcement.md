@@ -1,8 +1,4 @@
 # Enforcement
-## OPA Gatekeeper Enforcement 
-```bash
-coming soon
-```
 
 ## Kubewarden Enforcement 
 
@@ -49,4 +45,9 @@ spec:
           MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE5zlXeLmRxBHbVmDRZpnCFdzKhyKO
           tCAZva7CLlk/6gxvCM0QkIKznfaGTRMMYTaHMdQSau6yulDLlpokA++i8Q==
           -----END PUBLIC KEY-----
+```
+
+## OPA Gatekeeper Enforcement 
+```bash
+coming soon
 ```
