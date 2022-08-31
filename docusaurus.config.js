@@ -64,7 +64,7 @@ const config = {
         respectPrefersColorScheme: false,
       },
       navbar: {
-        title: 'RGS Carbide',
+        title: 'Rancher Carbide',
         logo: {
           alt: 'Carbide Logo',
           src: 'img/carbide-logo.svg',
@@ -77,11 +77,11 @@ const config = {
             label: 'Docs',
           },
           // {to: '/blog', label: 'Blog', position: 'left'},
-          // {
-          //   href: 'https://github.com/facebook/docusaurus',
-          //   label: 'GitHub',
-          //   position: 'right',
-          // },
+          {
+            href: 'https://github.com/rancherfederal/carbide-docs/issues',
+            label: 'Feedback',
+            position: 'right',
+          },
         ],
       },
       footer: {
