@@ -1,5 +1,7 @@
 # Validating Images
 
+This page will guide you through how to validate the secured images against our public key to ensure provenance. It also details how to download the SBOMs and vulnerability scans for those images.
+
 #### ssf-key.pub
 ```bash
 -----BEGIN PUBLIC KEY-----

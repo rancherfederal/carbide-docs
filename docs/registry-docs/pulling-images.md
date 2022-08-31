@@ -1,5 +1,9 @@
 # Downloading Release Images
 
+This page will walk you through how you can pull the secured images from the hardened registry, whether you're working in a connected or airgapped environment.
+
+**NOTE**: There is currently a Cosign [bug](https://github.com/sigstore/cosign/issues/2208) when using Harbor as your target registry and using the `cosign copy` command. Please utilize the Airgapped instructions if using Harbor. 
+
 ## Requirements
 
 * [Cosign](https://docs.sigstore.dev/cosign/installation/)

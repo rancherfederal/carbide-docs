@@ -1,5 +1,9 @@
 # Rancher Manager Configuration
 
+This page will walk you through how to configure Rancher Manager images instead of the upstream Docker hub images, both for its own components and downstream Rancher Kubernetes clusters (RKE2/K3s).
+
+**NOTE**: Due to current limitations of cloud providers, this project will not work for managing Cloud Provider clusters (AKS, EKS, GKE). If you're currently using Rancher to manage those workloads, do not use this project. We intend to improve this experience in the future.
+
 ## Compatibility Matrix
 | Infra           | Provisioner                  | Registry Auth Strategy                                           | Test Status |
 |-----------------|------------------------------|------------------------------------------------------------------|-------------|

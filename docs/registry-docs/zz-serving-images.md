@@ -1,5 +1,7 @@
 # Serving Container Images
 
+This page will walk you through seeding your registry with images from the hardened registry for all Rancher components.
+
 ## Requirements
 
 * [Cosign](https://docs.sigstore.dev/cosign/installation/)

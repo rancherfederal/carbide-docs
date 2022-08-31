@@ -1,5 +1,7 @@
 # Prerequisites 
 
+Below are all the things you need to get started with the Hardened Container Registry. As we improve and streamline the process, this list could evolve.
+
 ### Required Tools
 To explore what's available, you'll need some common tooling:
 
@@ -10,34 +12,3 @@ Container Tools
 - [docker](https://docs.docker.com/get-docker/0) (just the cli, but it comes as a package)
 - [helm](https://helm.sh/docs/)
 - [hauler](https://hauler.dev) (Not currently required, but will be in the near future)
-
-### Accounts
-
-In this initial alpha release, there are 2 accounts that serve different purposes:
-
-#### Token Authentication
-
-For longer term deployments, a read only, non-expiring token is provided.  This authentication method does not provide access to the UI, but does allow for clients such as `docker`, and `containerd` (kubernetes) to authenticate indefinately.
-
-```bash
-# To login with the shared credentials
-docker login -u <redacted> -p <redacted> rgcrprod.azurecr.us
-
-# You also need to login via cosign
-cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
-```
-If using in a Kubernetes cluster, follow the [basic usage](#basic-usage) instructions below.
-
-#### Early UI access authentication
-
-We are initially using the default UI that comes with Azure Government's Container Registry, with near plans of replacing this with a more purpose built custom UI.
-
-In the meantime, a read only azure acocunt can be used for __obtaining temporary pull credentials__.  These tokens can be generated as follows:
-
-```bash
-# NOTE: The Azure CLI is required
-az acr login -n rgscr
-
-# username: ssf-demo@rancherfederal.onmicrosoft.us
-# password: redacted
-```
