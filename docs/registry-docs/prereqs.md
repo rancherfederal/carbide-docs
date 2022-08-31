@@ -6,10 +6,10 @@ To explore what's available, you'll need some common tooling:
 Supply Chain Validation:
 - [cosign](https://github.com/sigstore/cosign)
 
-Container Tools (choose one)
+Container Tools
 - [docker](https://docs.docker.com/get-docker/0) (just the cli, but it comes as a package)
-- [skopeo](https://github.com/containers/skopeo)
-- [hauler](https://hauler.dev)
+- [helm](https://helm.sh/docs/)
+- [hauler](https://hauler.dev) (Not currently required, but will be in the near future)
 
 ### Accounts
 
@@ -21,7 +21,10 @@ For longer term deployments, a read only, non-expiring token is provided.  This 
 
 ```bash
 # To login with the shared credentials
-docker login -u internal-tester-read -p <redacted> rgcrprod.azurecr.us
+docker login -u <redacted> -p <redacted> rgcrprod.azurecr.us
+
+# You also need to login via cosign
+cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 ```
 If using in a Kubernetes cluster, follow the [basic usage](#basic-usage) instructions below.
 
