@@ -43,9 +43,13 @@ mkdir -p "$WORKING_DIR"
 tar zxf "$SOURCE_TAR" -C "$WORKING_DIR"
 
 for image in $(cat $WORKING_DIR/manifest.txt); do
-    IFS="|" read -r img_id source_image <<< $image
-    dest_image=$(echo $source_image | sed "s|TARGET_REGISTRY|$TARGET_REGISTRY|g")
-    cosign load --dir "$WORKING_DIR/$img_id" $dest_image
+    img_id=$(printf $image | cut -d "|" -f 1)
+    dest_image=$(printf "$image" | cut -d "|" -f 2 | sed "s|TARGET_REGISTRY|$TARGET_REGISTRY|g")
+    printf "===>Pushing $dest_image\n";
+    RESULT=$(cosign load --dir $WORKING_DIR/$img_id $dest_image)
+    if [ $? != 0 ]; then
+      printf "Error detected: $RESULT\n"
+    fi
 done
 
 rm -rf $WORKING_DIR

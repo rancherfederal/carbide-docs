@@ -153,15 +153,16 @@ mkdir -p "$DEST_DIRECTORY"
 
 K3S_IMAGES=$(curl --silent -L https://github.com/k3s-io/k3s/releases/download/$K3S_RELEASE/k3s-images.txt)
 for image in $K3S_IMAGES; do
+
     source_image=$(echo $image | sed "s|docker.io|$SOURCE_REGISTRY|g")
     dest_image=$(echo $image | sed "s|docker.io|TARGET_REGISTRY|g")
     
     # Create manifest to use during load
-    img_id_num=$(echo $RANDOM | md5sum | head -c 20)
+    img_dir=$(mktemp -d $DEST_DIRECTORY/k3s-image.XXXXXXX)
+    img_id_num=${img_dir: -17}
     echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
+
     # Save image locally
-    mkdir $DEST_DIRECTORY/$img_id_num
     cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
 done
 
@@ -208,8 +209,9 @@ for image in $RKE2_IMAGES; do
     dest_image=$(echo $image | sed "s|docker.io|TARGET_REGISTRY|g")
     
     # Create manifest to use during load
-    img_id_num=$(echo $RANDOM | md5sum | head -c 20)
-    echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
+    img_dir=$(mktemp -d $DEST_DIRECTORY/rke2-image.XXXXXXX)
+    img_id_num=${img_dir: -18}
+    echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt    
     
     # Save image locally
     mkdir $DEST_DIRECTORY/$img_id_num
@@ -260,11 +262,11 @@ for image in $LONGHORN_IMAGES; do
     dest_image="TARGET_REGISTRY/$image"
     
     # Create manifest to use during load
-    img_id_num=$(echo $RANDOM | md5sum | head -c 20)
+    img_dir=$(mktemp -d $DEST_DIRECTORY/longhorn-image.XXXXXXX)
+    img_id_num=${img_dir: -22}
     echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
+
     # Save image locally
-    mkdir $DEST_DIRECTORY/$img_id_num
     cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
 done
 
@@ -318,11 +320,11 @@ for image in $(helm template jetstack/cert-manager --version $CERT_MANAGER_RELEA
     dest_image=$(echo $image | sed "s/quay.io/TARGET_REGISTRY/g")
     
     # Create manifest to use during load
-    img_id_num=$(echo $RANDOM | md5sum | head -c 20)
+    img_dir=$(mktemp -d $DEST_DIRECTORY/cert-image.XXXXXXX)
+    img_id_num=${img_dir: -18}
     echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
+
     # Save image locally
-    mkdir $DEST_DIRECTORY/$img_id_num
     cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
 done
 
@@ -342,8 +344,8 @@ SOURCE_REGISTRY_USER=YOUR_CARBIDE_USER
 SOURCE_REGISTRY_PASS=YOUR_CARBIDE_PASS
 
 # Working directories & TAR
-DEST_DIRECTORY=/tmp/longhorn-images
-DEST_TAR=/tmp/longhorn-images.tar.gz  # Change this to the location you want for your resulting TAR 
+DEST_DIRECTORY=/tmp/rancher-images
+DEST_TAR=/tmp/rancher-images.tar.gz  # Change this to the location you want for your resulting TAR 
 
 # Longhorn Version
 RANCHER_RELEASE=v2.6.7
@@ -369,12 +371,15 @@ for image in $RANCHER_IMAGES; do
     dest_image="TARGET_REGISTRY/$image"
     
     # Create manifest to use during load
-    img_id_num=$(echo $RANDOM | md5sum | head -c 20)
+    img_dir=$(mktemp -d $DEST_DIRECTORY/rancher-image.XXXXXXX)
+    img_id_num=${img_dir: -21}
     echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
     
     # Save image locally
-    mkdir $DEST_DIRECTORY/$img_id_num
-    cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
+    cosign save --dir "$img_dir" $source_image
+    if [ $? != 0 ]; then
+        printf "FAILED: cosign save --dir $img_dir $source_image\n"
+    fi
 done
 
 # Compress directory
