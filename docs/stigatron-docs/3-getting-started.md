@@ -77,6 +77,9 @@ If you provisioned or are provisioning RKE2 directly from the Rancher UI, you ca
 6. In the `Authentication` box, select `Create a HTTP Basic Auth Secret` and enter your credentials.
   * For future clusters using the same registry, you can just select existing secret.
 7. Click `Save`.
+
+  ![Rancher Registry Configuration](/static/img/stigatron/registry-configuration.png)
+
 8. Wait for cluster to reconcile.
 
 ### Imported RKE2 Cluster
