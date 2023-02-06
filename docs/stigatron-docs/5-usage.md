@@ -1,5 +1,4 @@
-# Using STIGATRON (TODO SCREENSHOTS)
-
+# Using STIGATRON
 1. After installing STIGATRON on your downstream cluster, when you navigate to that downstream cluster, you should see STIGATRON on the left navigation menu. Click there.
 
   ![STIGATRON Menu Selection](/img/stigatron/stigatron-menu.png)
@@ -12,4 +11,10 @@
 
   ![Open Visualizer](/img/stigatron/open-visualizer.png)
 
-4. To export scan results to common formats, select the `Export` button in the upper-left and select the desired export format.
+4. To export scan results to common formats, select the `Export` button in the upper-left.
+
+  ![Select Export](/img/stigatron/heimdall-ui-export.png)
+
+5. Select the desired export format.
+
+  ![Select Export](/img/stigatron/heimdall-export.png)
