@@ -1,4 +1,4 @@
-## Using STIGATRON (TODO SCREENSHOTS)
+# Using STIGATRON (TODO SCREENSHOTS)
 
 1. After installing STIGATRON on your downstream cluster, when you navigate to that downstream cluster, you should see STIGATRON on the left navigation menu. Click there.
 2. To trigger a scan, click Create in the upper left, create a name, select a profile, and click Create.
