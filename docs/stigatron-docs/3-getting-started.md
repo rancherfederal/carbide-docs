@@ -59,7 +59,7 @@ rm -rf $DEST_DIRECTORY
 
 ### Local Cluster
 
-On the local cluster running Rancher Multi-cluster Manager, you'll need to configure credentials for the registry you've copied the STIGATRON images to. See the [Rancher Configuration](/rancher-config) on how to set up those credentials.
+On the local cluster running Rancher Multi-cluster Manager, you'll need to configure credentials for the registry you've copied the STIGATRON images to. See the [Rancher Configuration](/carbide-docs/docs/registry-docs/z-rancher-config) on how to set up those credentials.
 
 ### Downstream RKE2 Clusters
 
