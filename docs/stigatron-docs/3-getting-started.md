@@ -78,7 +78,7 @@ If you provisioned or are provisioning RKE2 directly from the Rancher UI, you ca
   * For future clusters using the same registry, you can just select existing secret.
 7. Click `Save`.
 
-  ![Rancher Registry Configuration](/static/img/stigatron/registry-configuration.png)
+  ![Rancher Registry Configuration](/img/stigatron/registry-configuration.png)
 
 8. Wait for cluster to reconcile.
 
