@@ -65,7 +65,7 @@ On the local cluster running Rancher Multi-cluster Manager, you'll need to confi
 
 For downstream RKE2 clusters, you'll need to also configure registry credentials. Depending on how RKE2 was configured and set up, there are a few ways to do this.
 
-### Rancher-Provisioned RKE2 Cluster (TODO SCREENSHOTS)
+### Rancher-Provisioned RKE2 Cluster
 
 If you provisioned or are provisioning RKE2 directly from the Rancher UI, you can configure/update that cluster with credentials.
 
