@@ -11,6 +11,27 @@ This page will walk you through how you can pull the secured images from the har
 
 ## Connected Environment
 
+### Carbide
+
+```bash
+# To login with the shared credentials
+cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
+
+# Your target registry (and login if it requires authentication)
+TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
+# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY  
+
+# Set the specific release of K3s you're targeting: https://github.com/rancherfederal/carbide-releases/releases
+CARBIDE_RELEASE=0.1.0
+
+CARBIDE_IMAGES=$(curl --silent -L https://github.com/rancherfederal/carbide-releases/releases/download/$CARBIDE_RELEASE/carbide-images.txt)
+for image in $CARBIDE_IMAGES; do
+    source_image=$(echo $image | sed "s/docker.io/rgcrprod.azurecr.us/g")
+    dest_image=$(echo $image | sed "s/docker.io/$TARGET_REGISTRY/g")
+    cosign copy $source_image $dest_image
+done
+```
+
 ### K3s
 
 ```bash
@@ -120,6 +141,57 @@ done
 ## Airgapped Environments & Incompatible Registries
 
 For airgapped environments or environments using incompatible registries that the above commands don't work for, use the following to package your images locally:
+
+### Carbide
+
+```bash
+# Carbide Registry
+SOURCE_REGISTRY=rgcrprod.azurecr.us
+SOURCE_REGISTRY_USER=YOUR_CARBIDE_USER
+SOURCE_REGISTRY_PASS=YOUR_CARBIDE_PASS
+
+# Working directories & TAR
+DEST_DIRECTORY=/tmp/carbide-images
+DEST_TAR=/tmp/carbide-images.tar.gz  # Change this to the location you want for your resulting TAR 
+
+# Carbide Version
+CARBIDE_RELEASE=0.1.0
+
+if [[ -d "$DEST_DIRECTORY" ]]; then
+    echo "ERROR: Directory '$DEST_DIRECTORY' exists."
+    echo "Change or delete it before running."
+    exit 1
+fi
+
+if [[ -d "$DEST_TAR" ]]; then
+    echo "ERROR: Directory '$DEST_TAR' exists."
+    echo "Change or delete it before running."
+    exit 1
+fi
+
+cosign login -u $SOURCE_REGISTRY_USER -p $SOURCE_REGISTRY_PASS $SOURCE_REGISTRY
+mkdir -p "$DEST_DIRECTORY"
+
+CARBIDE_IMAGES=$(curl --silent -L https://github.com/rancherfederal/carbide-releases/releases/download/$CARBIDE_RELEASE/carbide-images.txt)
+for image in $CARBIDE_IMAGES; do
+    source_image=$(echo $image | sed "s|docker.io|$SOURCE_REGISTRY|g")
+    dest_image=$(echo $image | sed "s|docker.io|TARGET_REGISTRY|g")
+    
+    # Create manifest to use during load
+    img_id_num=$(echo $RANDOM | md5sum | head -c 20)
+    echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
+    
+    # Save image locally
+    mkdir $DEST_DIRECTORY/$img_id_num
+    cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
+done
+
+# Compress directory
+tar zcf "$DEST_TAR" -C "$DEST_DIRECTORY" .
+
+# Clean up working directory
+rm -rf $DEST_DIRECTORY
+```
 
 ### K3s
 
