@@ -21,7 +21,7 @@ cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
 # cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY  
 
-# Set the specific release of K3s you're targeting: https://github.com/rancherfederal/carbide-releases/releases
+# Set the specific release of Carbide you're targeting: https://github.com/rancherfederal/carbide-releases/releases
 CARBIDE_RELEASE=0.1.0
 
 CARBIDE_IMAGES=$(curl --silent -L https://github.com/rancherfederal/carbide-releases/releases/download/$CARBIDE_RELEASE/carbide-images.txt)
