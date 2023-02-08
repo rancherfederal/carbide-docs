@@ -10,6 +10,8 @@ tCAZva7CLlk/6gxvCM0QkIKznfaGTRMMYTaHMdQSau6yulDLlpokA++i8Q==
 -----END PUBLIC KEY-----
 ```
 
+The key is also available to be pulled from each Carbide release's artifacts found [here](https://github.com/rancherfederal/carbide-releases/releases/)
+
 ## Secure Supply Chain 
 
 ### Prerequisites
