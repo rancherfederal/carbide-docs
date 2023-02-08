@@ -6,54 +6,16 @@ This will guide you through getting started with STIGATRON.
 
 * The images for STIGATRON can be found [here](https://github.com/rancherfederal/carbide-images/releases/). You'll need to pull these images using `cosign` (we intend to improve the packaging/management of these images in an upcoming release):
 
-```bash
-# Carbide Registry
-SOURCE_REGISTRY=rgcrprod.azurecr.us
-SOURCE_REGISTRY_USER=YOUR_CARBIDE_USER
-SOURCE_REGISTRY_PASS=YOUR_CARBIDE_PASS
+### Internet-Connected Environment
 
-# Working directories & TAR
-DEST_DIRECTORY=/tmp/stigatron-images
-DEST_TAR=/tmp/stigatron-images.tar.gz  # Change this to the location you want for your resulting TAR 
+If you're working in a connected environment, look [here](/carbide-docs/docs/registry-docs/pulling-images#carbide-docs) for instructions on pulling the images into your registry.
 
-# STIGATRON Version
-STIGATRON_RELEASE=0.1.0
+### Airgapped Environment
 
-if [[ -d "$DEST_DIRECTORY" ]]; then
-    echo "ERROR: Directory '$DEST_DIRECTORY' exists."
-    echo "Change or delete it before running."
-    exit 1
-fi
 
-if [[ -d "$DEST_TAR" ]]; then
-    echo "ERROR: Directory '$DEST_TAR' exists."
-    echo "Change or delete it before running."
-    exit 1
-fi
+If you're working in a connected environment, look [here](/carbide-docs/docs/registry-docs/pulling-images#carbide-docs) for instructions on pulling the images locally.
 
-cosign login -u $SOURCE_REGISTRY_USER -p $SOURCE_REGISTRY_PASS $SOURCE_REGISTRY
-mkdir -p "$DEST_DIRECTORY"
-
-STIGATRON_IMAGES=$(curl --silent -L https://github.com/rancherfederal/carbide-images/releases/download/stigatron-$STIGATRON_RELEASE/stigatron-images.txt)
-for image in $STIGATRON_IMAGES; do
-    source_image=$(echo $image | sed "s|docker.io|$SOURCE_REGISTRY|g")
-    dest_image=$(echo $image | sed "s|docker.io|TARGET_REGISTRY|g")
-    
-    # Create manifest to use during load
-    img_id_num=$(echo $RANDOM | md5sum | head -c 20)
-    echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
-    # Save image locally
-    mkdir $DEST_DIRECTORY/$img_id_num
-    cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
-done
-
-# Compress directory
-tar zcf "$DEST_TAR" -C "$DEST_DIRECTORY" .
-
-# Clean up working directory
-rm -rf $DEST_DIRECTORY
-```
+On the airgap, look [here](/carbide-docs/docs/registry-docs/zz-serving-images) for loading the localized images into the airgapped registry.
 
 ## Configuring Registry Credentials
 
