@@ -44,7 +44,7 @@ tar zxf "$SOURCE_TAR" -C "$WORKING_DIR"
 
 for image in $(cat $WORKING_DIR/manifest.txt); do
     IFS="|" read -r img_id source_image <<< $image
-    dest_image=$(echo $source_image | sed "s|TARGET_REGISTRY|$TARGET_REGISTRY|g")
+    dest_image=$(echo $source_image | sed "s|rgcrprod.azurecr.us|$TARGET_REGISTRY|g")
     cosign load --dir "$WORKING_DIR/$img_id" $dest_image
 done
 

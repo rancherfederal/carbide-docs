@@ -4,7 +4,7 @@ This will guide you through getting started with STIGATRON.
 
 ## STIGATRON Images
 
-* The images for STIGATRON can be found [here](https://github.com/rancherfederal/carbide-images/releases/). You'll need to pull these images using `cosign` (we intend to improve the packaging/management of these images in an upcoming release):
+* The images for STIGATRON can be found [here](https://github.com/rancherfederal/carbide-releases/releases/). You'll need to pull these images using `cosign` (we intend to improve the packaging/management of these images in an upcoming release):
 
 ### Internet-Connected Environment
 
@@ -79,4 +79,3 @@ Take the resulting `tgz` file over the airgap, then on the airgapped device:
 ```
 helm install example-release <chart-x.y.z>.tgz
 ```
-
