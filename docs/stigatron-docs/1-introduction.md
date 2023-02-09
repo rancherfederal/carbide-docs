@@ -1,6 +1,6 @@
 # Introduction
 
-This page will walk through beta expectations of the hardened registry and what exactly the hardened registry provides.
+This page will walk through Installation and Usage of the STIGATRON component of RGS Carbide.
 
 ## IOC Expectations
 As our product is still at Initial Operation Capability (IOC), there are some expectations to level-set:
