@@ -8,7 +8,7 @@ As our product is still in the beta phase, there are some expectations to level-
 * Beta users can expect beta registry credentials to be revoked in lieu of release keys at IOC.
 * Beta users can expect our signing key to potentially change at IOC.
 * Beta users can expect tooling and processes to be changed, improved and streamlined continuously throughout the beta.
-* Beta users can expect throttling of the LHOCR registry at IOC (standard practice will be to use your own registry).
+* Beta users can expect throttling of the secured registry at IOC (standard practice will be to use your own registry).
 
 If you see issues and areas for improvement, please submit Github issues [here](https://github.com/rancherfederal/ssf-feedback/issues/).
 
