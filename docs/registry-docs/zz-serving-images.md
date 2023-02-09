@@ -19,8 +19,10 @@ Update/run the following script to load your images from the generated TAR (will
 ```bash
 # Remote Registry
 TARGET_REGISTRY=YOUR_REGISTRY_HERE
-TARGET_REGISTRY_USER=YOUR_REGISTRY_USER_HERE
-TARGET_REGISTRY_PASSWORD=YOUR_REGISTRY_PASSWORD_HERE
+
+# Set these if your target registry requires authentication.
+# TARGET_REGISTRY_USER=YOUR_REGISTRY_USER_HERE
+# TARGET_REGISTRY_PASSWORD=YOUR_REGISTRY_PASSWORD_HERE
 
 # Source and Working Files
 SOURCE_TAR=IMAGE_TAR_PATH
@@ -37,7 +39,9 @@ if [[ -d "$WORKING_DIR" ]]; then
     exit 1
 fi
 
-cosign login -u $TARGET_REGISTRY_USER -p $TARGET_REGISTRY_PASSWORD $TARGET_REGISTRY
+if [[ ! -z $TARGET_REGISTRY_USER ]] && [[ ! -z $TARGET_REGISTRY_PASSWORD ]]; then
+    cosign login -u $TARGET_REGISTRY_USER -p $TARGET_REGISTRY_PASSWORD $TARGET_REGISTRY
+fi
 
 mkdir -p "$WORKING_DIR"
 tar zxf "$SOURCE_TAR" -C "$WORKING_DIR"

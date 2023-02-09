@@ -21,23 +21,23 @@ tCAZva7CLlk/6gxvCM0QkIKznfaGTRMMYTaHMdQSau6yulDLlpokA++i8Q==
 # export the public key for the production ssf
 export KEY=ssf-key.pub
 # Verifying the image's attestation by validating the supplied signature
-cosign verify --key $KEY rgcrprod.azurecr.us/rancher/system-agent:v0.1.1-suc
+cosign verify --key $KEY rgcrprod.azurecr.us/rancher/rancher:v2.7.1
 ```
 
 ### Software Bill of Materials
 ```bash
 # Verifying the image's SBOM attestation by validating the supplied signature
-cosign verify --key $KEY rgcrprod.azurecr.us/rancher/system-agent:v0.1.1-suc --attachment sbom
+cosign verify --key $KEY rgcrprod.azurecr.us/rancher/rancher:v2.7.1 --attachment sbom
 
 # Viewing the image's SBOM
-cosign download sbom rgcrprod.azurecr.us/rancher/system-agent:v0.1.1-suc
+cosign download sbom rgcrprod.azurecr.us/rancher/rancher:v2.7.1
 ```
 
 ### Vulnerability Scan Results
 ```bash
 # Verifying the image's SBOM attestation by validating the supplied signature
-cosign verify-attestation --key $KEY --type vuln rgcrprod.azurecr.us/rancher/system-agent:v0.1.1-suc --type vuln > /dev/null
+cosign verify-attestation --key $KEY --type vuln rgcrprod.azurecr.us/rancher/rancher:v2.7.1 --type vuln > /dev/null
 
 # Viewing the image's vulnerability scan results
-cosign verify-attestation --key $KEY rgcrprod.azurecr.us/rancher/system-agent:v0.1.1-suc  --type vuln | jq -r '.payload' | base64 -d | jq
+cosign verify-attestation --key $KEY rgcrprod.azurecr.us/rancher/rancher:v2.7.1 --type vuln | jq -r '.payload' | base64 -d | jq
 ```

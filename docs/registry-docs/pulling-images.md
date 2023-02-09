@@ -26,8 +26,8 @@ CARBIDE_RELEASE=0.1.0
 
 CARBIDE_IMAGES=$(curl --silent -L https://github.com/rancherfederal/carbide-releases/releases/download/$CARBIDE_RELEASE/carbide-images.txt)
 for image in $CARBIDE_IMAGES; do
-    source_image=$(echo $image | sed "s/docker.io/rgcrprod.azurecr.us/g")
-    dest_image=$(echo $image | sed "s/docker.io/$TARGET_REGISTRY/g")
+    source_image=$(echo $image)
+    dest_image=$(echo $image | sed "s/rgcrprod.azurecr.us/$TARGET_REGISTRY/g")
     cosign copy $source_image $dest_image
 done
 ```
@@ -103,12 +103,18 @@ done
 # Log into the registry
 cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
+# Rancher supports v1.7.1 currently. See here for more info:
+# https://ranchermanager.docs.rancher.com/pages-for-subheaders/install-upgrade-on-a-kubernetes-cluster#4-install-cert-manager
+CERT_MANAGER_VERSION="v1.7.1"
+
 # Add the cert manager repo (required Helm)
 helm repo add jetstack https://charts.jetstack.io
 helm repo update
 
 # Grab the list of images and download them (requires docker, grep, sed, and awk)
-for image in $(helm template jetstack/cert-manager --version v1.9.1 | grep 'image:' | sed 's/"//g' | awk '{ print $2 }'); do
+
+
+for image in $(helm template jetstack/cert-manager --version $CERT_MANAGER_VERSION | grep 'image:' | sed 's/"//g' | awk '{ print $2 }'); do
     source_image=$(echo $image | sed 's/quay.io/rgcrprod.azurecr.us/g')
     dest_image=$(echo $image | sed "s/quay.io/$TARGET_REGISTRY/g")
     cosign copy $source_image $dest_image
@@ -174,8 +180,8 @@ mkdir -p "$DEST_DIRECTORY"
 
 CARBIDE_IMAGES=$(curl --silent -L https://github.com/rancherfederal/carbide-releases/releases/download/$CARBIDE_RELEASE/carbide-images.txt)
 for image in $CARBIDE_IMAGES; do
-    source_image=$(echo $image | sed "s|docker.io|$SOURCE_REGISTRY|g")
-    dest_image=$(echo $image | sed "s|docker.io|TARGET_REGISTRY|g")
+    source_image=$(echo $image)
+    dest_image=$(echo $image | sed "s|rgcrprod.azurecr.us|TARGET_REGISTRY|g")
     
     # Create manifest to use during load
     img_id_num=$(echo $RANDOM | md5sum | head -c 20)
