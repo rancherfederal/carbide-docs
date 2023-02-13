@@ -121,7 +121,7 @@ for image in $(helm template jetstack/cert-manager --version $CERT_MANAGER_VERSI
 done
 ```
 
-See [Rancher Manager Configuration](z-rancher-config.md) for configuring the Cert Manager chart to use these images.
+See [Rancher Manager Configuration](8-rancher-config.md) for configuring the Cert Manager chart to use these images.
 
 #### Rancher
 
@@ -462,4 +462,4 @@ tar zcf "$DEST_TAR" -C "$DEST_DIRECTORY" .
 rm -rf $DEST_DIRECTORY
 ```
 
-See [Serving Images](zz-serving-images.md) for information on loading these into your airgapped registry.
+See [Serving Images](x1-serving-images.md) for information on loading these into your airgapped registry.
