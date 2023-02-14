@@ -1,8 +1,8 @@
 {
-  "label": "Hardened Container Registry",
+  "label": "Carbide Image Registry",
   "position": 5,
   "link": {
     "type": "generated-index",
-    "description": "LHOCR - Lowside/Highside Operations Container Registry"
+    "description": "Carbide Image Registry"
   }
 }

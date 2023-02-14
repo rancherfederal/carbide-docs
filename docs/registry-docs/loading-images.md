@@ -1,14 +1,14 @@
-# Serving Container Images
+# Loading Local Images to Registry
 
-This page will walk you through seeding your registry with images from the hardened registry for all Rancher components.
+This page will walk you through seeding your registry with local images from the hardened registry for all Rancher components.
 
 ## Requirements
 
 * [Cosign](https://docs.sigstore.dev/cosign/installation/)
 
-## Pulling images
+## Downloading images
 
-Make sure you've checked out the section on [Pulling Images](5-pulling-images.md) and that you've saved your images using the save script on that page. It is required to collect the manifest that the load script will use.
+Make sure you've checked out the section on [Downloading Images](downloading-images.md) and that you've saved your images using the save script on that page. It is required to collect the manifest that the load script will use.
 
 **NOTE**: `cosign` requires that your target registry is secured with a valid certificate. If necessary, you may need to set-up/add the CA to your host's CA chain so it interprets the secured.
 

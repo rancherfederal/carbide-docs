@@ -24,16 +24,41 @@ const sidebars = {
       type: 'category',
       label: 'Carbide Image Registry',
       items: [
-        'registry-docs/disclaimers',
-        'registry-docs/architecture',
-        'registry-docs/prereqs',
         'registry-docs/getting-started',
-        'registry-docs/pulling-images',
-        'registry-docs/validating-images',
-        'registry-docs/kubernetes-config',
-        'registry-docs/rancher-config',
+        {
+          type: 'category',
+          label: 'Managed Secured Images',
+          items: [
+            'registry-docs/prereqs',
+            {
+              type: 'category',
+              label: 'Connected Environments',
+              items: [
+                'registry-docs/validating-images',
+                'registry-docs/copying-images',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Deploying Into Airgaps',
+              items: [
+                'registry-docs/downloading-images',
+                'registry-docs/validating-airgap-images',
+                'registry-docs/loading-images',
+              ],
+            },
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Configuration',
+          items: [
+            'registry-docs/kubernetes-config',
+            'registry-docs/rancher-config'
+          ],
+        },
         'registry-docs/enforcement',
-        'registry-docs/x1-serving-images'
+        'registry-docs/architecture'
       ],
     },
     {
