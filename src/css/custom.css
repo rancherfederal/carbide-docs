@@ -6,7 +6,8 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #2e8555;
+  /* --ifm-color-primary: #2e8555; */
+  --ifm-color-primary: #303846; /* carbide custom blg */
   --ifm-color-primary-dark: #29784c;
   --ifm-color-primary-darker: #277148;
   --ifm-color-primary-darkest: #205d3b;
@@ -26,4 +27,49 @@
   --ifm-color-primary-light: #c4c4c5;
   --ifm-color-primary-lighter: #cdcdce;
   --ifm-color-primary-lightest: #e8e8e8;
+}
+
+.simple-class {
+  color: blue;
+  /* background-color: silver; */
+  background-image: url("/static/img/rfed-hero.svg");
+  height: 1200px;
+  width: 1200px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid black;
+
+}
+
+/* BLG */
+.hero {
+  background-image: url("/static/img/rfed-hero.svg");
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-color: lightgray;
+}
+
+.hero__title{
+  /* color: rgba(17, 16, 16, 0.678); */
+  color: black;
+}
+.hero__subtitle{
+  color: rgba(17, 16, 16, 0.678);
+}
+
+@font-face {
+  font-family: nasalization;
+  src: url("/static/font/nasalization-rg.otf");
+}
+
+.nasa{
+  font-family: nasalization;
+}
+.nasa-black{
+  font-family: nasalization;
+  color: black;
+}
+.nasa-red{
+  font-family: nasalization;
+  color: red;
 }

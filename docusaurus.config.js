@@ -37,7 +37,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/rancherfederal/carbide-docs/edit/main',
         },
         blog: {
           showReadingTime: true,
@@ -59,15 +59,16 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       colorMode: {
-        defaultMode: 'dark',
-        disableSwitch: false,
+        defaultMode: 'light',
+        disableSwitch: true,
         respectPrefersColorScheme: false,
       },
       navbar: {
-        title: 'Rancher Carbide',
+        // https://docusaurus.io/docs/api/themes/configuration
+        title: '',
         logo: {
           alt: 'Carbide Logo',
-          src: 'img/carbide-logo.svg',
+          src: 'img/rgs_navbar_spaced.svg',
         },
         items: [
           {

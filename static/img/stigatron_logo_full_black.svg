@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="149.17389mm"
+   height="17.754601mm"
+   viewBox="0 0 149.17389 17.754601"
+   version="1.1"
+   id="svg6386"
+   inkscape:export-filename="stigatron_logo_full_black.svg"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview6388"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false" />
+  <defs
+     id="defs6383" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-7.1143657,-6.2915791)">
+    <text
+       xml:space="preserve"
+       style="font-size:25.4px;font-family:Nasalization;-inkscape-font-specification:Nasalization;fill:#666666;stroke-width:0.264583"
+       x="5.8189654"
+       y="23.741379"
+       id="text6494"
+       inkscape:export-filename="stigatrong_logo_full.svg"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan6492"
+         style="stroke-width:0.264583"
+         x="5.8189654"
+         y="23.741379"><tspan
+           style="fill:#000000"
+           id="tspan7049">STIG</tspan><tspan
+           style="fill:#ff0000"
+           id="tspan6742">A</tspan><tspan
+           style="fill:#000000"
+           id="tspan6945">TRON</tspan></tspan></text>
+  </g>
+</svg>
