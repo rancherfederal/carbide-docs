@@ -14,7 +14,7 @@ const FeatureList = [
   },
   {
     title: 'STIGATRON',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    Svg: require('@site/static/img/stigatron_logo_full_black.svg').default,
     description: (
       <>
         Day 2 operator tactically built to monitor the DISA STIG integrity of your downrange RKE2 Kubernetes clusters.
