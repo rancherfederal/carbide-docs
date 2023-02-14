@@ -12,7 +12,14 @@ function HomepageHeader() {
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container" >
-        <h1 className="hero__title">{siteConfig.title}</h1>
+        <h1 className="hero__title">
+        Rancher Govt &nbsp;
+        
+        <span className='nasa'>
+          C<span class="nasa-red">A</span>RBIDE
+        </span>
+        </h1>
+        {/* <h1 className="hero__title">{siteConfig.title}</h1> */}
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
           <Link

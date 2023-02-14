@@ -64,10 +64,11 @@ const config = {
         respectPrefersColorScheme: false,
       },
       navbar: {
-        title: 'Rancher Carbide',
+        // https://docusaurus.io/docs/api/themes/configuration
+        title: '',
         logo: {
           alt: 'Carbide Logo',
-          src: 'img/carbide-logo.svg',
+          src: 'img/rgs_navbar_spaced.svg',
         },
         items: [
           {
