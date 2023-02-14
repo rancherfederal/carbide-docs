@@ -23,7 +23,7 @@ const FeatureList = [
   },
   {
     title: 'World Class Support',
-    Svg: require('@site/static/img/rancher-logo-stacked-white.svg').default,
+    Svg: require('@site/static/img/rancher-logo-stacked-color-svg.svg').default,
     description: (
       <>
         Rancher Government is your trusted provider of Rancher, Kubernetes and cloudnative enterprise support. Learn more at <a href="https://ranchergovernment.com">ranchergovernment.com</a>.
