@@ -59,7 +59,15 @@ const sidebars = {
           ],
         },
         'registry-docs/enforcement',
-        'registry-docs/architecture'
+        {
+          type: 'category',
+          label: 'Uninstall',
+          items: [
+            'registry-docs/uninstall-kubernetes',
+            'registry-docs/uninstall-rancher',
+          ],
+        },
+        'registry-docs/architecture',
       ],
     },
     {
