@@ -41,12 +41,8 @@ cosign download sbom rgcrprod.azurecr.us/rancher/rancher:v2.7.1
 ### Vulnerability Scan Results
 ```bash
 # Verifying the image's SBOM attestation by validating the supplied signature
-cosign verify-attestation --key $KEY --type vuln rgcrprod.azurecr.us/rancher/rancher:v2.7.1 --type vuln > /dev/null
+cosign verify-attestation --key $KEY rgcrprod.azurecr.us/rancher/rancher:v2.7.1 --type vuln > /dev/null
 
 # Viewing the image's vulnerability scan results
 cosign verify-attestation --key $KEY rgcrprod.azurecr.us/rancher/rancher:v2.7.1 --type vuln | jq -r '.payload' | base64 -d | jq
 ```
-
-## Checking the Digital Signature In a Local Image
-
-After you take images over the airgap in their compressed format, you should verify them against the public key again before pushing them to a registry. Cosign gives you this ability, and you can leverage the following script to validate those images after following the packaging
