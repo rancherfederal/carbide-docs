@@ -95,10 +95,10 @@ The full configuration using the shared alpha account is below:
 mirrors:
   docker.io:
     endpoint:
-      - "https://rgcrprod.azurecr.us"
+      - "https://YOUR_REGISTRY_DOMAIN"
 
 configs:
-  "rgcrprod.azurecr.us":
+  "YOUR_REGISTRY_DOMAIN":
     auth:
       username: <redacted>
       password: <redacted>
@@ -123,8 +123,8 @@ helm install rancher rancher-latest/rancher \
   --namespace cattle-system \
   --set hostname=rancher.my.org \
   --set replicas=3 \
-  --set rancherImage=rgcrprod.azurecr.us/rancher/rancher
-  --set systemDefaultRegistry=rgcrprod.azurecr.us
+  --set rancherImage=YOUR_REGISTRY_DOMAIN/rancher/rancher
+  --set systemDefaultRegistry=YOUR_REGISTRY_DOMAIN
 ```
 
 NOTE: This requires configuring your above K3s/RKE2 `registries.yaml` to work.
@@ -141,16 +141,12 @@ write_files:
       mirrors:
         docker.io:
             endpoint:
-            - "https://rgcrprod.azurecr.us"
+            - "https://YOUR_REGISTRY_DOMAIN"
 
         configs:
-        "rgcrprod.azurecr.us":
+        "YOUR_REGISTRY_DOMAIN":
             auth:
             username: <redacted>
             password: <redacted>
     permissions: "0644"
 ```
-
-### ECR + IAM
-
-Convallis tellus id interdum velit laoreet. Neque egestas congue quisque egestas diam in arcu cursus euismod. Pellentesque sit amet porttitor eget dolor. Et tortor at risus viverra adipiscing at in. Lacinia at quis risus sed vulputate. In metus vulputate eu scelerisque felis imperdiet proin. Volutpat commodo sed egestas egestas fringilla phasellus faucibus. Vivamus arcu felis bibendum ut tristique et egestas quis ipsum. Eu mi bibendum neque egestas congue quisque egestas diam. Sed tempus urna et pharetra. Nibh praesent tristique magna sit.
