@@ -7,13 +7,13 @@ On downstream RKE2 clusters, you'll need to first install Rancher's CIS Benchmar
 1. Run the following Helm command to install Airgapped Docs chart:
 
 ```bash
-helm install -n carbide-docs-system --create-namespace carbide-docs carbide-charts/carbide-docs
+helm install -n carbide-docs-system --create-namespace airgapped-docs carbide-charts/airgapped-docs
 ```
 
 Check the status of the rollout:
 
 ```bash
-helm status -n carbide-docs-system carbide-docs
+helm status -n carbide-docs-system airgapped-docs
 ```
 
 You should now see `Airgapped Docs` on the left menu of your Explore Cluster.
@@ -24,7 +24,7 @@ There may be situations where you are running in a low-compute, low-resource env
 
 ```bash
 # Disable neuvector docs
-helm install -n carbide-docs-system --create-namespace --set "docs.neuvector.enabled=false" carbide-docs carbide-charts/carbide-docs
+helm install -n carbide-docs-system --create-namespace --set "docs.neuvector.enabled=false" airgapped-docs carbide-charts/airgapped-docs
 ```
 
 For a full list of products that can be disabled, see [here](https://github.com/rancherfederal/carbide-charts/blob/main/charts/offline-docs/values.yaml).
