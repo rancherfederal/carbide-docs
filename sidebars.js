@@ -23,11 +23,12 @@ const sidebars = {
     {
       type: 'category',
       label: 'Carbide Image Registry',
+      collapsed: false,
       items: [
-        'registry-docs/getting-started',
+        'registry-docs/introduction',
         {
           type: 'category',
-          label: 'Managed Secured Images',
+          label: 'Installation',
           items: [
             'registry-docs/prereqs',
             {
@@ -64,15 +65,30 @@ const sidebars = {
     {
       type: 'category',
       label: 'STIGATRON',
+      collapsed: false,
       items: [
         'stigatron-docs/introduction',
-        'stigatron-docs/getting-started',
-        'stigatron-docs/prereqs',
-        'stigatron-docs/installation',
-        'stigatron-docs/usage'
+        {
+          type: 'category',
+          label: 'Installation',
+          items: [
+            'stigatron-docs/prereqs',
+            'stigatron-docs/getting-started',
+            'stigatron-docs/installation',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Using STIGATRON',
+          items: [
+            'stigatron-docs/create-scan',
+            'stigatron-docs/using-heimdall',
+          ],
+        },
+        'stigatron-docs/uninstall',   
       ],
     },
-    'registry-docs/x2-feedback'
+    'registry-docs/feedback'
   ],
 
 };

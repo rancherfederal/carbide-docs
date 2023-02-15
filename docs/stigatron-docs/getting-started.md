@@ -8,20 +8,20 @@ This will guide you through getting started with STIGATRON.
 
 ### Internet-Connected Environment
 
-If you're working in a connected environment, look [here](../registry-docs/copying-images.md#carbide-docs) for instructions on pulling the images into your registry.
+If you're working in a connected environment, look [here](../registry-docs/5-pulling-images.md#carbide-docs) for instructions on pulling the images into your registry.
 
 ### Airgapped Environment
 
 
-If you're working in an airgapped environment, look [here](../registry-docs/downloading-images.md#carbide-docs) for instructions on pulling the images locally.
+If you're working in a connected environment, look [here](../registry-docs/5-pulling-images.md#carbide-docs) for instructions on pulling the images locally.
 
-On the airgap, look [here](../registry-docs/loading-images.md) for loading the localized images into the airgapped registry.
+On the airgap, look [here](../registry-docs/x1-serving-images.md) for loading the localized images into the airgapped registry.
 
 ## Configuring Registry Credentials
 
 ### Local Cluster
 
-On the local cluster running Rancher Multi-cluster Manager, you'll need to configure credentials for the registry you've copied the STIGATRON images to. See the [Rancher Configuration](../registry-docs/rancher-config.md) on how to set up those credentials.
+On the local cluster running Rancher Multi-cluster Manager, you'll need to configure credentials for the registry you've copied the STIGATRON images to. See the [Rancher Configuration](../registry-docs/8-rancher-config.md) on how to set up those credentials.
 
 ### Downstream RKE2 Clusters
 
