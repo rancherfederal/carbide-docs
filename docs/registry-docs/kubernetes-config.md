@@ -6,12 +6,12 @@ This page will walk you through how to configure Rancher Kubernetes distribution
 
 To modify the system images that `k3s` uses upon bootstrapping, configure k3s' mirror settings as described [here](https://rancher.com/docs/k3s/latest/en/installation/private-registry/#mirrors).
 
-The full configuration using the shared alpha account is below:
+The full configuration using your authenticated registry is below:
 
 ```yaml
 # /etc/rancher/k3s/registries.yaml
 configs:
-  "rgcrprod.azurecr.us":
+  "YOUR_REGISTRY_DOMAIN_HERE":
     auth:
       username: <redacted>
       password: <redacted>
@@ -20,7 +20,7 @@ configs:
 You will also need to utilize the `system-default-registry` flag when installing K3s to ensure it uses the registry. For instance:
 
 ```bash
-curl -sfL https://get.k3s.io | sh - --system-default-registry rgcrprod.azurecr.us
+curl -sfL https://get.k3s.io | sh - --system-default-registry YOUR_REGISTRY_DOMAIN_HERE
 ```
 
 ### Usage with `rke2`
@@ -32,7 +32,7 @@ The full configuration using the shared alpha account is below:
 ```yaml
 # /etc/rancher/rke2/registries.yaml
 configs:
-  "rgcrprod.azurecr.us":
+  "YOUR_REGISTRY_DOMAIN_HERE":
     auth:
       username: <redacted>
       password: <redacted>
@@ -44,6 +44,6 @@ You will also need to utilize the `system-default-registry` flag when installing
 # /etc/rancher/rke2/config.yaml
 node-name: controlplane1
 write-kubeconfig-mode: 0640
-system-default-registry: rgcrprod.azurecr.us
+system-default-registry: YOUR_REGISTRY_DOMAIN_HERE
 ...
 ```

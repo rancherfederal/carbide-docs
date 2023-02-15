@@ -12,11 +12,16 @@ tCAZva7CLlk/6gxvCM0QkIKznfaGTRMMYTaHMdQSau6yulDLlpokA++i8Q==
 
 ## Secure Supply Chain 
 
-### Prerequisites
+## Prerequisites
 
 * [Cosign CLI](https://docs.sigstore.dev/cosign/installation/)
 
-### Checking the Digital Signature
+## Checking the Digital Signature In A Registry
+
+Before pulling images, or after images have been pushed to a registry, you should verify those images against the RGS public key. These instructions are for verifying images directly from a registry.
+
+*NOTE*: You'll need to substitute `rgcrprod.azurecr.us` with your own registry domain if verifying in your own registry.
+
 ```bash
 # export the public key for the production ssf
 export KEY=ssf-key.pub
@@ -41,3 +46,7 @@ cosign verify-attestation --key $KEY --type vuln rgcrprod.azurecr.us/rancher/ran
 # Viewing the image's vulnerability scan results
 cosign verify-attestation --key $KEY rgcrprod.azurecr.us/rancher/rancher:v2.7.1 --type vuln | jq -r '.payload' | base64 -d | jq
 ```
+
+## Checking the Digital Signature In a Local Image
+
+After you take images over the airgap in their compressed format, you should verify them against the public key again before pushing them to a registry. Cosign gives you this ability, and you can leverage the following script to validate those images after following the packaging

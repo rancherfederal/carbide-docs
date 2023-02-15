@@ -1,4 +1,4 @@
-# Getting Started
+# Introduction
 
 This page will walk through beta expectations of the hardened registry and what exactly the hardened registry provides.
 

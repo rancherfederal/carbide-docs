@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Introduction
+# Carbide
 
 Carbide is Rancher Government's hardened distribution of the SUSE Rancher product portfolio. Carbide is exclusively offered to our US Government and partnering customers that value security above all else. 
 

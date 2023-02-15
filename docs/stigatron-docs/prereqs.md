@@ -1,4 +1,4 @@
-# Requirements
+# Prerequisites
 
 In order to install STIGATRON, you need the following:
 

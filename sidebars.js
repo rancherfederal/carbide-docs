@@ -23,31 +23,80 @@ const sidebars = {
     {
       type: 'category',
       label: 'Carbide Image Registry',
+      collapsed: false,
       items: [
-        'registry-docs/disclaimers',
-        'registry-docs/architecture',
-        'registry-docs/prereqs',
-        'registry-docs/getting-started',
-        'registry-docs/pulling-images',
-        'registry-docs/validating-images',
-        'registry-docs/kubernetes-config',
-        'registry-docs/rancher-config',
+        'registry-docs/introduction',
+        {
+          type: 'category',
+          label: 'Installation',
+          items: [
+            'registry-docs/prereqs',
+            {
+              type: 'category',
+              label: 'Connected Environments',
+              items: [
+                'registry-docs/validating-images',
+                'registry-docs/copying-images',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Deploying Into Airgaps',
+              items: [
+                'registry-docs/downloading-images',
+                'registry-docs/validating-airgap-images',
+                'registry-docs/loading-images',
+              ],
+            },
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Configuration',
+          items: [
+            'registry-docs/kubernetes-config',
+            'registry-docs/rancher-config'
+          ],
+        },
         'registry-docs/enforcement',
-        'registry-docs/x1-serving-images'
+        {
+          type: 'category',
+          label: 'Uninstall',
+          items: [
+            'registry-docs/uninstall-kubernetes',
+            'registry-docs/uninstall-rancher',
+          ],
+        },
+        'registry-docs/architecture',
       ],
     },
     {
       type: 'category',
       label: 'STIGATRON',
+      collapsed: false,
       items: [
         'stigatron-docs/introduction',
-        'stigatron-docs/getting-started',
-        'stigatron-docs/prereqs',
-        'stigatron-docs/installation',
-        'stigatron-docs/usage'
+        {
+          type: 'category',
+          label: 'Installation',
+          items: [
+            'stigatron-docs/prereqs',
+            'stigatron-docs/getting-started',
+            'stigatron-docs/installation',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Using STIGATRON',
+          items: [
+            'stigatron-docs/create-scan',
+            'stigatron-docs/using-heimdall',
+          ],
+        },
+        'stigatron-docs/uninstall',   
       ],
     },
-    'registry-docs/x2-feedback'
+    'registry-docs/feedback'
   ],
 
 };
