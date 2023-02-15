@@ -32,7 +32,7 @@ for image in $CARBIDE_IMAGES; do
 done
 ```
 
-### K3s
+## K3s
 
 ```bash
 # To login with the shared credentials
