@@ -97,6 +97,23 @@ const sidebars = {
         'stigatron-docs/uninstall',   
       ],
     },
+    {
+      type: 'category',
+      label: 'Airgapped Docs',
+      collapsed: false,
+      items: [
+        'airgapped-docs/introduction',
+        {
+          type: 'category',
+          label: 'Installation',
+          items: [
+            'airgapped-docs/prereqs',
+            'airgapped-docs/installation',
+          ],
+        },
+        'airgapped-docs/uninstall',   
+      ],
+    },
     'registry-docs/feedback'
   ],
 
