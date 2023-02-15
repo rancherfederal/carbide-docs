@@ -19,7 +19,7 @@ As Rancher has a dependency on Cert Manager, you'll need to update your Helm ins
 
 If you're following Rancher's [Connected](https://rancher.com/docs/rancher/v2.6/en/installation/install-rancher-on-k8s/#4-install-cert-manager) installation instructions, you'll need to follow the next steps to use the SSF images for cert-manager. 
 
-If using the [Airgapped](https://rancher.com/docs/rancher/v2.6/en/installation/other-installation-methods/air-gap/install-rancher/#1-add-the-cert-manager-repo) instructions, make sure you've pulled the [SSF cert-manager images](5-pulling-images.md) to your local/airgapped registry.
+If using the [Airgapped](https://rancher.com/docs/rancher/v2.6/en/installation/other-installation-methods/air-gap/install-rancher/#1-add-the-cert-manager-repo) instructions, make sure you've pulled the [SSF cert-manager images](pulling-images.md) to your local/airgapped registry.
 
 ### Cert Manager Helm Install
 

@@ -35,6 +35,7 @@ const sidebars = {
               type: 'category',
               label: 'Connected Environments',
               items: [
+                // 'registry-docs/pulling-images',
                 'registry-docs/validating-images',
                 'registry-docs/copying-images',
               ],
