@@ -4,8 +4,8 @@ This page will walk through the architecture of the SSF, including both the pipe
 
 ## Pipeline Architecture
 
-![Pipeline Architecture](/img/ssf/ssf-pipelines-arch-diagram.png)
+![Pipeline Architecture](/img/ssf/ssf-pipelines-arch-diagram.svg)
 
 ## Usage Architecture
 
-![Usage Architecture](/img/ssf/ssf-usage-arch-diagram.png)
+![Usage Architecture](/img/ssf/ssf-usage-arch-diagram.svg)
