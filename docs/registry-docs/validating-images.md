@@ -46,3 +46,6 @@ cosign verify-attestation --key $KEY rgcrprod.azurecr.us/rancher/rancher:v2.7.1 
 # Viewing the image's vulnerability scan results
 cosign verify-attestation --key $KEY rgcrprod.azurecr.us/rancher/rancher:v2.7.1 --type vuln | jq -r '.payload' | base64 -d | jq
 ```
+
+### Resources
+For more information on `cosign`, check out [Chainguard Academy](https://edu.chainguard.dev/open-source/sigstore/cosign/how-to-verify-file-signatures-with-cosign/).
