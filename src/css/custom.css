@@ -16,11 +16,12 @@
   --ifm-color-primary-lightest: #3cad6e;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-link-color: red;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #b2b2b3;
+  --ifm-color-primary: #b2b2b3;  
   --ifm-color-primary-dark: #a0a0a1;
   --ifm-color-primary-darker: #979798;
   --ifm-color-primary-darkest: #7c7c7e;
