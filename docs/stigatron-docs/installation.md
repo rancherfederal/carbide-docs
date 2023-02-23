@@ -32,10 +32,29 @@ On downstream RKE2 clusters, you'll need to first install Rancher's CIS Benchmar
 4. Leave the default values and continue selecting `Next`, then click `Install`.
 5. Wait for the installation to complete.
 
+Next, you'll need to create the `carbide-stigatron-system` namespace and create a secret named `PLACEHOLDER` containing your license (this step is **critical**, as STIGATRON will not start without this secret present):
+
+```bash
+# Create the namespace
+kubectl create namespace carbide-stigatron-system
+
+# Now create the secret, substituting your license
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Secret
+metadata:
+  name: PLACEHOLDER
+  namespace: carbide-stigatron-system
+type: Opaque
+stringData:
+  license: YOUR_LICENSE_HERE
+EOF
+```
+
 Next, you'll need to run the following Helm command to install the STIGATRON Operator (**NOTE**: Using carbide-stigatron-system as the namespace is required):
 
 ```bash
-helm install -n carbide-stigatron-system --create-namespace stigatron carbide-charts/stigatron
+helm install -n carbide-stigatron-system stigatron carbide-charts/stigatron
 ```
 
 Check the status of the rollout:
