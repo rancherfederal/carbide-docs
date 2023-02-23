@@ -39,7 +39,7 @@ On downstream RKE2 clusters, you'll need to first install Rancher's CIS Benchmar
 
 ### Creating the License Secret
 
-Next, you'll need to create the `carbide-stigatron-system` namespace and create a secret named `PLACEHOLDER` containing your license (this step is **critical**, as STIGATRON operator will not start without this secret present):
+Next, you'll need to create the `carbide-stigatron-system` namespace and create a secret named `stigatron-license` containing your license (this step is **critical**, as STIGATRON operator will not start without this secret present):
 
 ```bash
 # Create the namespace
@@ -50,7 +50,7 @@ kubectl apply -f - <<EOF
 apiVersion: v1
 kind: Secret
 metadata:
-  name: PLACEHOLDER
+  name: stigatron-license
   namespace: carbide-stigatron-system
 type: Opaque
 stringData:
