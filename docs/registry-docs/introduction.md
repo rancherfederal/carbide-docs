@@ -2,15 +2,14 @@
 
 This page will walk through beta expectations of the hardened registry and what exactly the hardened registry provides.
 
-## Beta Expectations
-As our product is still in the beta phase, there are some expectations to level-set:
+## IOC Expectations
+As our product is still in the IOC phase, there are some expectations to level-set:
 
-* Beta users can expect beta registry credentials to be revoked in lieu of release keys at IOC.
-* Beta users can expect our signing key to potentially change at IOC.
-* Beta users can expect tooling and processes to be changed, improved and streamlined continuously throughout the beta.
-* Beta users can expect throttling of the LHOCR registry at IOC (standard practice will be to use your own registry).
+* IOC users can expect tooling and processes to be changed, improved and streamlined continuously as we strive to improve the Carbide offering.
 
-If you see issues and areas for improvement, please submit Github issues [here](https://github.com/rancherfederal/ssf-feedback/issues/).
+**DISCLAIMER**:  The Secured Registry (rgcrprod.azurecr.us) is _not_ intended to be used as the primary registry for running Kubernetes clusters. It is only intended as the acquisition point to obtain the Carbide secured images. Customers should seed their own private OCI registries, and use that registry for their Kubernetes clusters.
+
+If you see issues and areas for improvement, please submit Github issues [here](https://github.com/rancherfederal/carbide-docs/issues/).
 
 ## What is this?
 Here at Rancher Government Solutions, we take the security of our products seriously.  Products like `rke2` are tailor built to address the "secure by default" needs of the federal government, while still maintaining the same ease of deployments that our users have come to love from Rancher products.

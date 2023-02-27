@@ -2,7 +2,11 @@
 
 Below are all the things you need to get started with the Hardened Container Registry. As we improve and streamline the process, this list could evolve.
 
-### Required Tools
+## Registry Disclaimer
+
+ The Secured Registry (rgcrprod.azurecr.us) is _not_ intended to be used as the primary registry for running Kubernetes clusters. It is only intended as the acquisition point to obtain the Carbide secured images. Customers should seed their own private OCI registries, and use that registry for their Kubernetes clusters.
+
+## Required Tools
 To explore what's available, you'll need some common tooling:
 
 Supply Chain Validation:
