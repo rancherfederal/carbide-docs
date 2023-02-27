@@ -27,4 +27,4 @@ There may be situations where you are running in a low-compute, low-resource env
 helm install -n carbide-docs-system --create-namespace --set "docs.neuvector.enabled=false" airgapped-docs carbide-charts/airgapped-docs
 ```
 
-For a full list of products that can be disabled, see [here](https://github.com/rancherfederal/carbide-charts/blob/main/charts/offline-docs/values.yaml).
+For a full list of products that can be disabled, see [here](https://github.com/rancherfederal/carbide-charts/blob/main/charts/airgapped-docs/values.yaml).
