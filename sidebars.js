@@ -26,6 +26,7 @@ const sidebars = {
       collapsed: false,
       items: [
         'registry-docs/introduction',
+        'registry-docs/known-limits',
         {
           type: 'category',
           label: 'Installation',
