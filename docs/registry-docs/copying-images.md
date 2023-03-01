@@ -95,6 +95,31 @@ for image in $LONGHORN_IMAGES; do
 done
 ```
 
+## Kubewarden
+
+```bash
+# Log into the registry
+cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
+
+# Add the Kubewarden repo (required Helm)
+helm repo add kubewarden https://charts.kubewarden.io
+helm repo update
+
+# Grab the list of images and download them (requires docker, grep, sed, and awk)
+
+
+for image in $(helm template kubewarden/kubewarden-controller | grep 'image:' | sed 's/"//g' | sed "s/'//g" | awk '{ print $2 }'); do
+    source_image=$(echo $image | sed 's/quay.io/rgcrprod.azurecr.us/g')
+    dest_image=$(echo $image | sed "s/quay.io/$TARGET_REGISTRY/g")
+    cosign copy $source_image $dest_image
+done
+
+for image in $(helm template kubewarden/kubewarden-defaults | grep 'image:' | sed 's/"//g' | sed "s/'//g" | awk '{ print $2 }'); do
+    source_image=$(echo $image | sed 's/quay.io/rgcrprod.azurecr.us/g')
+    dest_image=$(echo $image | sed "s/quay.io/$TARGET_REGISTRY/g")
+    cosign copy $source_image $dest_image
+done
+
 ## Rancher
 
 ### Cert Manager
