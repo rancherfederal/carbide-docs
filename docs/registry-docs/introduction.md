@@ -1,6 +1,6 @@
 # Introduction
 
-This page will walk through beta expectations of the hardened registry and what exactly the hardened registry provides.
+This page will walk through IOC expectations of the hardened registry and what exactly the hardened registry provides.
 
 ## IOC Expectations
 As our product is still in the IOC phase, there are some expectations to level-set:
