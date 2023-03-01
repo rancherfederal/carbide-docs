@@ -24,9 +24,8 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/intro">
-            Beta Available
-            
+            to="https://ranchergovernment.com/contact">
+            Contact Sales
           </Link>
         </div>
       </div>
