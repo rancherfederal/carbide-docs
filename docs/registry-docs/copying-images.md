@@ -119,6 +119,7 @@ for image in $(helm template kubewarden/kubewarden-defaults | grep 'image:' | se
     dest_image=$(echo $image | sed "s/quay.io/$TARGET_REGISTRY/g")
     cosign copy $source_image $dest_image
 done
+```
 
 ## Rancher
 
