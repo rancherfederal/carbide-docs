@@ -14,10 +14,12 @@ On the `local` cluster running Rancher MCM, you'll need to first enable Extensio
 
 ### Installing STIGATRON UI Plugin
 
-Next, on the same `local` cluster, run the following Helm commands to install the UI Plugin for STIGATRON (see the `tgz` method above for airgap with no Helm repository):
+Next, on the same `local` cluster, run the following Helm commands to install the UI Plugin for STIGATRON (see the `tgz` method above for airgap with no Helm repository), substituting your registry in:
 
 ```bash
-helm install -n carbide-stigatron-system --create-namespace stigatron-ui carbide-charts/stigatron-ui
+helm install -n carbide-stigatron-system --create-namespace \
+  --set "global.cattle.systemDefaultRegistry=YOUR_REGISTRY_HERE" \
+  stigatron-ui carbide-charts/stigatron-ui
 ```
 
 Check the status of the rollout:
@@ -63,7 +65,10 @@ EOF
 Next, you'll need to run the following Helm command to install the STIGATRON Operator (**NOTE**: Using carbide-stigatron-system as the namespace is required):
 
 ```bash
-helm install -n carbide-stigatron-system stigatron carbide-charts/stigatron
+helm install -n carbide-stigatron-system \
+  --set "global.cattle.systemDefaultRegistry=YOUR_REGISTRY_HERE" \
+  --set "heimdall2.global.cattle.systemDefaultRegistry=YOUR_REGISTRY_HERE" \
+  stigatron carbide-charts/stigatron
 ```
 
 Check the status of the rollout:

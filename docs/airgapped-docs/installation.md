@@ -4,10 +4,12 @@
 
 On downstream RKE2 clusters, you'll need to first install Rancher's CIS Benchmark Operator:
 
-1. Run the following Helm command to install Airgapped Docs chart:
+1. Run the following Helm command to install Airgapped Docs chart, substituting your registry in:
 
 ```bash
-helm install -n carbide-docs-system --create-namespace airgapped-docs carbide-charts/airgapped-docs
+helm install -n carbide-docs-system --create-namespace \
+    --set "global.cattle.systemDefaultRegistry=YOUR_REGISTRY_HERE" \
+    airgapped-docs carbide-charts/airgapped-docs
 ```
 
 Check the status of the rollout:
@@ -24,7 +26,10 @@ There may be situations where you are running in a low-compute, low-resource env
 
 ```bash
 # Disable neuvector docs
-helm install -n carbide-docs-system --create-namespace --set "docs.neuvector.enabled=false" airgapped-docs carbide-charts/airgapped-docs
+helm install -n carbide-docs-system --create-namespace \
+  --set "global.cattle.systemDefaultRegistry=YOUR_REGISTRY_HERE" \
+  --set "docs.neuvector.enabled=false" \
+  airgapped-docs carbide-charts/airgapped-docs
 ```
 
 For a full list of products that can be disabled, see [here](https://github.com/rancherfederal/carbide-charts/blob/main/charts/airgapped-docs/values.yaml).
