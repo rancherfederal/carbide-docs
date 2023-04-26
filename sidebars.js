@@ -70,6 +70,7 @@ const sidebars = {
           ],
         },
         'registry-docs/architecture',
+        'registry-docs/release-cadence',
       ],
     },
     {
