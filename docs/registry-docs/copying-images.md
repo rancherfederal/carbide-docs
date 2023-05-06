@@ -14,15 +14,15 @@ If you're copying images into an airgap, check the documents [here](downloading-
 ## Carbide
 
 ```bash
-# To login with the shared credentials
+# Log into the registry
 cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # Your target registry (and login if it requires authentication)
 TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
-# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY  
+# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY
 
 # Set the specific release of Carbide you're targeting: https://github.com/rancherfederal/carbide-releases/releases
-CARBIDE_RELEASE=0.1.0
+CARBIDE_RELEASE=0.1.1
 
 CARBIDE_IMAGES=$(curl --silent -L https://github.com/rancherfederal/carbide-releases/releases/download/$CARBIDE_RELEASE/carbide-images.txt)
 for image in $CARBIDE_IMAGES; do
@@ -35,12 +35,12 @@ done
 ## K3s
 
 ```bash
-# To login with the shared credentials
+# Log into the registry
 cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # Your target registry (and login if it requires authentication)
 TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
-# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY  
+# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY
 
 # Set the specific release of K3s you're targeting: https://github.com/k3s-io/k3s/releases
 K3S_RELEASE=v1.24.4+k3s1
@@ -56,12 +56,12 @@ done
 ## RKE2
 
 ```bash
-# To login with the shared credentials
+# Log into the registry
 cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # Your target registry (and login if it requires authentication)
 TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
-# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY  
+# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY
 
 # Set the specific release of RKE2 you're targeting: https://github.com/rancher/rke2/releases
 RKE2_RELEASE=v1.24.3+rke2r1
@@ -77,12 +77,12 @@ done
 ## Longhorn
 
 ```bash
-# To login with the shared credentials
+# Log into the registry
 cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # Your target registry (and login if it requires authentication)
 TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
-# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY  
+# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY
 
 # Set the specific release of Longhorn you're targeting: https://github.com/longhorn/longhorn/releases
 LONGHORN_RELEASE=v1.3.1
@@ -95,19 +95,46 @@ for image in $LONGHORN_IMAGES; do
 done
 ```
 
+## NeuVector
+
+```bash
+# Log into the registry
+cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
+
+# Your target registry (and login if it requires authentication)
+TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
+# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY
+
+# NeuVector Chart Version
+NEUVECTOR_RELEASE=v2.4.2
+
+# Add the neuvector repo (required Helm)
+helm repo add neuvector https://neuvector.github.io/neuvector-helm
+helm repo update
+
+# Grab the list of images and download them (requires docker, grep, sed, and awk)
+for image in $(helm template neuvector neuvector/core --version $NEUVECTOR_RELEASE | grep 'image:' | sed 's/"//g' | awk '{ print $2 }'); do
+    source_image=$(echo $image | sed 's/docker.io/rgcrprod.azurecr.us/g')
+    dest_image=$(echo $image | sed "s/docker.io/$TARGET_REGISTRY/g")
+    cosign copy $source_image $dest_image
+done
+```
+
 ## Kubewarden
 
 ```bash
 # Log into the registry
 cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
+# Your target registry (and login if it requires authentication)
+TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
+# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY
+
 # Add the Kubewarden repo (required Helm)
 helm repo add kubewarden https://charts.kubewarden.io
 helm repo update
 
 # Grab the list of images and download them (requires docker, grep, sed, and awk)
-
-
 for image in $(helm template kubewarden/kubewarden-controller | grep 'image:' | sed 's/"//g' | sed "s/'//g" | awk '{ print $2 }'); do
     source_image=$(echo $image | sed 's/quay.io/rgcrprod.azurecr.us/g')
     dest_image=$(echo $image | sed "s/quay.io/$TARGET_REGISTRY/g")
@@ -129,18 +156,20 @@ done
 # Log into the registry
 cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
+# Your target registry (and login if it requires authentication)
+TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
+# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY
+
 # Rancher supports v1.7.1 currently. See here for more info:
 # https://ranchermanager.docs.rancher.com/pages-for-subheaders/install-upgrade-on-a-kubernetes-cluster#4-install-cert-manager
-CERT_MANAGER_VERSION="v1.7.1"
+CERT_MANAGER_RELEASE="v1.7.1"
 
 # Add the cert manager repo (required Helm)
 helm repo add jetstack https://charts.jetstack.io
 helm repo update
 
 # Grab the list of images and download them (requires docker, grep, sed, and awk)
-
-
-for image in $(helm template jetstack/cert-manager --version $CERT_MANAGER_VERSION | grep 'image:' | sed 's/"//g' | awk '{ print $2 }'); do
+for image in $(helm template jetstack/cert-manager --version $CERT_MANAGER_RELEASE | grep 'image:' | sed 's/"//g' | awk '{ print $2 }'); do
     source_image=$(echo $image | sed 's/quay.io/rgcrprod.azurecr.us/g')
     dest_image=$(echo $image | sed "s/quay.io/$TARGET_REGISTRY/g")
     cosign copy $source_image $dest_image
@@ -152,12 +181,12 @@ See [Rancher Manager Configuration](rancher-config.md) for configuring the Cert 
 ### Rancher
 
 ```bash
-# To login with the shared credentials
+# Log into the registry
 cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # Your target registry (and login if it requires authentication)
 TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
-# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY  
+# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY
 
 # Set the specific release of Rancher you're targeting: https://github.com/rancher/rancher/releases
 RANCHER_RELEASE=v2.7.1
