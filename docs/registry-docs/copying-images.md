@@ -9,7 +9,7 @@ If you're copying images into an airgap, check the documents [here](downloading-
 ## Requirements
 
 * [Cosign](https://docs.sigstore.dev/cosign/installation/)
-* [Helm](https://helm.sh/docs/intro/install/) (For Cert Manager Only)
+* [Helm](https://helm.sh/docs/intro/install/)
 
 ## Carbide
 
