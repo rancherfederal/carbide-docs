@@ -15,6 +15,14 @@ Make sure you've checked out the section on [Downloading Images](downloading-ima
 ## Copying a Local Image to a Registry
 
 Update/run the following script to load your images from the generated TAR (will work for any component TAR):
+* Rancher Government Carbide - `carbide-images.tar.gz`
+* K3s - `k3s-images.tar.gz`
+* RKE2 - `rke2-images.tar.gz`
+* Longhorn - `longhorn-images.tar.gz`
+* NeuVector - `neuvector-images.tar.gz`
+* Kubewarden - `kubewarden-images.tar.gz`
+* Cert Manager - `cert-manager-images.tar.gz`
+* Rancher - `rancher-images.tar.gz`
 
 ```bash
 # Remote Registry

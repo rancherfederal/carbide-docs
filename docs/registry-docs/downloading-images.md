@@ -1,11 +1,13 @@
 # Downloading Release Images
 
-This page will walk you through how you can locally download secured images from the hardened registry and package them to move over an airgap.
+This page will walk you through how you can locally download secured images from the hardened registry and package them to move over an airgap to your registry.
+
+If you're copying images into a connected registry, check the documents [here](copying-images.md).
 
 ## Requirements
 
 * [Cosign](https://docs.sigstore.dev/cosign/installation/)
-* [Helm](https://helm.sh/docs/intro/install/) (For Cert Manager Only)
+* [Helm](https://helm.sh/docs/intro/install/)
 
 ## Carbide
 
@@ -20,7 +22,7 @@ DEST_DIRECTORY=/tmp/carbide-images
 DEST_TAR=/tmp/carbide-images.tar.gz  # Change this to the location you want for your resulting TAR 
 
 # Carbide Version
-CARBIDE_RELEASE=0.1.0
+CARBIDE_RELEASE=0.1.1
 
 if [[ -d "$DEST_DIRECTORY" ]]; then
     echo "ERROR: Directory '$DEST_DIRECTORY' exists."
@@ -212,6 +214,60 @@ tar zcf "$DEST_TAR" -C "$DEST_DIRECTORY" .
 rm -rf $DEST_DIRECTORY
 ```
 
+## NeuVector
+```bash
+# Carbide Registry
+SOURCE_REGISTRY=rgcrprod.azurecr.us
+SOURCE_REGISTRY_USER=YOUR_CARBIDE_USER
+SOURCE_REGISTRY_PASS=YOUR_CARBIDE_PASS
+
+# Working directories & TAR
+DEST_DIRECTORY=/tmp/neuvector-images
+DEST_TAR=/tmp/neuvector-images.tar.gz  # Change this to the location you want for your resulting TAR 
+
+# NeuVector Chart Version
+NEUVECTOR_RELEASE=v2.4.2
+
+if [[ -d "$DEST_DIRECTORY" ]]; then
+    echo "ERROR: Directory '$DEST_DIRECTORY' exists."
+    echo "Change or delete it before running."
+    exit 1
+fi
+
+if [[ -d "$DEST_TAR" ]]; then
+    echo "ERROR: Directory '$DEST_TAR' exists."
+    echo "Change or delete it before running."
+    exit 1
+fi
+
+cosign login -u $SOURCE_REGISTRY_USER -p $SOURCE_REGISTRY_PASS $SOURCE_REGISTRY
+mkdir -p "$DEST_DIRECTORY"
+
+# Add the neuvector repo (required Helm)
+helm repo add neuvector https://neuvector.github.io/neuvector-helm
+helm repo update
+
+# Grab the list of images and download them (requires docker, grep, sed, and awk)
+for image in $(helm template neuvector neuvector/core --version $NEUVECTOR_RELEASE | grep 'image:' | sed 's/"//g' | sed "s/'//g" | awk '{ print $2 }'); do
+    source_image=$(echo $image | sed "s/docker.io/$SOURCE_REGISTRY/g")
+    dest_image=$(echo $image | sed "s/docker.io/TARGET_REGISTRY/g")
+    
+    # Create manifest to use during load
+    img_id_num=$(mktemp -d XXXXXXXXXXXXXXXXXXXX)
+    echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
+    
+    # Save image locally
+    mkdir $DEST_DIRECTORY/$img_id_num
+    cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
+done
+
+# Compress directory
+tar zcf "$DEST_TAR" -C "$DEST_DIRECTORY" .
+
+# Clean up working directory
+rm -rf $DEST_DIRECTORY
+```
+
 ## Kubewarden
 
 ```bash
@@ -385,4 +441,4 @@ tar zcf "$DEST_TAR" -C "$DEST_DIRECTORY" .
 rm -rf $DEST_DIRECTORY
 ```
 
-See [Validate Images in the Airgap](validating-airgap-images.md) and [Loading Local Images to Registry](loading-images.md) for information on loading these into your airgapped registry.
+See [Validate Images in the Airgap](validating-airgap-images.md) and [Loading Local Images to Registry](loading-images.md) for information on validating the images and loading the images into your airgapped registry.
