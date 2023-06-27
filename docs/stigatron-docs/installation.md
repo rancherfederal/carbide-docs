@@ -9,12 +9,13 @@ On the `local` cluster running Rancher MCM, you'll need to first enable Extensio
 1. Log into the Rancher MCM as an administrator.
 2. Click the menu in the upper-left of the main dashboard and click the `Extensions` link near the bottom.
 3. Click the `Enable` button on the Extensions screen.
+4. Click `Ok`, when prompted to Enable Extension Support.
 
   ![Enable Extensions](/img/stigatron/enable-extensions.png)
 
 ### Installing STIGATRON UI Plugin
 
-Next, on the same `local` cluster, run the following Helm commands to install the UI Plugin for STIGATRON (see the `tgz` method above for airgap with no Helm repository), substituting your registry in:
+Next, on the same `local` cluster, run the following Helm commands to install the UI Plugin for STIGATRON (see the `tgz` method above for airgap with no Helm repository) and ensure to substitute your registry:
 
 ```bash
 helm install -n carbide-stigatron-system --create-namespace \
@@ -36,28 +37,20 @@ On downstream RKE2 clusters, you'll need to first install Rancher's CIS Benchmar
 1. Navigate to your cluster in the `Explore Cluster` menu.
 2. On the left, select `Apps` and click `Charts`.
 3. In the `Filter` box on the right, type `CIS Benchmark`.
-4. Leave the default values and continue selecting `Next`, then click `Install`.
-5. Wait for the installation to complete.
+4. Review the `Chart Information` and when ready click `Install`.
+5. Leave all default values, select `Next`, and then click `Install`.
+6. Wait for the installation to complete and feel free to close the kubectl shell.
 
 ### Creating the License Secret
 
-Next, you'll need to create the `carbide-stigatron-system` namespace and create a secret named `stigatron-license` containing your license (this step is **critical**, as STIGATRON operator will not start without this secret present):
+Next, you'll need to create the `carbide-stigatron-system` namespace and create a secret named `stigatron-license` containing your Carbide License. *This step is **critical**, as STIGATRON operator will not start without this secret present:*
 
 ```bash
 # Create the namespace
 kubectl create namespace carbide-stigatron-system
 
 # Now create the secret, substituting your license
-kubectl apply -f - <<EOF
-apiVersion: v1
-kind: Secret
-metadata:
-  name: stigatron-license
-  namespace: carbide-stigatron-system
-type: Opaque
-stringData:
-  license: YOUR_LICENSE_HERE
-EOF
+kubectl create secret generic stigatron-license -n carbide-stigatron-system --from-literal=license=YOUR_LICENSE_HERE
 ```
 
 ### Installing STIGATRON Operator
@@ -78,4 +71,3 @@ helm status -n carbide-stigatron-system stigatron
 ```
 
 You should now see `STIGATRON` on the left menu of your Explore Cluster.
-
