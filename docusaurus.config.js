@@ -46,14 +46,14 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/rancherfederal/carbide-docs/edit/main',
+            'https://github.com/rancherfederal/carbide-docs/edit/main/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/rancherfederal/carbide-docs/edit/main/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -63,8 +63,8 @@ const config = {
   ],
 
   themeConfig:
-      
-  
+
+
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       colorMode: {
@@ -90,7 +90,7 @@ const config = {
           // {to: '/blog', label: 'Blog', position: 'left'},
           {
             href: 'https://github.com/rancherfederal/carbide-docs/issues',
-            label: 'Feedback',
+            label: 'Submit Feedback',
             position: 'right',
           },
         ],
@@ -102,8 +102,20 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
+                label: 'Carbide Docs',
                 to: '/docs/intro',
+              },
+              {
+                label: 'Registry',
+                to: '/docs/registry-docs/introduction',
+              },
+              {
+                label: 'STIGATRON',
+                to: '/docs/stigatron-docs/introduction',
+              },
+              {
+                label: 'Airgapped Docs',
+                to: '/docs/airgapped-docs/introduction',
               },
             ],
           },
@@ -111,34 +123,38 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'ZenDesk',
-                href: 'https://support.rancherfederal.com',
-              },
-              {
-                label: 'Slack',
-                href: 'https://rancher-users.slack.com',
-              },
-              {
                 label: 'Rancher',
                 href: 'https://rancher.com',
+              },
+              {
+                label: 'Rancher GitHub',
+                href: 'https://github.com/rancher',
+              },
+              {
+                label: 'Rancher Slack',
+                href: 'https://rancher-users.slack.com',
               },
             ],
           },
           {
-            title: 'More',
+            title: 'Contact',
             items: [
               {
-                label: 'Blog',
-                to: '/blog',
+                label: 'RGS Blog',
+                to: 'https://ranchergovernment.com/blog',
               },
               {
-                label: 'GitHub',
+                label: 'RGS GitHub',
                 href: 'https://github.com/rancherfederal',
+              },
+              {
+                label: 'RGS ZenDesk',
+                href: 'https://support.rancherfederal.com',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Rancher Federal Inc.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Rancher Federal, Inc. All rights reserved.`,
       },
       prism: {
         theme: lightCodeTheme,
