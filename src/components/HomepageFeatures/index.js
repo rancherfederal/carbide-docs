@@ -4,11 +4,11 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Trusted Container Registry',
+    title: 'Carbide Secured Registry (CSR)',
     Svg: require('@site/static/img/carbide-logo.svg').default,
     description: (
       <>
-        SLSA 3 compliant Container Registry hosting RGS digitally-signed Rancher images.
+        Centralized Secure SLSA 3 Compliant Container Registry, with SBOMs, CVEs, Image Attestations, and verifiable digital signatures.
       </>
     ),
   },
@@ -17,7 +17,7 @@ const FeatureList = [
     Svg: require('@site/static/img/stigatron_logo_full_black.svg').default,
     description: (
       <>
-        Day 2 operator tactically built to monitor the DISA STIG integrity of your downrange RKE2 Kubernetes clusters.
+        Compliance and Observability tool for Day 2 Operations, tactically built to validate downstream clusters against the <a href="https://public.cyber.mil/stigs/downloads">published DISA STIGs</a>.
       </>
     ),
   },
@@ -26,7 +26,7 @@ const FeatureList = [
     Svg: require('@site/static/img/rancher-logo-stacked-color-svg.svg').default,
     description: (
       <>
-        Rancher Government is your trusted provider of Rancher, Kubernetes and cloudnative enterprise support. Learn more at <a href="https://ranchergovernment.com">ranchergovernment.com</a>.
+        Rancher Government Solutions is your trusted provider of Rancher, Kubernetes, and Cloud Native support. Learn more on our <a href="https://ranchergovernment.com">website</a>.
       </>
     ),
   },
