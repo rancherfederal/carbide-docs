@@ -154,7 +154,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Rancher Federal, Inc. All rights reserved.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Rancher Government Solutions. All rights reserved.`,
       },
       prism: {
         theme: lightCodeTheme,
