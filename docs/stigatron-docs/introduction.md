@@ -10,7 +10,7 @@ As our product is still at Initial Operation Capability (IOC), there are some ex
 If you see issues and areas for improvement, please submit Github issues [here](https://github.com/rancherfederal/ssf-feedback/issues/).
 
 ## What is this?
-With our Federal/Government driven Kubernetes Distribution RKE2, we worked dilligently to provide the first and currently only Kubernetes distribution outside of the upstream project to obtain a fully certificate DISA STIG Certification.
+With our Federal/Government driven Kubernetes Distribution RKE2, we worked dilligently to provide the first Kubernetes distribution outside of the upstream project to obtain full DISA STIG Certification.
 
 While having the STIG provides immense benefits to our customers, we also wanted to improve the UX around working with that STIG. That is why we developed STIGATRON. STIGATRON will give our users capabilities that alleviate a lot of the pain points that go with traditional management of maintaining and assessing compliance of your systems:
 
