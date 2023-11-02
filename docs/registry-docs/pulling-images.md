@@ -2,8 +2,6 @@
 
 This page will walk you through how you can pull the secured images from the hardened registry, whether you're working in a connected or airgapped environment.
 
-**NOTE**: There is currently a Cosign [bug](https://github.com/sigstore/cosign/issues/2208) when using Harbor as your target registry and using the `cosign copy` command. Please utilize the Airgapped instructions if using Harbor. 
-
 ## Requirements
 
 * [Cosign](https://docs.sigstore.dev/cosign/installation/)
@@ -19,7 +17,7 @@ cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # Your target registry (and login if it requires authentication)
 TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
-# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY  
+# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY
 
 # Set the specific release of Carbide you're targeting: https://github.com/rancherfederal/carbide-releases/releases
 CARBIDE_RELEASE=0.1.0
@@ -40,7 +38,7 @@ cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # Your target registry (and login if it requires authentication)
 TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
-# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY  
+# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY
 
 # Set the specific release of K3s you're targeting: https://github.com/k3s-io/k3s/releases
 K3S_RELEASE=v1.24.4+k3s1
@@ -61,7 +59,7 @@ cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # Your target registry (and login if it requires authentication)
 TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
-# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY  
+# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY
 
 # Set the specific release of RKE2 you're targeting: https://github.com/rancher/rke2/releases
 RKE2_RELEASE=v1.24.3+rke2r1
@@ -82,7 +80,7 @@ cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # Your target registry (and login if it requires authentication)
 TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
-# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY  
+# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY
 
 # Set the specific release of Longhorn you're targeting: https://github.com/longhorn/longhorn/releases
 LONGHORN_RELEASE=v1.3.1
@@ -131,7 +129,7 @@ cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # Your target registry (and login if it requires authentication)
 TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
-# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY  
+# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY
 
 # Set the specific release of Rancher you're targeting: https://github.com/rancher/rancher/releases
 RANCHER_RELEASE=v2.7.1
@@ -158,7 +156,7 @@ SOURCE_REGISTRY_PASS=YOUR_CARBIDE_PASS
 
 # Working directories & TAR
 DEST_DIRECTORY=/tmp/carbide-images
-DEST_TAR=/tmp/carbide-images.tar.gz  # Change this to the location you want for your resulting TAR 
+DEST_TAR=/tmp/carbide-images.tar.gz  # Change this to the location you want for your resulting TAR
 
 # Carbide Version
 CARBIDE_RELEASE=0.1.0
@@ -182,11 +180,11 @@ CARBIDE_IMAGES=$(curl --silent -L https://github.com/rancherfederal/carbide-rele
 for image in $CARBIDE_IMAGES; do
     source_image=$(echo $image)
     dest_image=$(echo $image | sed "s|rgcrprod.azurecr.us|TARGET_REGISTRY|g")
-    
+
     # Create manifest to use during load
     img_id_num=$(echo $RANDOM | md5sum | head -c 20)
     echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
+
     # Save image locally
     mkdir $DEST_DIRECTORY/$img_id_num
     cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
@@ -209,7 +207,7 @@ SOURCE_REGISTRY_PASS=YOUR_CARBIDE_PASS
 
 # Working directories & TAR
 DEST_DIRECTORY=/tmp/k3s-images
-DEST_TAR=/tmp/k3s-images.tar.gz  # Change this to the location you want for your resulting TAR 
+DEST_TAR=/tmp/k3s-images.tar.gz  # Change this to the location you want for your resulting TAR
 
 # K3s Version
 K3S_RELEASE=v1.24.4+k3s1
@@ -233,11 +231,11 @@ K3S_IMAGES=$(curl --silent -L https://github.com/k3s-io/k3s/releases/download/$K
 for image in $K3S_IMAGES; do
     source_image=$(echo $image | sed "s|docker.io|$SOURCE_REGISTRY|g")
     dest_image=$(echo $image | sed "s|docker.io|TARGET_REGISTRY|g")
-    
+
     # Create manifest to use during load
     img_id_num=$(echo $RANDOM | md5sum | head -c 20)
     echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
+
     # Save image locally
     mkdir $DEST_DIRECTORY/$img_id_num
     cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
@@ -260,7 +258,7 @@ SOURCE_REGISTRY_PASS=YOUR_CARBIDE_PASS
 
 # Working directories & TAR
 DEST_DIRECTORY=/tmp/rke2-images
-DEST_TAR=/tmp/rke2-images.tar.gz  # Change this to the location you want for your resulting TAR 
+DEST_TAR=/tmp/rke2-images.tar.gz  # Change this to the location you want for your resulting TAR
 
 # RKE2 Version
 RKE2_RELEASE=v1.24.3+rke2r1
@@ -284,11 +282,11 @@ RKE2_IMAGES=$(curl --silent -L https://github.com/rancher/rke2/releases/download
 for image in $RKE2_IMAGES; do
     source_image=$(echo $image | sed "s|docker.io|$SOURCE_REGISTRY|g")
     dest_image=$(echo $image | sed "s|docker.io|TARGET_REGISTRY|g")
-    
+
     # Create manifest to use during load
     img_id_num=$(echo $RANDOM | md5sum | head -c 20)
     echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
+
     # Save image locally
     mkdir $DEST_DIRECTORY/$img_id_num
     cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
@@ -311,7 +309,7 @@ SOURCE_REGISTRY_PASS=YOUR_CARBIDE_PASS
 
 # Working directories & TAR
 DEST_DIRECTORY=/tmp/longhorn-images
-DEST_TAR=/tmp/longhorn-images.tar.gz  # Change this to the location you want for your resulting TAR 
+DEST_TAR=/tmp/longhorn-images.tar.gz  # Change this to the location you want for your resulting TAR
 
 # Longhorn Version
 LONGHORN_RELEASE=v1.3.1
@@ -336,11 +334,11 @@ LONGHORN_IMAGES=$(curl --silent -L https://raw.githubusercontent.com/longhorn/lo
 for image in $LONGHORN_IMAGES; do
     source_image="$SOURCE_REGISTRY/$image"
     dest_image="TARGET_REGISTRY/$image"
-    
+
     # Create manifest to use during load
     img_id_num=$(echo $RANDOM | md5sum | head -c 20)
     echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
+
     # Save image locally
     mkdir $DEST_DIRECTORY/$img_id_num
     cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
@@ -366,7 +364,7 @@ SOURCE_REGISTRY_PASS=YOUR_CARBIDE_PASS
 
 # Working directories & TAR
 DEST_DIRECTORY=/tmp/cert-manager-images
-DEST_TAR=/tmp/cert-manager-images.tar.gz  # Change this to the location you want for your resulting TAR 
+DEST_TAR=/tmp/cert-manager-images.tar.gz  # Change this to the location you want for your resulting TAR
 
 # Cert Manager Chart Version
 CERT_MANAGER_RELEASE=v1.7.3
@@ -394,11 +392,11 @@ helm repo update
 for image in $(helm template jetstack/cert-manager --version $CERT_MANAGER_RELEASE | grep 'image:' | sed 's/"//g' | awk '{ print $2 }'); do
     source_image=$(echo $image | sed "s/quay.io/$SOURCE_REGISTRY/g")
     dest_image=$(echo $image | sed "s/quay.io/TARGET_REGISTRY/g")
-    
+
     # Create manifest to use during load
     img_id_num=$(echo $RANDOM | md5sum | head -c 20)
     echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
+
     # Save image locally
     mkdir $DEST_DIRECTORY/$img_id_num
     cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
@@ -421,7 +419,7 @@ SOURCE_REGISTRY_PASS=YOUR_CARBIDE_PASS
 
 # Working directories & TAR
 DEST_DIRECTORY=/tmp/rancher-images
-DEST_TAR=/tmp/rancher-images.tar.gz  # Change this to the location you want for your resulting TAR 
+DEST_TAR=/tmp/rancher-images.tar.gz  # Change this to the location you want for your resulting TAR
 
 # Rancher Version
 RANCHER_RELEASE=v2.7.1
@@ -445,11 +443,11 @@ RANCHER_IMAGES=$(curl --silent -L https://github.com/rancher/rancher/releases/do
 for image in $RANCHER_IMAGES; do
     source_image="$SOURCE_REGISTRY/$image"
     dest_image="TARGET_REGISTRY/$image"
-    
+
     # Create manifest to use during load
     img_id_num=$(echo $RANDOM | md5sum | head -c 20)
     echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
+
     # Save image locally
     mkdir $DEST_DIRECTORY/$img_id_num
     cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
