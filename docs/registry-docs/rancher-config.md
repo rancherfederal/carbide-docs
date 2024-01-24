@@ -114,12 +114,16 @@ configs:
 
 ### Usage with `Rancher`
 
-Follow Rancher's [Installation Guide](https://rancher.com/docs/rancher/v2.5/en/installation/install-rancher-on-k8s/), adding in the following steps to your `helm install` command.
+Follow Rancher's [Installation Guide](https://rancher.com/docs/rancher/v2.5/en/installation/install-rancher-on-k8s/), adding in the following steps to use our [Carbide Helm Chart](https://github.com/rancherfederal/carbide-charts) and the `helm install` command.
 
 When installing Rancher, to utilize the private registry, you'll need to set the following values in your Helm values:
 
 ```bash
-helm install rancher rancher-latest/rancher \
+helm repo add carbide-charts https://rancherfederal.github.io/carbide-charts
+helm repo update
+helm search repo carbide-charts
+
+helm install rancher carbide-charts/rancher \
   --namespace cattle-system \
   --set hostname=rancher.my.org \
   --set replicas=3 \
