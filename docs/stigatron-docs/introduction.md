@@ -1,13 +1,13 @@
 # Introduction
 
-This page will walk through Installation and Usage of the STIGATRON component of RGS Carbide.
+This page will walk through Installation and Usage of the STIGATRON component of Rancher Government Carbide.
 
 ## IOC Expectations
 As our product is still at Initial Operation Capability (IOC), there are some expectations to level-set:
 
 * Installation and packaging is still in progress and improving.
 
-If you see issues and areas for improvement, please submit Github issues [here](https://github.com/rancherfederal/ssf-feedback/issues/).
+If you see issues and areas for improvement, please submit Github issues [here](https://github.com/rancherfederal/carbide-charts/issues/).
 
 ## What is this?
 With our Federal/Government driven Kubernetes Distribution RKE2, we worked dilligently to provide the first Kubernetes distribution outside of the upstream project to obtain full DISA STIG Certification.

@@ -1,4 +1,4 @@
-# Downloading Release Images
+# Downloading the Images
 
 This page will walk you through how you can locally download secured images from the hardened registry and package them to move over an airgap to your registry.
 
@@ -19,7 +19,7 @@ SOURCE_REGISTRY_PASS=YOUR_CARBIDE_PASS
 
 # Working directories & TAR
 DEST_DIRECTORY=/tmp/carbide-images
-DEST_TAR=/tmp/carbide-images.tar.gz  # Change this to the location you want for your resulting TAR 
+DEST_TAR=/tmp/carbide-images.tar.gz  # Change this to the location you want for your resulting TAR
 
 # Carbide Version
 CARBIDE_RELEASE=0.1.1
@@ -43,11 +43,11 @@ CARBIDE_IMAGES=$(curl --silent -L https://github.com/rancherfederal/carbide-rele
 for image in $CARBIDE_IMAGES; do
     source_image=$(echo $image)
     dest_image=$(echo $image | sed "s|rgcrprod.azurecr.us|TARGET_REGISTRY|g")
-    
+
     # Create manifest to use during load
     img_id_num=$(mktemp -d XXXXXXXXXXXXXXXXXXXX)
     echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
+
     # Save image locally
     mkdir $DEST_DIRECTORY/$img_id_num
     cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
@@ -70,7 +70,7 @@ SOURCE_REGISTRY_PASS=YOUR_CARBIDE_PASS
 
 # Working directories & TAR
 DEST_DIRECTORY=/tmp/k3s-images
-DEST_TAR=/tmp/k3s-images.tar.gz  # Change this to the location you want for your resulting TAR 
+DEST_TAR=/tmp/k3s-images.tar.gz  # Change this to the location you want for your resulting TAR
 
 # K3s Version
 K3S_RELEASE=v1.24.4+k3s1
@@ -94,11 +94,11 @@ K3S_IMAGES=$(curl --silent -L https://github.com/k3s-io/k3s/releases/download/$K
 for image in $K3S_IMAGES; do
     source_image=$(echo $image | sed "s|docker.io|$SOURCE_REGISTRY|g")
     dest_image=$(echo $image | sed "s|docker.io|TARGET_REGISTRY|g")
-    
+
     # Create manifest to use during load
     img_id_num=$(mktemp -d XXXXXXXXXXXXXXXXXXXX)
     echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
+
     # Save image locally
     mkdir $DEST_DIRECTORY/$img_id_num
     cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
@@ -121,7 +121,7 @@ SOURCE_REGISTRY_PASS=YOUR_CARBIDE_PASS
 
 # Working directories & TAR
 DEST_DIRECTORY=/tmp/rke2-images
-DEST_TAR=/tmp/rke2-images.tar.gz  # Change this to the location you want for your resulting TAR 
+DEST_TAR=/tmp/rke2-images.tar.gz  # Change this to the location you want for your resulting TAR
 
 # RKE2 Version
 RKE2_RELEASE=v1.24.3+rke2r1
@@ -145,11 +145,11 @@ RKE2_IMAGES=$(curl --silent -L https://github.com/rancher/rke2/releases/download
 for image in $RKE2_IMAGES; do
     source_image=$(echo $image | sed "s|docker.io|$SOURCE_REGISTRY|g")
     dest_image=$(echo $image | sed "s|docker.io|TARGET_REGISTRY|g")
-    
+
     # Create manifest to use during load
     img_id_num=$(mktemp -d XXXXXXXXXXXXXXXXXXXX)
     echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
+
     # Save image locally
     mkdir $DEST_DIRECTORY/$img_id_num
     cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
@@ -172,7 +172,7 @@ SOURCE_REGISTRY_PASS=YOUR_CARBIDE_PASS
 
 # Working directories & TAR
 DEST_DIRECTORY=/tmp/longhorn-images
-DEST_TAR=/tmp/longhorn-images.tar.gz  # Change this to the location you want for your resulting TAR 
+DEST_TAR=/tmp/longhorn-images.tar.gz  # Change this to the location you want for your resulting TAR
 
 # Longhorn Version
 LONGHORN_RELEASE=v1.3.1
@@ -197,11 +197,11 @@ LONGHORN_IMAGES=$(curl --silent -L https://raw.githubusercontent.com/longhorn/lo
 for image in $LONGHORN_IMAGES; do
     source_image="$SOURCE_REGISTRY/$image"
     dest_image="TARGET_REGISTRY/$image"
-    
+
     # Create manifest to use during load
     img_id_num=$(mktemp -d XXXXXXXXXXXXXXXXXXXX)
     echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
+
     # Save image locally
     mkdir $DEST_DIRECTORY/$img_id_num
     cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
@@ -223,7 +223,7 @@ SOURCE_REGISTRY_PASS=YOUR_CARBIDE_PASS
 
 # Working directories & TAR
 DEST_DIRECTORY=/tmp/neuvector-images
-DEST_TAR=/tmp/neuvector-images.tar.gz  # Change this to the location you want for your resulting TAR 
+DEST_TAR=/tmp/neuvector-images.tar.gz  # Change this to the location you want for your resulting TAR
 
 # NeuVector Chart Version
 NEUVECTOR_RELEASE=v2.4.2
@@ -251,11 +251,11 @@ helm repo update
 for image in $(helm template neuvector neuvector/core --version $NEUVECTOR_RELEASE | grep 'image:' | sed 's/"//g' | sed "s/'//g" | awk '{ print $2 }'); do
     source_image=$(echo $image | sed "s/docker.io/$SOURCE_REGISTRY/g")
     dest_image=$(echo $image | sed "s/docker.io/TARGET_REGISTRY/g")
-    
+
     # Create manifest to use during load
     img_id_num=$(mktemp -d XXXXXXXXXXXXXXXXXXXX)
     echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
+
     # Save image locally
     mkdir $DEST_DIRECTORY/$img_id_num
     cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
@@ -278,7 +278,7 @@ SOURCE_REGISTRY_PASS=YOUR_CARBIDE_PASS
 
 # Working directories & TAR
 DEST_DIRECTORY=/tmp/kubewarden-images
-DEST_TAR=/tmp/kubewarden-images.tar.gz  # Change this to the location you want for your resulting TAR 
+DEST_TAR=/tmp/kubewarden-images.tar.gz  # Change this to the location you want for your resulting TAR
 
 if [[ -d "$DEST_DIRECTORY" ]]; then
     echo "ERROR: Directory '$DEST_DIRECTORY' exists."
@@ -303,11 +303,11 @@ helm repo update
 for image in $(helm template kubewarden/kubewarden-controller | grep 'image:' | sed 's/"//g' | sed "s/'//g" | awk '{ print $2 }'); do
     source_image=$(echo $image | sed "s/ghcr.io/$SOURCE_REGISTRY/g")
     dest_image=$(echo $image | sed "s/ghcr.io/TARGET_REGISTRY/g")
-    
+
     # Create manifest to use during load
     img_id_num=$(mktemp -d XXXXXXXXXXXXXXXXXXXX)
     echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
+
     # Save image locally
     mkdir $DEST_DIRECTORY/$img_id_num
     cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
@@ -316,11 +316,11 @@ done
 for image in $(helm template kubewarden/kubewarden-defaults | grep 'image:' | sed 's/"//g' | sed "s/'//g" | awk '{ print $2 }'); do
     source_image=$(echo $image | sed "s/ghcr.io/$SOURCE_REGISTRY/g")
     dest_image=$(echo $image | sed "s/ghcr.io/TARGET_REGISTRY/g")
-    
+
     # Create manifest to use during load
     img_id_num=$(mktemp -d XXXXXXXXXXXXXXXXXXXX)
     echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
+
     # Save image locally
     mkdir $DEST_DIRECTORY/$img_id_num
     cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
@@ -345,7 +345,7 @@ SOURCE_REGISTRY_PASS=YOUR_CARBIDE_PASS
 
 # Working directories & TAR
 DEST_DIRECTORY=/tmp/cert-manager-images
-DEST_TAR=/tmp/cert-manager-images.tar.gz  # Change this to the location you want for your resulting TAR 
+DEST_TAR=/tmp/cert-manager-images.tar.gz  # Change this to the location you want for your resulting TAR
 
 # Cert Manager Chart Version
 CERT_MANAGER_RELEASE=v1.7.3
@@ -373,11 +373,11 @@ helm repo update
 for image in $(helm template jetstack/cert-manager --version $CERT_MANAGER_RELEASE | grep 'image:' | sed 's/"//g' | sed "s/'//g" | awk '{ print $2 }'); do
     source_image=$(echo $image | sed "s/quay.io/$SOURCE_REGISTRY/g")
     dest_image=$(echo $image | sed "s/quay.io/TARGET_REGISTRY/g")
-    
+
     # Create manifest to use during load
     img_id_num=$(mktemp -d XXXXXXXXXXXXXXXXXXXX)
     echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
+
     # Save image locally
     mkdir $DEST_DIRECTORY/$img_id_num
     cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
@@ -400,10 +400,10 @@ SOURCE_REGISTRY_PASS=YOUR_CARBIDE_PASS
 
 # Working directories & TAR
 DEST_DIRECTORY=/tmp/rancher-images
-DEST_TAR=/tmp/rancher-images.tar.gz  # Change this to the location you want for your resulting TAR 
+DEST_TAR=/tmp/rancher-images.tar.gz  # Change this to the location you want for your resulting TAR
 
 # Rancher Version
-RANCHER_RELEASE=v2.7.1
+RANCHER_RELEASE=v2.8.2
 
 if [[ -d "$DEST_DIRECTORY" ]]; then
     echo "ERROR: Directory '$DEST_DIRECTORY' exists."
@@ -424,11 +424,11 @@ RANCHER_IMAGES=$(curl --silent -L https://github.com/rancher/rancher/releases/do
 for image in $RANCHER_IMAGES; do
     source_image="$SOURCE_REGISTRY/$image"
     dest_image="TARGET_REGISTRY/$image"
-    
+
     # Create manifest to use during load
     img_id_num=$(mktemp -d XXXXXXXXXXXXXXXXXXXX)
     echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
+
     # Save image locally
     mkdir $DEST_DIRECTORY/$img_id_num
     cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
@@ -441,4 +441,4 @@ tar zcf "$DEST_TAR" -C "$DEST_DIRECTORY" .
 rm -rf $DEST_DIRECTORY
 ```
 
-See [Validate Images in the Airgap](validating-airgap-images.md) and [Loading Local Images to Registry](loading-images.md) for information on validating the images and loading the images into your airgapped registry.
+See [Loading Local Images to Registry](loading-images.md) for information on loading the images into your airgapped registry.

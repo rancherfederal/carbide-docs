@@ -1,4 +1,4 @@
-# Copy Release Images to Registry
+# Copying Images to a Registry
 
 This page will walk you through how you can copy the secured images from the hardened registry into another registry within a connected environment.
 
@@ -187,7 +187,7 @@ TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
 # cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY
 
 # Set the specific release of Rancher you're targeting: https://github.com/rancher/rancher/releases
-RANCHER_RELEASE=v2.7.1
+RANCHER_RELEASE=v2.8.2
 
 RANCHER_IMAGES=$(curl --silent -L https://github.com/rancher/rancher/releases/download/$RANCHER_RELEASE/rancher-images.txt)
 for image in $RANCHER_IMAGES; do

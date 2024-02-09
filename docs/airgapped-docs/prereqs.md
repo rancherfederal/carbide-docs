@@ -1,7 +1,9 @@
 # Prerequisites
 
-In order to install STIGATRON, you need the following:
+In order to utilize Airgapped Docs, you will need the following prerequisites:
 
-* For pulling/storing the STIGATRON images in your registry, you'll need the [Cosign CLI](https://github.com/sigstore/cosign).
-* For installation, you'll need the [Helm CLI](https://helm.sh/docs/intro/install/).
-* From the Rancher Manager UI, access to the downstream RKE2 cluster(s) you want to install Airgapped Docs onto.
+- **Rancher v2.7.0 or higher:** https://ranchermanager.docs.rancher.com/integrations-in-rancher/rancher-extensions
+- For fetching and packaging... **Hauler:** https://github.com/rancherfederal/hauler
+- For installation and deployment... **Helm:** https://helm.sh/docs/intro/install
+- Access to the `local` cluster, to be able to install and deploy the app(s).
+- Access to the `downstream` cluster(s), to be able to install and deploy the app(s).

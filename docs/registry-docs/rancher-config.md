@@ -15,11 +15,11 @@ This page will walk you through how to configure Rancher Manager images instead 
 
 ## Configuring Cert Manager
 
-As Rancher has a dependency on Cert Manager, you'll need to update your Helm install of Cert Manager to use SSF images that are validated/signed. 
+As Rancher has a dependency on Cert Manager, you'll need to update your Helm install of Cert Manager to use Carbide Secured Registry (CSR) images that are validated and signed by Rancher Government.
 
-If you're following Rancher's [Connected](https://rancher.com/docs/rancher/v2.6/en/installation/install-rancher-on-k8s/#4-install-cert-manager) installation instructions, you'll need to follow the next steps to use the SSF images for cert-manager. 
+If you're following Rancher's [Connected](https://rancher.com/docs/rancher/v2.6/en/installation/install-rancher-on-k8s/#4-install-cert-manager) installation instructions, you'll need to follow the next steps to use the Carbide Secured Registry (CSR) images for cert-manager.
 
-If using the [Airgapped](https://rancher.com/docs/rancher/v2.6/en/installation/other-installation-methods/air-gap/install-rancher/#1-add-the-cert-manager-repo) instructions, make sure you've pulled the [SSF cert-manager images](pulling-images.md) to your local/airgapped registry.
+If using the [Airgapped](https://rancher.com/docs/rancher/v2.6/en/installation/other-installation-methods/air-gap/install-rancher/#1-add-the-cert-manager-repo) instructions, make sure you've pulled the [cert-manager images](pulling-images.md) to your local/airgapped registry.
 
 ### Cert Manager Helm Install
 
@@ -37,7 +37,7 @@ webhook:
   image:
     registry: YOUR_REGISTRY_DOMAIN_HERE
     repository: jetstack/cert-manager-webhook
-  
+
 cainjector:
   image:
     registry: YOUR_REGISTRY_DOMAIN_HERE
@@ -50,7 +50,7 @@ startupapicheck:
 EOT
 ```
 
-Then use the following `helm install` command to use the SSF images:
+Then use the following `helm install` command to use the images:
 ```
 helm install cert-manager jetstack/cert-manager \
   --namespace cert-manager \
@@ -104,12 +104,12 @@ configs:
       password: <redacted>
 ```
 
-#### `registries.yaml` Strategy 
-| Scenario                    | Best practice                                                            |   
+#### `registries.yaml` Strategy
+| Scenario                    | Best practice                                                            |
 |-----------------------------|--------------------------------------------------------------------------|
-| Use of a 'golden image'     | Pre-configure `registries.yaml` on golden image before host provisioning |   
-| Rancher provisioned cluster | Embed a `cloud-init` file into cluster provisioning (Example below)          |   
-| Ansible/Saltstack/Manual    | Pre-configure `registries.yaml` on host before cluster provisioning      |   
+| Use of a 'golden image'     | Pre-configure `registries.yaml` on golden image before host provisioning |
+| Rancher provisioned cluster | Embed a `cloud-init` file into cluster provisioning (Example below)          |
+| Ansible/Saltstack/Manual    | Pre-configure `registries.yaml` on host before cluster provisioning      |
 
 
 ### Usage with `Rancher`

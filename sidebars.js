@@ -22,22 +22,23 @@ const sidebars = {
     'intro',
     {
       type: 'category',
-      label: 'Carbide Image Registry',
+      label: 'Carbide Secured Registry',
       collapsed: false,
       items: [
         'registry-docs/introduction',
-        'registry-docs/known-limits',
+        'registry-docs/architecture',
+        'registry-docs/release-cadence',
         {
           type: 'category',
           label: 'Installation',
           items: [
             'registry-docs/prereqs',
+            'registry-docs/validating-images',
             {
               type: 'category',
               label: 'Connected Environments',
               items: [
                 // 'registry-docs/pulling-images',
-                'registry-docs/validating-images',
                 'registry-docs/copying-images',
               ],
             },
@@ -46,7 +47,6 @@ const sidebars = {
               label: 'Deploying Into Airgaps',
               items: [
                 'registry-docs/downloading-images',
-                'registry-docs/validating-airgap-images',
                 'registry-docs/loading-images',
               ],
             },
@@ -69,8 +69,6 @@ const sidebars = {
             'registry-docs/uninstall-rancher',
           ],
         },
-        'registry-docs/architecture',
-        'registry-docs/release-cadence',
       ],
     },
     {
@@ -96,7 +94,7 @@ const sidebars = {
             'stigatron-docs/using-heimdall',
           ],
         },
-        'stigatron-docs/uninstall',   
+        'stigatron-docs/uninstall',
       ],
     },
     {
@@ -113,10 +111,11 @@ const sidebars = {
             'airgapped-docs/installation',
           ],
         },
-        'airgapped-docs/uninstall',   
+        'airgapped-docs/uninstall',
       ],
     },
-    'registry-docs/feedback'
+    'known-limits',
+    'feedback',
   ],
 
 };

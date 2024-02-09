@@ -17,6 +17,6 @@
 When selecting a STIGATRON Scan Profile, there are 2 options for each support Kubernetes version:
 
 * Official: This is the officially certified version from DISA. While fully certified, it may be missing the latest security requirements currently in process for STIG reevaluations and fixes.
-* Preview: This is the latest version currently being worked and submitted to DISA from RGS. This will contain the latest STIG fixes and reevaluations, even before being fully certified.
+* Preview: This is the latest version currently being worked and submitted to DISA from Rancher Government. This will contain the latest STIG fixes and reevaluations, even before being fully certified.
 
-It is useful to leverage both versions when scanning to understand your cluster's current state against both the current and future STIGs.
+It is useful to leverage both versions when scanning to understand your cluster's current state against both of the current and future STIGs.

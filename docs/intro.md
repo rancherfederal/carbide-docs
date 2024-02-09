@@ -2,9 +2,9 @@
 sidebar_position: 1
 ---
 
-# Carbide
+# Introduction
 
-Carbide is Rancher Government's hardened distribution of the SUSE Rancher product portfolio. Carbide is exclusively offered to our US Government and partnering customers that value security above all else. 
+Carbide is Rancher Government's hardened distribution of the SUSE Rancher product portfolio. Carbide is exclusively offered to our US Government and partnering customers that value security above all else.
 
 Rancher Carbide is tactically built with the following enhancements over the community version:
 * [SLSA 3 compliant](https://slsa.dev/) secure build process hosted on Azure Government
@@ -13,7 +13,7 @@ Rancher Carbide is tactically built with the following enhancements over the com
 * Container [Attestations](https://www.testifysec.com/blog/what-is-a-supply-chain-attestation/)
 * Container Vulnerability Scans
 * Authenticated Registry hosted on Azure Government Container Registry
-* STIGATRON: Day 2 security operator powered by Rancher Government's DISA STIGs 
+* STIGATRON: Day 2 security operator powered by Rancher Government's DISA STIGs
 * Airgapped Docs: Fully airgapped-supportive documentation for the entire supported Rancher product portfolio
 * Custom red-white-blue theming & Rancher manager white-labeling
 

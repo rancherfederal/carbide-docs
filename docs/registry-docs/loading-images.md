@@ -1,4 +1,4 @@
-# Loading Local Images to Registry
+# Loading Images to a Registry
 
 This page will walk you through seeding your registry with local images from the hardened registry for all Rancher components.
 
