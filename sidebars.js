@@ -71,6 +71,7 @@ const sidebars = {
         },
       ],
     },
+    'carbide-charts',
     {
       type: 'category',
       label: 'STIGATRON',
@@ -108,6 +109,7 @@ const sidebars = {
           label: 'Installation',
           items: [
             'airgapped-docs/prereqs',
+            'airgapped-docs/getting-started',
             'airgapped-docs/installation',
           ],
         },

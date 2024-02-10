@@ -11,7 +11,7 @@ On the `local` cluster running Rancher MCM, you'll need to first enable Extensio
 3. Click the `Enable` button on the Extensions screen.
 4. Click `Ok`, when prompted to Enable Extension Support.
 
-  ![Enable Extensions](/img/stigatron/enable-extensions.png)
+![Enable Extensions](/img/stigatron/enable-extensions.png)
 
 ### Installing STIGATRON UI Plugin
 
@@ -19,7 +19,7 @@ Next, on the same `local` cluster, run the following Helm commands to install th
 
 ```bash
 helm install -n carbide-stigatron-system --create-namespace \
-  --set "global.cattle.systemDefaultRegistry=YOUR_REGISTRY_HERE" \
+  --set "global.cattle.systemDefaultRegistry=<registry-url>" \
   stigatron-ui carbide-charts/stigatron-ui
 ```
 
@@ -29,10 +29,11 @@ Check the status of the rollout:
 helm status -n carbide-stigatron-system stigatron-ui
 ```
 
-## Downstream RKE2 Clusters
+## Downstream Clusters
 
 ### Installing CIS Benchmark Operator
-On downstream RKE2 clusters, you'll need to first install Rancher's CIS Benchmark Operator:
+
+On downstream clusters, you'll need to first install Rancher's CIS Benchmark Operator:
 
 1. Navigate to your cluster in the `Explore Cluster` menu.
 2. On the left, select `Apps` and click `Charts`.
@@ -43,7 +44,7 @@ On downstream RKE2 clusters, you'll need to first install Rancher's CIS Benchmar
 
 ### Creating the License Secret
 
-Next, you'll need to create the `carbide-stigatron-system` namespace and create a secret named `stigatron-license` containing your Carbide License. *This step is **critical**, as STIGATRON operator will not start without this secret present:*
+Next, you'll need to create the `carbide-stigatron-system` namespace and create a secret named `stigatron-license` containing your Carbide License. _This step is **critical**, as STIGATRON operator will not start without this secret present:_
 
 ```bash
 # Create the namespace
@@ -59,8 +60,8 @@ Next, you'll need to run the following Helm command to install the STIGATRON Ope
 
 ```bash
 helm install -n carbide-stigatron-system \
-  --set "global.cattle.systemDefaultRegistry=YOUR_REGISTRY_HERE" \
-  --set "heimdall2.global.cattle.systemDefaultRegistry=YOUR_REGISTRY_HERE" \
+  --set "global.cattle.systemDefaultRegistry=<registry-url>" \
+  --set "heimdall2.global.cattle.systemDefaultRegistry=<registry-url>" \
   stigatron carbide-charts/stigatron
 ```
 

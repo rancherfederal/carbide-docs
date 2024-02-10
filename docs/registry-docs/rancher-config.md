@@ -5,13 +5,14 @@ This page will walk you through how to configure Rancher Manager images instead 
 **NOTE**: Due to current limitations of cloud providers, this project will not work for managing Cloud Provider clusters (AKS, EKS, GKE). If you're currently using Rancher to manage those workloads, do not use this project. We intend to improve this experience in the future.
 
 ## Compatibility Matrix
-| Infra           | Provisioner                  | Registry Auth Strategy                                           | Test Status |
-|-----------------|------------------------------|------------------------------------------------------------------|-------------|
-| *               | Self-install                 | Global Registry (Rancher)                                        |             |
-| AWS-EKS         | Rancher                      | ECR (public or IAM)                                              |             |
-| * (non eks/aks) | Rancher (Cloud provisioner)  | Global Registry (Rancher)                                        |             |
-| * (non eks/aks) | Rancher (Custom provisioner) | Authenticated Registry requires manual registries.yaml creation  |             |
-| *               | Imported Cluster             | UNKNOWN                                                          |             |
+
+| Infra   | Provisioner                  | Registry Auth Strategy                          | Test Status |
+| ------- | ---------------------------- | ----------------------------------------------- | ----------- |
+| Any     | Rancher (Cloud provisioner)  | Global Registry (Rancher)                       | Validated   |
+| Any     | Rancher (Custom provisioner) | Authenticated Registry (Manual registries.yaml) | Validated   |
+| Any     | Self Installation            | Global Registry (Rancher)                       | Validated   |
+| Any     | Imported Cluster             | Unknown                                         |             |
+| AWS-EKS | Rancher                      | ECR (public or private)                         |             |
 
 ## Configuring Cert Manager
 
@@ -19,7 +20,7 @@ As Rancher has a dependency on Cert Manager, you'll need to update your Helm ins
 
 If you're following Rancher's [Connected](https://rancher.com/docs/rancher/v2.6/en/installation/install-rancher-on-k8s/#4-install-cert-manager) installation instructions, you'll need to follow the next steps to use the Carbide Secured Registry (CSR) images for cert-manager.
 
-If using the [Airgapped](https://rancher.com/docs/rancher/v2.6/en/installation/other-installation-methods/air-gap/install-rancher/#1-add-the-cert-manager-repo) instructions, make sure you've pulled the [cert-manager images](pulling-images.md) to your local/airgapped registry.
+If using the [Airgapped](https://rancher.com/docs/rancher/v2.6/en/installation/other-installation-methods/air-gap/install-rancher/#1-add-the-cert-manager-repo) installation instructions, make sure you've pulled the images to your local/airgapped registry.
 
 ### Cert Manager Helm Install
 
@@ -51,6 +52,7 @@ EOT
 ```
 
 Then use the following `helm install` command to use the images:
+
 ```
 helm install cert-manager jetstack/cert-manager \
   --namespace cert-manager \
@@ -60,9 +62,11 @@ helm install cert-manager jetstack/cert-manager \
 ```
 
 ## Registry Auth Scenarios
+
 ### Global Registry
 
 #### Setting a Private Registry with No Credentials as the Default Registry
+
 1. Log into Rancher and configure the default administrator password.
 1. Click **☰ > Global Settings**.
 1. Go to the setting called `system-default-registry` and choose **⋮ > Edit Setting**.
@@ -83,9 +87,9 @@ You can follow these steps to configure a private registry when you create a clu
 
 **Result:** The new cluster will be able to pull images from the private registry.
 
-
 ### Manual `registries.yaml` configuration (`RKE2`/`k3s`)
-In order to configure authentication to the CRI *before* pulling down the base kubernetes container image. To modify the system images that `k3s` or `rke2` uses upon bootstrapping, configure k3s' mirror settings as described [here](https://rancher.com/docs/k3s/latest/en/installation/private-registry/#mirrors).
+
+In order to configure authentication to the CRI _before_ pulling down the base kubernetes container image. To modify the system images that `k3s` or `rke2` uses upon bootstrapping, configure k3s' mirror settings as described [here](https://rancher.com/docs/k3s/latest/en/installation/private-registry/#mirrors).
 
 The full configuration using the shared alpha account is below:
 
@@ -95,22 +99,22 @@ The full configuration using the shared alpha account is below:
 mirrors:
   docker.io:
     endpoint:
-      - "https://YOUR_REGISTRY_DOMAIN"
+      - 'https://YOUR_REGISTRY_DOMAIN'
 
 configs:
-  "YOUR_REGISTRY_DOMAIN":
+  'YOUR_REGISTRY_DOMAIN':
     auth:
       username: <redacted>
       password: <redacted>
 ```
 
 #### `registries.yaml` Strategy
-| Scenario                    | Best practice                                                            |
-|-----------------------------|--------------------------------------------------------------------------|
-| Use of a 'golden image'     | Pre-configure `registries.yaml` on golden image before host provisioning |
-| Rancher provisioned cluster | Embed a `cloud-init` file into cluster provisioning (Example below)          |
-| Ansible/Saltstack/Manual    | Pre-configure `registries.yaml` on host before cluster provisioning      |
 
+| Scenario                    | Best practice                                                            |
+| --------------------------- | ------------------------------------------------------------------------ |
+| Use of a 'golden image'     | Pre-configure `registries.yaml` on golden image before host provisioning |
+| Rancher provisioned cluster | Embed a `cloud-init` file into cluster provisioning (Example below)      |
+| Ansible/Saltstack/Manual    | Pre-configure `registries.yaml` on host before cluster provisioning      |
 
 ### Usage with `Rancher`
 
@@ -134,6 +138,7 @@ helm install rancher carbide-charts/rancher \
 NOTE: This requires configuring your above K3s/RKE2 `registries.yaml` to work.
 
 #### Example `cloud-init` (`RKE2`)
+
 ```yaml
 # cloud-init
 
@@ -152,5 +157,5 @@ write_files:
             auth:
             username: <redacted>
             password: <redacted>
-    permissions: "0644"
+    permissions: '0644'
 ```

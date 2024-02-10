@@ -6,7 +6,7 @@ This will guide you through validating the signatures and attestations of each i
 
 ```bash
 # download the public key for carbide
-curl -#OL https://github.com/rancherfederal/carbide-releases/releases/download/0.1.1/carbide-key.pub
+curl -sfl https://github.com/rancherfederal/carbide-releases/releases/download/0.1.1/carbide-key.pub
 
 # view the public key for carbide
 cat carbide-key.pub
@@ -28,6 +28,7 @@ _NOTE_: You'll need to substitute `rgcrprod.azurecr.us` with your own registry d
 ```bash
 # export the public key for carbide
 export KEY=carbide-key.pub
+
 # verify the image's attestation by validating the supplied signature
 cosign verify --key $KEY rgcrprod.azurecr.us/rancher/rancher:v2.8.2
 ```

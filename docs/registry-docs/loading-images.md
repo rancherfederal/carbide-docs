@@ -11,7 +11,7 @@ Make sure you've checked out the section on [Downloading Images](downloading-ima
 hauler store load carbide-images.tar.zst
 
 # copy the content from the hauler store to your registry
-hauler store copy --username <redacted> --password <redacted> registry://harbor.example.com
+hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
 ```
 
 ## K3s
@@ -21,7 +21,7 @@ hauler store copy --username <redacted> --password <redacted> registry://harbor.
 hauler store load k3s-images.tar.zst
 
 # copy the content from the hauler store to your registry
-hauler store copy --username <redacted> --password <redacted> registry://harbor.example.com
+hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
 ```
 
 ## RKE2
@@ -31,7 +31,7 @@ hauler store copy --username <redacted> --password <redacted> registry://harbor.
 hauler store load rke2-images.tar.zst
 
 # copy the content from the hauler store to your registry
-hauler store copy --username <redacted> --password <redacted> registry://harbor.example.com
+hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
 ```
 
 ## Rancher
@@ -43,7 +43,7 @@ hauler store copy --username <redacted> --password <redacted> registry://harbor.
 hauler store load cert-manager-images.tar.zst
 
 # copy the content from the hauler store to your registry
-hauler store copy --username <redacted> --password <redacted> registry://harbor.example.com
+hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
 ```
 
 ### Rancher
@@ -53,7 +53,7 @@ hauler store copy --username <redacted> --password <redacted> registry://harbor.
 hauler store load rancher-images.tar.zst
 
 # copy the content from the hauler store to your registry
-hauler store copy --username <redacted> --password <redacted> registry://harbor.example.com
+hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
 ```
 
 ## Longhorn
@@ -63,7 +63,7 @@ hauler store copy --username <redacted> --password <redacted> registry://harbor.
 hauler store load longhorn-images.tar.zst
 
 # copy the content from the hauler store to your registry
-hauler store copy --username <redacted> --password <redacted> registry://harbor.example.com
+hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
 ```
 
 ## NeuVector
@@ -73,7 +73,7 @@ hauler store copy --username <redacted> --password <redacted> registry://harbor.
 hauler store load neuvector-images.tar.zst
 
 # copy the content from the hauler store to your registry
-hauler store copy --username <redacted> --password <redacted> registry://harbor.example.com
+hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
 ```
 
 ## Kubewarden
@@ -83,5 +83,5 @@ hauler store copy --username <redacted> --password <redacted> registry://harbor.
 hauler store load kubewarden-images.tar.zst
 
 # copy the content from the hauler store to your registry
-hauler store copy --username <redacted> --password <redacted> registry://harbor.example.com
+hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
 ```
