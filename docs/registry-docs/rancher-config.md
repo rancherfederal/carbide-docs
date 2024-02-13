@@ -135,7 +135,7 @@ helm install rancher carbide-charts/rancher \
   --set systemDefaultRegistry=YOUR_REGISTRY_DOMAIN
 ```
 
-NOTE: This requires configuring your above K3s/RKE2 `registries.yaml` to work.
+**NOTE:** This requires configuring your above K3s/RKE2 `registries.yaml` to work.
 
 #### Example `cloud-init` (`RKE2`)
 

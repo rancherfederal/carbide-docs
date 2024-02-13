@@ -56,7 +56,7 @@ kubectl create secret generic stigatron-license -n carbide-stigatron-system --fr
 
 ### Installing STIGATRON Operator
 
-Next, you'll need to run the following Helm command to install the STIGATRON Operator (**NOTE**: Using carbide-stigatron-system as the namespace is required):
+Next, you'll need to run the following Helm command to install the STIGATRON Operator (**NOTE:** Using carbide-stigatron-system as the namespace is required):
 
 ```bash
 helm install -n carbide-stigatron-system \

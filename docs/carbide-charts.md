@@ -29,13 +29,6 @@ helm install <release-name> carbide-charts/<chart>
 
 If you would like to do add the Carbide Helm Charts to the Rancher Manager Chart Catalog, so you are able to use the user interface to install them, please follow the steps in the [Rancher Manager Docs](https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/helm-charts-in-rancher).
 
-### For Helm Chart OCI Artifacts
-
-```bash
-# example install of a helm chart
-helm install <release-name> oci://ghcr.io/rancherfederal/<chart>
-```
-
 ## How to Use (Airgaped Environments)
 
 ### For Helm Chart Repositories
@@ -43,35 +36,33 @@ helm install <release-name> oci://ghcr.io/rancherfederal/<chart>
 #### On Connected Environment
 
 ```bash
-# add and update the helm chart repository
-helm repo add carbide-charts https://rancherfederal.github.io/carbide-charts
-helm repo update
+# generate the hauler manfiest for the carbide charts
+cat <<EOF > carbide-charts.yaml
+apiVersion: content.hauler.cattle.io/v1alpha1
+kind: Charts
+metadata:
+  name: carbide-charts
+spec:
+  charts:
+    - name: airgapped-docs
+      repoURL: https://rancherfederal.github.io/carbide-charts
+      version: 0.1.47
+    - name: heimdall2
+      repoURL: https://rancherfederal.github.io/carbide-charts
+      version: 0.1.45
+    - name: rancher
+      repoURL: https://rancherfederal.github.io/carbide-charts
+      version: 2.8.2
+    - name: stigatron
+      repoURL: https://rancherfederal.github.io/carbide-charts
+      version: 0.2.5
+    - name: stigatron-ui
+      repoURL: https://rancherfederal.github.io/carbide-charts
+      version: 0.2.3
+EOF
 
-# view the charts in the helm chart repository
-helm search repo carbide-charts
-
-# save and output the helm chart to tarball
-helm pull carbide-charts/<chart>
-```
-
-#### On Airgapped Environment
-
-```bash
-# example install of a helm chart
-helm install <release-name> <chart>.tgz
-```
-
-### For Helm Chart OCI Artifacts
-
-#### On Connected Environment
-
-```bash
-# authenticate into carbide secured registry
-cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
-
-# fetch the content from the carbide secured registry
-# verify the version, location of the key, and the platform/architecture
-hauler store sync --products carbide-charts=v0.1.1 --key carbide-key.pub --platform linux/amd64
+# fetch the content from generated hauler manifest
+hauler store sync -f carbide-charts.yaml
 
 # save and output the content from the hauler store to tarball
 hauler store save --filename carbide-charts.tar.zst
@@ -83,9 +74,9 @@ hauler store save --filename carbide-charts.tar.zst
 # load the content from the tarball to the hauler store
 hauler store load carbide-charts.tar.zst
 
-# copy the content from the hauler store to your registry
-hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
+# server the content from the hauler store
+hauler store serve fileserver
 
-# save and output the helm chart to tarball
-helm install <release-name> oci://ghcr.io/rancherfederal/<chart>
+# example install of a helm chart
+helm install <release-name> http://<FQDN or IP>:<PORT>/<chart>.tgz
 ```

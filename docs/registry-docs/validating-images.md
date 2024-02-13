@@ -6,7 +6,7 @@ This will guide you through validating the signatures and attestations of each i
 
 ```bash
 # download the public key for carbide
-curl -sfl https://github.com/rancherfederal/carbide-releases/releases/download/0.1.1/carbide-key.pub
+curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
 
 # view the public key for carbide
 cat carbide-key.pub
@@ -23,21 +23,18 @@ tCAZva7CLlk/6gxvCM0QkIKznfaGTRMMYTaHMdQSau6yulDLlpokA++i8Q==
 
 Before pulling images, or after images have been pushed to a registry, you should verify those images against the carbide public key. These instructions are for verifying images directly from a registry.
 
-_NOTE_: You'll need to substitute `rgcrprod.azurecr.us` with your own registry domain if verifying in your own registry.
+**NOTE:** You'll need to substitute `rgcrprod.azurecr.us` with your own registry domain if verifying in your own registry.
 
 ```bash
-# export the public key for carbide
-export KEY=carbide-key.pub
-
 # verify the image's attestation by validating the supplied signature
-cosign verify --key $KEY rgcrprod.azurecr.us/rancher/rancher:v2.8.2
+cosign verify --key carbide-key.pub rgcrprod.azurecr.us/rancher/rancher:v2.8.2
 ```
 
 ### Software Bill of Materials
 
 ```bash
 # verify the image's SBOM attestation by validating the supplied signature
-cosign verify --key $KEY rgcrprod.azurecr.us/rancher/rancher:v2.8.2 --attachment sbom
+cosign verify --key carbide-key.pub rgcrprod.azurecr.us/rancher/rancher:v2.8.2 --attachment sbom
 
 # view the image's SBOM
 cosign download sbom rgcrprod.azurecr.us/rancher/rancher:v2.8.2
@@ -47,10 +44,10 @@ cosign download sbom rgcrprod.azurecr.us/rancher/rancher:v2.8.2
 
 ```bash
 # verify the image's SBOM attestation by validating the supplied signature
-cosign verify-attestation --key $KEY rgcrprod.azurecr.us/rancher/rancher:v2.8.2 --type vuln > /dev/null
+cosign verify-attestation --key carbide-key.pub rgcrprod.azurecr.us/rancher/rancher:v2.8.2 --type vuln > /dev/null
 
 # view the image's vulnerability scan results
-cosign verify-attestation --key $KEY rgcrprod.azurecr.us/rancher/rancher:v2.8.2 --type vuln | jq -r '.payload' | base64 -d | jq
+cosign verify-attestation --key carbide-key.pub rgcrprod.azurecr.us/rancher/rancher:v2.8.2 --type vuln | jq -r '.payload' | base64 -d | jq
 ```
 
 ### Resources

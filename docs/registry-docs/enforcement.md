@@ -36,7 +36,7 @@ If your Rancher system images are in a private registry requiring authentication
 cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # download the public key for carbide
-curl -sfl https://github.com/rancherfederal/carbide-releases/releases/download/0.1.1/carbide-key.pub
+curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
 
 # fetch the image from the carbide secured registry
 hauler store add image rgcrprod.azurecr.us/policies/verify-image-signatures:v0.1.7 --key carbide-key.pub --platform linux/amd64
@@ -54,7 +54,7 @@ Use the below script, substituting your registry, to both validate and save loca
 cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # download the public key for carbide
-curl -sfl https://github.com/rancherfederal/carbide-releases/releases/download/0.1.1/carbide-key.pub
+curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
 
 # fetch the image from the carbide secured registry
 hauler store add image rgcrprod.azurecr.us/policies/verify-image-signatures:v0.1.7 --key carbide-key.pub --platform linux/amd64
