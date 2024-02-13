@@ -1,11 +1,11 @@
 # Architecture
 
-This page will walk through the architecture of the SSF, including both the pipelines as well as typical usage of the SSF images.
+This page will walk through the architecture of the Carbide Secured Registry (CSR), including both of the pipelines related to the CSR, as well as typical usage of the images.
 
 ## Pipeline Architecture
 
-![Pipeline Architecture](/img/ssf/ssf-pipelines-arch-diagram.svg)
+![Pipeline Architecture](/img/csr/csr-pipelines-arch-diagram.svg)
 
 ## Usage Architecture
 
-![Usage Architecture](/img/ssf/ssf-usage-arch-diagram.svg)
+![Usage Architecture](/img/csr/csr-usage-arch-diagram.svg)

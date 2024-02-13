@@ -1,149 +1,84 @@
-# Copy Release Images to Registry
+# Copying Images to a Registry
 
 This page will walk you through how you can copy the secured images from the hardened registry into another registry within a connected environment.
 
 If you're copying images into an airgap, check the documents [here](downloading-images.md).
 
-## Requirements
-
-* [Cosign](https://docs.sigstore.dev/cosign/installation/)
-* [Helm](https://helm.sh/docs/intro/install/)
-
 ## Carbide
 
+**NOTE:** We are working to improve the collection and formatting of the `carbide` manifests and will be updating them.
+
 ```bash
-# Log into the registry
+# authenticate into carbide secured registry
 cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
-# Your target registry (and login if it requires authentication)
-TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
-# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY
+# download the public key for carbide
+curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
 
-# Set the specific release of Carbide you're targeting: https://github.com/rancherfederal/carbide-releases/releases
-CARBIDE_RELEASE=0.1.1
+# generate the hauler manifest for carbide
+cat <<EOF > carbide-images.yaml
+apiVersion: content.hauler.cattle.io/v1alpha1
+kind: Images
+metadata:
+  name: carbide-images
+  annotations:
+    hauler.dev/key: carbide-key.pub
+    hauler.dev/platform: linux/amd64
+spec:
+  images:
+$(curl -sfL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-images.txt | sed '/nats/d' | sed 's/^/    - name: /')
+---
+apiVersion: content.hauler.cattle.io/v1alpha1
+kind: Images
+metadata:
+  name: carbide-dependency-images
+  annotations:
+    hauler.dev/platform: linux/amd64
+spec:
+  images:
+$(curl -sfL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-images.txt | sed '/rgcr/d' | sed 's/^/    - name: /')
+EOF
 
-CARBIDE_IMAGES=$(curl --silent -L https://github.com/rancherfederal/carbide-releases/releases/download/$CARBIDE_RELEASE/carbide-images.txt)
-for image in $CARBIDE_IMAGES; do
-    source_image=$(echo $image)
-    dest_image=$(echo $image | sed "s/rgcrprod.azurecr.us/$TARGET_REGISTRY/g")
-    cosign copy $source_image $dest_image
-done
+# fetch the content from generated hauler manifest
+# verify the location of the key and the platform/architecture
+hauler store sync -f carbide-images.yaml
+
+# copy the content from the hauler store to your registry
+hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
 ```
 
 ## K3s
 
 ```bash
-# Log into the registry
+# authenticate into carbide secured registry
 cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
-# Your target registry (and login if it requires authentication)
-TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
-# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY
+# download the public key for carbide
+curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
 
-# Set the specific release of K3s you're targeting: https://github.com/k3s-io/k3s/releases
-K3S_RELEASE=v1.24.4+k3s1
+# fetch the content from the carbide secured registry
+# verify the version, location of the key, and the platform/architecture
+hauler store sync --products k3s=v1.26.13-k3s2 --key carbide-key.pub --platform linux/amd64
 
-K3S_IMAGES=$(curl --silent -L https://github.com/k3s-io/k3s/releases/download/$K3S_RELEASE/k3s-images.txt)
-for image in $K3S_IMAGES; do
-    source_image=$(echo $image | sed "s/docker.io/rgcrprod.azurecr.us/g")
-    dest_image=$(echo $image | sed "s/docker.io/$TARGET_REGISTRY/g")
-    cosign copy $source_image $dest_image
-done
+# copy the content from the hauler store to your registry
+hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
 ```
 
 ## RKE2
 
 ```bash
-# Log into the registry
+# authenticate into carbide secured registry
 cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
-# Your target registry (and login if it requires authentication)
-TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
-# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY
+# download the public key for carbide
+curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
 
-# Set the specific release of RKE2 you're targeting: https://github.com/rancher/rke2/releases
-RKE2_RELEASE=v1.24.3+rke2r1
+# fetch the content from the carbide secured registry
+# verify the version, location of the key, and the platform/architecture
+hauler store sync --products rke2=v1.26.13+rke2r1 --key carbide-key.pub --platform linux/amd64
 
-RKE2_IMAGES=$(curl --silent -L https://github.com/rancher/rke2/releases/download/$RKE2_RELEASE/rke2-images-all.linux-amd64.txt)
-for image in $RKE2_IMAGES; do
-    source_image=$(echo $image | sed "s/docker.io/rgcrprod.azurecr.us/g")
-    dest_image=$(echo $image | sed "s/docker.io/$TARGET_REGISTRY/g")
-    cosign copy $source_image $dest_image
-done
-```
-
-## Longhorn
-
-```bash
-# Log into the registry
-cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
-
-# Your target registry (and login if it requires authentication)
-TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
-# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY
-
-# Set the specific release of Longhorn you're targeting: https://github.com/longhorn/longhorn/releases
-LONGHORN_RELEASE=v1.3.1
-
-LONGHORN_IMAGES=$(curl --silent -L https://raw.githubusercontent.com/longhorn/longhorn/$LONGHORN_RELEASE/deploy/longhorn-images.txt)
-for image in $LONGHORN_IMAGES; do
-    source_image="rgcrprod.azurecr.us/$image"
-    dest_image="$TARGET_REGISTRY/$image"
-    cosign copy $source_image $dest_image
-done
-```
-
-## NeuVector
-
-```bash
-# Log into the registry
-cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
-
-# Your target registry (and login if it requires authentication)
-TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
-# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY
-
-# NeuVector Chart Version
-NEUVECTOR_RELEASE=v2.4.2
-
-# Add the neuvector repo (required Helm)
-helm repo add neuvector https://neuvector.github.io/neuvector-helm
-helm repo update
-
-# Grab the list of images and download them (requires docker, grep, sed, and awk)
-for image in $(helm template neuvector neuvector/core --version $NEUVECTOR_RELEASE | grep 'image:' | sed 's/"//g' | awk '{ print $2 }'); do
-    source_image=$(echo $image | sed 's/docker.io/rgcrprod.azurecr.us/g')
-    dest_image=$(echo $image | sed "s/docker.io/$TARGET_REGISTRY/g")
-    cosign copy $source_image $dest_image
-done
-```
-
-## Kubewarden
-
-```bash
-# Log into the registry
-cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
-
-# Your target registry (and login if it requires authentication)
-TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
-# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY
-
-# Add the Kubewarden repo (required Helm)
-helm repo add kubewarden https://charts.kubewarden.io
-helm repo update
-
-# Grab the list of images and download them (requires docker, grep, sed, and awk)
-for image in $(helm template kubewarden/kubewarden-controller | grep 'image:' | sed 's/"//g' | sed "s/'//g" | awk '{ print $2 }'); do
-    source_image=$(echo $image | sed 's/quay.io/rgcrprod.azurecr.us/g')
-    dest_image=$(echo $image | sed "s/quay.io/$TARGET_REGISTRY/g")
-    cosign copy $source_image $dest_image
-done
-
-for image in $(helm template kubewarden/kubewarden-defaults | grep 'image:' | sed 's/"//g' | sed "s/'//g" | awk '{ print $2 }'); do
-    source_image=$(echo $image | sed 's/quay.io/rgcrprod.azurecr.us/g')
-    dest_image=$(echo $image | sed "s/quay.io/$TARGET_REGISTRY/g")
-    cosign copy $source_image $dest_image
-done
+# copy the content from the hauler store to your registry
+hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
 ```
 
 ## Rancher
@@ -151,48 +86,84 @@ done
 ### Cert Manager
 
 ```bash
-# Log into the registry
+# authenticate into carbide secured registry
 cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
-# Your target registry (and login if it requires authentication)
-TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
-# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY
+# download the public key for carbide
+curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
 
-# Rancher supports v1.7.1 currently. See here for more info:
-# https://ranchermanager.docs.rancher.com/pages-for-subheaders/install-upgrade-on-a-kubernetes-cluster#4-install-cert-manager
-CERT_MANAGER_RELEASE="v1.7.1"
+# fetch the content from the carbide secured registry
+# verify the version, location of the key, and the platform/architecture
+hauler store sync --products cert-manager=v1.14.1 --key carbide-key.pub --platform linux/amd64
 
-# Add the cert manager repo (required Helm)
-helm repo add jetstack https://charts.jetstack.io
-helm repo update
-
-# Grab the list of images and download them (requires docker, grep, sed, and awk)
-for image in $(helm template jetstack/cert-manager --version $CERT_MANAGER_RELEASE | grep 'image:' | sed 's/"//g' | awk '{ print $2 }'); do
-    source_image=$(echo $image | sed 's/quay.io/rgcrprod.azurecr.us/g')
-    dest_image=$(echo $image | sed "s/quay.io/$TARGET_REGISTRY/g")
-    cosign copy $source_image $dest_image
-done
+# copy the content from the hauler store to your registry
+hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
 ```
-
-See [Rancher Manager Configuration](rancher-config.md) for configuring the Cert Manager chart to use these images.
 
 ### Rancher
 
 ```bash
-# Log into the registry
+# authenticate into carbide secured registry
 cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
-# Your target registry (and login if it requires authentication)
-TARGET_REGISTRY=YOUR_REGISTRY_DOMAIN_HERE
-# cosign login -u YOUR_USER -p YOUR_PASSWORD $TARGET_REGISTRY
+# download the public key for carbide
+curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
 
-# Set the specific release of Rancher you're targeting: https://github.com/rancher/rancher/releases
-RANCHER_RELEASE=v2.7.1
+# fetch the content from the carbide secured registry
+# verify the version, location of the key, and the platform/architecture
+hauler store sync --products rancher=v2.8.2 --key carbide-key.pub --platform linux/amd64
 
-RANCHER_IMAGES=$(curl --silent -L https://github.com/rancher/rancher/releases/download/$RANCHER_RELEASE/rancher-images.txt)
-for image in $RANCHER_IMAGES; do
-    source_image="rgcrprod.azurecr.us/$image"
-    dest_image="$TARGET_REGISTRY/$image"
-    cosign copy $source_image $dest_image
-done
+# copy the content from the hauler store to your registry
+hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
+```
+
+## Longhorn
+
+```bash
+# authenticate into carbide secured registry
+cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
+
+# download the public key for carbide
+curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
+
+# fetch the content from the carbide secured registry
+# verify the version, location of the key, and the platform/architecture
+hauler store sync --products longhorn=v1.6.0 --key carbide-key.pub --platform linux/amd64
+
+# copy the content from the hauler store to your registry
+hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
+```
+
+## NeuVector
+
+```bash
+# authenticate into carbide secured registry
+cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
+
+# download the public key for carbide
+curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
+
+# fetch the content from the carbide secured registry
+# verify the version, location of the key, and the platform/architecture
+hauler store sync --products neuvector=v5.3.0 --key carbide-key.pub --platform linux/amd64
+
+# copy the content from the hauler store to your registry
+hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
+```
+
+## Kubewarden
+
+```bash
+# authenticate into carbide secured registry
+cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
+
+# download the public key for carbide
+curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
+
+# fetch the content from the carbide secured registry
+# verify the version, location of the key, and the platform/architecture
+hauler store sync --products kubewarden=kubewarden-controller-2.0.8 --key carbide-key.pub --platform linux/amd64
+
+# copy the content from the hauler store to your registry
+hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
 ```

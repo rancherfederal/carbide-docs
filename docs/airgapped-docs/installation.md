@@ -1,14 +1,12 @@
 # Installation
 
-## Downstream RKE2 Clusters
+## Downstream Clusters
 
-On downstream RKE2 clusters, you'll need to first install Rancher's CIS Benchmark Operator:
-
-1. Run the following Helm command to install Airgapped Docs chart, substituting your registry in:
+Run the following Helm command to install Airgapped Docs chart, substituting your registry in:
 
 ```bash
 helm install -n carbide-docs-system --create-namespace \
-    --set "global.cattle.systemDefaultRegistry=YOUR_REGISTRY_HERE" \
+    --set "global.cattle.systemDefaultRegistry=<registry-url>" \
     airgapped-docs carbide-charts/airgapped-docs
 ```
 
@@ -27,7 +25,7 @@ There may be situations where you are running in a low-compute, low-resource env
 ```bash
 # Disable neuvector docs
 helm install -n carbide-docs-system --create-namespace \
-  --set "global.cattle.systemDefaultRegistry=YOUR_REGISTRY_HERE" \
+  --set "global.cattle.systemDefaultRegistry=<registry-url>" \
   --set "docs.neuvector.enabled=false" \
   airgapped-docs carbide-charts/airgapped-docs
 ```

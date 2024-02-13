@@ -25,7 +25,7 @@ curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --flannel-backend none" 
 You'd need to run:
 
 ```bash
-curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --flannel-backend none" K3S_TOKEN=12345 sh - 
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --flannel-backend none" K3S_TOKEN=12345 sh -
 ```
 
 ## RKE2
@@ -52,4 +52,4 @@ write-kubeconfig-mode: 0640
 To restart controlplane nodes, run: `systemctl restart rke2-server`
 To restart agents, run: `systemctl restart rke2-agent`
 
-*NOTE*: For controlplane nodes, be sure to restart them one at a time.
+**NOTE:** For controlplane nodes, be sure to restart them one at a time.

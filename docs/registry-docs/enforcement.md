@@ -2,121 +2,82 @@
 
 This page will walk you through configuring Policy Enforcement (Kubewarden, Kyverno, Open Policy Agent) to ensure images running in your cluster that come from the hardened registry are validated against our public key before deploying.
 
-## Kubewarden Enforcement 
+## Kubewarden Enforcement
 
 ### Installation
 
 To install Kubewarden, run the following commands, substituting your registry information:
 
 ```bash
+# add and update the helm chart repository
 helm repo add kubewarden https://charts.kubewarden.io
 helm repo update
 
+# install the crds helm chart
 helm install --wait -n kubewarden --create-namespace kubewarden-crds kubewarden/kubewarden-crds
 
-helm install --wait -n kubewarden kubewarden-controller --set "common.cattle.systemDefaultRegistry=YOUR_REGISTRY_HERE" kubewarden/kubewarden-controller
+# install the controller helm chart
+helm install --wait -n kubewarden kubewarden-controller kubewarden/kubewarden-controller --set "common.cattle.systemDefaultRegistry=<registry-url>"
 
-helm install --wait -n kubewarden kubewarden-defaults --set "common.cattle.systemDefaultRegistry=YOUR_REGISTRY_HERE" kubewarden/kubewarden-defaults
+# install the defaults helm chart
+helm install --wait -n kubewarden kubewarden-defaults kubewarden/kubewarden-defaults --set "common.cattle.systemDefaultRegistry=<registry-url>" kubewarden/kubewarden-defaults
 ```
 
 For more information about installing Kubewarden, see the [docs](https://docs.kubewarden.io/quick-start#installation).
-
 
 ### Private Registry
 
 If your Rancher system images are in a private registry requiring authentication, you'll need to configure your Kubewarden policy-server with a [Pull Secret](https://docs.kubewarden.io/operator-manual/policy-servers/private-registry) in order for it to validate the signature.
 
-### Copying Policy Artifact to Registry
+### Copying Policy Artifact to a Registry (Connected Environments)
 
-You will also need to copy the policy artifact used by Kubewarden to your registry. 
+```bash
+# authenticate into carbide secured registry
+cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
-#### Saving the Policy Artifact
+# download the public key for carbide
+curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
+
+# fetch the image from the carbide secured registry
+hauler store add image rgcrprod.azurecr.us/policies/verify-image-signatures:v0.1.7 --key carbide-key.pub --platform linux/amd64
+
+# copy the content from the hauler store to your registry
+hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
+```
+
+### Saving Policy Artifact (Airgaped Environments)
+
 Use the below script, substituting your registry, to both validate and save locally the policy artifact:
 
 ```bash
-# Working directories & TAR
-DEST_DIRECTORY=/tmp/kubewarden-policy
-DEST_TAR=/tmp/kubewarden-policy.tar.gz  # Change this to the location you want for your resulting TAR 
+# authenticate into carbide secured registry
+cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
-# Temporarily create file with the Carbide public key
-cat <<EOT >/tmp/carbide-pub.key
------BEGIN PUBLIC KEY-----
-MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE5zlXeLmRxBHbVmDRZpnCFdzKhyKO
-tCAZva7CLlk/6gxvCM0QkIKznfaGTRMMYTaHMdQSau6yulDLlpokA++i8Q==
------END PUBLIC KEY-----
-EOT
+# download the public key for carbide
+curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
 
-# Verify the image
-cosign verify --key /tmp/carbide-pub.key rgcrprod.azurecr.us/policies/verify-image-signatures:v0.1.7
+# fetch the image from the carbide secured registry
+hauler store add image rgcrprod.azurecr.us/policies/verify-image-signatures:v0.1.7 --key carbide-key.pub --platform linux/amd64
 
-# Save the image and compress it
-cosign save --dir "$DEST_DIRECTORY" rgcrprod.azurecr.us/policies/verify-image-signatures:v0.1.7
-
-# Compress directory
-tar zcf "$DEST_TAR" -C "$DEST_DIRECTORY" .
-
-# Clean up working directory
-rm -rf $DEST_DIRECTORY
+# save and output the content from the hauler store to tarball
+hauler store save --filename kubewarden-policy.tar.zst
 ```
 
-If working in an airgapped, you can now move that resulting TAR over the airgap.
-
-#### Loading Policy Artifact into Registry
+### Loading Policy Artifact to a Registry (Airgaped Environments)
 
 To move the Policy Artifact into your registry, use the following script and the resulting TAR from the [Saving Policy](enforcement.md#saving-the-policy-artifact).
 
 ```bash
-# Remote Registry
-TARGET_REGISTRY=YOUR_REGISTRY_HERE
+# load the content from the tarball to the hauler store
+hauler store load kubewarden-policy.tar.zst
 
-# Set these if your target registry requires authentication.
-# TARGET_REGISTRY_USER=YOUR_REGISTRY_USER_HERE
-# TARGET_REGISTRY_PASSWORD=YOUR_REGISTRY_PASSWORD_HERE
-
-# Source and Working Files
-SOURCE_TAR=/tmp/kubewarden-policy.tar.gz # Adjust if necessary to point to the TAR
-WORKING_DIR=/tmp/images  # Change this if desired/necessary
-
-# Temporarily create file with the Carbide public key
-cat <<EOT >/tmp/carbide-pub.key
------BEGIN PUBLIC KEY-----
-MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE5zlXeLmRxBHbVmDRZpnCFdzKhyKO
-tCAZva7CLlk/6gxvCM0QkIKznfaGTRMMYTaHMdQSau6yulDLlpokA++i8Q==
------END PUBLIC KEY-----
-EOT
-
-if [[ ! -f "$SOURCE_TAR" ]]; then
-    echo "ERROR: Tarball '$SOURCE_TAR' not found."
-    exit 1
-fi
-
-if [[ -d "$WORKING_DIR" ]]; then
-    echo "ERROR: Working directory '$WORKING_DIR' exists."
-    echo "Remove it or change the value."
-    exit 1
-fi
-
-if [[ ! -z $TARGET_REGISTRY_USER ]] && [[ ! -z $TARGET_REGISTRY_PASSWORD ]]; then
-    cosign login -u $TARGET_REGISTRY_USER -p $TARGET_REGISTRY_PASSWORD $TARGET_REGISTRY
-fi
-
-mkdir -p "$WORKING_DIR"
-tar zxf "$SOURCE_TAR" -C "$WORKING_DIR"
-
-cosign verify --key /tmp/carbide-pub.key --local-image "$WORKING_DIR"
-
-if [[ "$?" != "0" ]]; then
-    echo "Exiting due to failed signature verification."
-    exit 1
-fi
-
-# Load into the registry
-cosign load --dir "$WORKING_DIR" $TARGET_REGISTRY/policies/verify-image-signatures:v0.1.7
+# copy the content from the hauler store to your registry
+hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
 ```
 
 ### Creating the Policy
 
-After installing/configuring Kubewarden and copying the policy to your registry, apply the following ClusterAdmissionPolicy (substituting `YOUR_REGISTRY_HERE` with your registry domain):
+After installing/configuring Kubewarden and copying the policy to your registry, apply the following ClusterAdmissionPolicy (substituting `<registry-url>` with your registry domain):
 
 ```yaml
 apiVersion: policies.kubewarden.io/v1
@@ -124,31 +85,60 @@ kind: ClusterAdmissionPolicy
 metadata:
   name: verify-image-signatures
 spec:
-  module: YOUR_REGISTRY_HERE/policies/verify-image-signatures:v0.1.7
+  module: <registry-url>/policies/verify-image-signatures:v0.1.7
   rules:
-  - apiGroups: ["", "apps", "batch"]
-    apiVersions: ["v1"]
-    resources: ["pods", "deployments", "statefulsets", "replicationcontrollers", "jobs", "cronjobs"]
-    operations:
-    - CREATE
-    - UPDATE
+    - apiGroups: ['', 'apps', 'batch']
+      apiVersions: ['v1']
+      resources:
+        [
+          'pods',
+          'deployments',
+          'statefulsets',
+          'replicationcontrollers',
+          'jobs',
+          'cronjobs',
+        ]
+      operations:
+        - CREATE
+        - UPDATE
   mutating: true
   settings:
     signatures:
-    - image: "YOUR_REGISTRY_HERE/rancher/*"
-      pubKeys: 
-        - |
-          -----BEGIN PUBLIC KEY-----
-          MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE5zlXeLmRxBHbVmDRZpnCFdzKhyKO
-          tCAZva7CLlk/6gxvCM0QkIKznfaGTRMMYTaHMdQSau6yulDLlpokA++i8Q==
-          -----END PUBLIC KEY-----
-    - image: "YOUR_REGISTRY_HERE/longhornio/*"
-      pubKeys: 
-        - |
-          -----BEGIN PUBLIC KEY-----
-          MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE5zlXeLmRxBHbVmDRZpnCFdzKhyKO
-          tCAZva7CLlk/6gxvCM0QkIKznfaGTRMMYTaHMdQSau6yulDLlpokA++i8Q==
-          -----END PUBLIC KEY-----
+      - image: '<registry-url>/carbide/*'
+        pubKeys:
+          - |
+            -----BEGIN PUBLIC KEY-----
+            MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE5zlXeLmRxBHbVmDRZpnCFdzKhyKO
+            tCAZva7CLlk/6gxvCM0QkIKznfaGTRMMYTaHMdQSau6yulDLlpokA++i8Q==
+            -----END PUBLIC KEY-----
+      - image: '<registry-url>/jetstack/*'
+        pubKeys:
+          - |
+            -----BEGIN PUBLIC KEY-----
+            MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE5zlXeLmRxBHbVmDRZpnCFdzKhyKO
+            tCAZva7CLlk/6gxvCM0QkIKznfaGTRMMYTaHMdQSau6yulDLlpokA++i8Q==
+            -----END PUBLIC KEY-----
+      - image: '<registry-url>/rancher/*'
+        pubKeys:
+          - |
+            -----BEGIN PUBLIC KEY-----
+            MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE5zlXeLmRxBHbVmDRZpnCFdzKhyKO
+            tCAZva7CLlk/6gxvCM0QkIKznfaGTRMMYTaHMdQSau6yulDLlpokA++i8Q==
+            -----END PUBLIC KEY-----
+      - image: '<registry-url>/longhornio/*'
+        pubKeys:
+          - |
+            -----BEGIN PUBLIC KEY-----
+            MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE5zlXeLmRxBHbVmDRZpnCFdzKhyKO
+            tCAZva7CLlk/6gxvCM0QkIKznfaGTRMMYTaHMdQSau6yulDLlpokA++i8Q==
+            -----END PUBLIC KEY-----
+      - image: '<registry-url>/neuvector/*'
+        pubKeys:
+          - |
+            -----BEGIN PUBLIC KEY-----
+            MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE5zlXeLmRxBHbVmDRZpnCFdzKhyKO
+            tCAZva7CLlk/6gxvCM0QkIKznfaGTRMMYTaHMdQSau6yulDLlpokA++i8Q==
+            -----END PUBLIC KEY-----
 ```
 
 ## Kyverno Enforcement
@@ -163,7 +153,7 @@ If your Rancher system images are in a private registry requiring authentication
 
 ### Creating the Policy
 
-After installing/configuring Kyverno, apply the following Policy (substituting `YOUR_REGISTRY_HERE` with your registry domain):
+After installing/configuring Kyverno, apply the following Policy (substituting `<registry-url>` with your registry domain):
 
 ```yaml
 apiVersion: kyverno.io/v1
@@ -179,25 +169,28 @@ spec:
     - name: check-image
       match:
         any:
-        - resources:
-            kinds:
-            - Pod
-            - Deployment
+          - resources:
+              kinds:
+                - Pod
+                - Deployment
       verifyImages:
-      - imageReferences:
-        - "YOUR_REGISTRY_HERE/rancher/*"
-        - "YOUR_REGISTRY_HERE/longhornio/*"
-        attestors:
-        - count: 1
-          entries:
-          - keys:
-              publicKeys: |-
-                -----BEGIN PUBLIC KEY-----
-                MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE5zlXeLmRxBHbVmDRZpnCFdzKhyKO
-                tCAZva7CLlk/6gxvCM0QkIKznfaGTRMMYTaHMdQSau6yulDLlpokA++i8Q==
-                -----END PUBLIC KEY-----
+        - imageReferences:
+            - '<registry-url>/carbide/*'
+            - '<registry-url>/jetstack/*'
+            - '<registry-url>/rancher/*'
+            - '<registry-url>/longhornio/*'
+            - '<registry-url>/neuvector/*'
+          attestors:
+            - count: 1
+              entries:
+                - keys:
+                    publicKeys: |-
+                      -----BEGIN PUBLIC KEY-----
+                      MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE5zlXeLmRxBHbVmDRZpnCFdzKhyKO
+                      tCAZva7CLlk/6gxvCM0QkIKznfaGTRMMYTaHMdQSau6yulDLlpokA++i8Q==
+                      -----END PUBLIC KEY-----
 ```
 
-## OPA Gatekeeper Enforcement 
+## OPA Gatekeeper Enforcement
 
 Gatekeeper can be used to verify image signatures through its [External Data Provider](https://open-policy-agent.github.io/gatekeeper/website/docs/externaldata).

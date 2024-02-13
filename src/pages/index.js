@@ -13,8 +13,8 @@ function HomepageHeader() {
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container" >
         <h1 className="hero__title">
-        Rancher Govt &nbsp;
-        
+        Rancher Government &nbsp;
+
         <span className='nasa'>
           C<span class="nasa-red">A</span>RBIDE
         </span>
@@ -24,14 +24,14 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="https://ranchergovernment.com/contact">
-            Contact Sales
+            to="/docs/intro">
+            📚 View the Docs 📚
           </Link>
         </div>
       </div>
       {/* <div class="simple-class" >woo</div> */}
     </header>
-    
+
   );
 }
 

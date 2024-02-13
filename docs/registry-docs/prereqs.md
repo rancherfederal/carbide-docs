@@ -1,22 +1,39 @@
-# Prerequisites 
+# Prerequisites
 
 Below are all the things you need to get started with the Hardened Container Registry. As we improve and streamline the process, this list could evolve.
 
 ## Registry Disclaimer
 
- The Secured Registry (rgcrprod.azurecr.us) is _not_ intended to be used as the primary registry for running Kubernetes clusters. It is only intended as the acquisition point to obtain the Carbide secured images. Customers should seed their own private OCI registries, and use that registry for their Kubernetes clusters.
+The Carbide Secured Registry (rgcrprod.azurecr.us) is _not_ intended to be used as the primary registry for running Kubernetes clusters. It is only intended as the acquisition point to obtain the Carbide images. Customers should seed their own private registries, and use that registry for their Kubernetes clusters.
 
 ## Required Tools
-To explore what's available, you'll need some common tooling:
 
-Supply Chain Validation:
-- [cosign](https://github.com/sigstore/cosign)
+**Packaging/Airgapping Tool: [hauler](https://hauler.dev)**
 
-Container Tools
-- [docker](https://docs.docker.com/get-docker/0) (just the cli, but it comes as a package)
-- [helm](https://helm.sh/docs/)
-- [hauler](https://hauler.dev) (Not currently required, but will be in the near future)
+```bash
+# example installation steps
+# please see the docs: https://rancherfederal.github.io/hauler-docs/docs/introduction/install
 
-Other Tools
-- [tar](https://www.gnu.org/software/tar/) (required for airgap packaging/serving)
-- [gzip](https://www.gzip.org/) (required for airgap packaging/serving)
+curl -sfL https://get.hauler.dev | bash
+```
+
+**Supply Chain Tool: [cosign](https://docs.sigstore.dev/)**
+
+```bash
+# example installation steps
+# please see the docs: https://docs.sigstore.dev/system_config/installation
+
+curl -O -L "https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64"
+sudo mv cosign-linux-amd64 /usr/local/bin/cosign
+sudo chmod 755 /usr/local/bin/cosign
+```
+
+**Container Tool: [helm](https://helm.sh/docs/)**
+
+```bash
+# example installation steps
+# please see the docs: https://helm.sh/docs/intro/install
+
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+sudo chmod 755 get_helm.sh && sudo ./get_helm.sh
+```

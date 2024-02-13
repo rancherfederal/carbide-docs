@@ -1,336 +1,84 @@
-# Downloading Release Images
+# Downloading the Images
 
 This page will walk you through how you can locally download secured images from the hardened registry and package them to move over an airgap to your registry.
 
 If you're copying images into a connected registry, check the documents [here](copying-images.md).
 
-## Requirements
-
-* [Cosign](https://docs.sigstore.dev/cosign/installation/)
-* [Helm](https://helm.sh/docs/intro/install/)
-
 ## Carbide
 
+**NOTE:** We are working to improve the collection and formatting of the `carbide` manifests and will be updating them.
+
 ```bash
-# Carbide Registry
-SOURCE_REGISTRY=rgcrprod.azurecr.us
-SOURCE_REGISTRY_USER=YOUR_CARBIDE_USER
-SOURCE_REGISTRY_PASS=YOUR_CARBIDE_PASS
+# authenticate into carbide secured registry
+cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
-# Working directories & TAR
-DEST_DIRECTORY=/tmp/carbide-images
-DEST_TAR=/tmp/carbide-images.tar.gz  # Change this to the location you want for your resulting TAR 
+# download the public key for carbide
+curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
 
-# Carbide Version
-CARBIDE_RELEASE=0.1.1
+# generate the hauler manifest for carbide
+cat <<EOF > carbide-images.yaml
+apiVersion: content.hauler.cattle.io/v1alpha1
+kind: Images
+metadata:
+  name: carbide-images
+  annotations:
+    hauler.dev/key: carbide-key.pub
+    hauler.dev/platform: linux/amd64
+spec:
+  images:
+$(curl -sfL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-images.txt | sed '/nats/d' | sed 's/^/    - name: /')
+---
+apiVersion: content.hauler.cattle.io/v1alpha1
+kind: Images
+metadata:
+  name: carbide-dependency-images
+  annotations:
+    hauler.dev/platform: linux/amd64
+spec:
+  images:
+$(curl -sfL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-images.txt | sed '/rgcr/d' | sed 's/^/    - name: /')
+EOF
 
-if [[ -d "$DEST_DIRECTORY" ]]; then
-    echo "ERROR: Directory '$DEST_DIRECTORY' exists."
-    echo "Change or delete it before running."
-    exit 1
-fi
+# fetch the content from generated hauler manifest
+# verify the location of the key and the platform/architecture
+hauler store sync -f carbide-images.yaml
 
-if [[ -d "$DEST_TAR" ]]; then
-    echo "ERROR: Directory '$DEST_TAR' exists."
-    echo "Change or delete it before running."
-    exit 1
-fi
-
-cosign login -u $SOURCE_REGISTRY_USER -p $SOURCE_REGISTRY_PASS $SOURCE_REGISTRY
-mkdir -p "$DEST_DIRECTORY"
-
-CARBIDE_IMAGES=$(curl --silent -L https://github.com/rancherfederal/carbide-releases/releases/download/$CARBIDE_RELEASE/carbide-images.txt)
-for image in $CARBIDE_IMAGES; do
-    source_image=$(echo $image)
-    dest_image=$(echo $image | sed "s|rgcrprod.azurecr.us|TARGET_REGISTRY|g")
-    
-    # Create manifest to use during load
-    img_id_num=$(mktemp -d XXXXXXXXXXXXXXXXXXXX)
-    echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
-    # Save image locally
-    mkdir $DEST_DIRECTORY/$img_id_num
-    cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
-done
-
-# Compress directory
-tar zcf "$DEST_TAR" -C "$DEST_DIRECTORY" .
-
-# Clean up working directory
-rm -rf $DEST_DIRECTORY
+# save and output the content from the hauler store to tarball
+hauler store save --filename carbide-images.tar.zst
 ```
 
 ## K3s
 
 ```bash
-# Carbide Registry
-SOURCE_REGISTRY=rgcrprod.azurecr.us
-SOURCE_REGISTRY_USER=YOUR_CARBIDE_USER
-SOURCE_REGISTRY_PASS=YOUR_CARBIDE_PASS
+# authenticate into carbide secured registry
+cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
-# Working directories & TAR
-DEST_DIRECTORY=/tmp/k3s-images
-DEST_TAR=/tmp/k3s-images.tar.gz  # Change this to the location you want for your resulting TAR 
+# download the public key for carbide
+curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
 
-# K3s Version
-K3S_RELEASE=v1.24.4+k3s1
+# fetch the content from the carbide secured registry
+# verify the version, location of the key, and the platform/architecture
+hauler store sync --products k3s=v1.26.13-k3s2 --key carbide-key.pub --platform linux/amd64
 
-if [[ -d "$DEST_DIRECTORY" ]]; then
-    echo "ERROR: Directory '$DEST_DIRECTORY' exists."
-    echo "Change or delete it before running."
-    exit 1
-fi
-
-if [[ -d "$DEST_TAR" ]]; then
-    echo "ERROR: Directory '$DEST_TAR' exists."
-    echo "Change or delete it before running."
-    exit 1
-fi
-
-cosign login -u $SOURCE_REGISTRY_USER -p $SOURCE_REGISTRY_PASS $SOURCE_REGISTRY
-mkdir -p "$DEST_DIRECTORY"
-
-K3S_IMAGES=$(curl --silent -L https://github.com/k3s-io/k3s/releases/download/$K3S_RELEASE/k3s-images.txt)
-for image in $K3S_IMAGES; do
-    source_image=$(echo $image | sed "s|docker.io|$SOURCE_REGISTRY|g")
-    dest_image=$(echo $image | sed "s|docker.io|TARGET_REGISTRY|g")
-    
-    # Create manifest to use during load
-    img_id_num=$(mktemp -d XXXXXXXXXXXXXXXXXXXX)
-    echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
-    # Save image locally
-    mkdir $DEST_DIRECTORY/$img_id_num
-    cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
-done
-
-# Compress directory
-tar zcf "$DEST_TAR" -C "$DEST_DIRECTORY" .
-
-# Clean up working directory
-rm -rf $DEST_DIRECTORY
+# save and output the content from the hauler store to tarball
+hauler store save --filename k3s-images.tar.zst
 ```
 
 ## RKE2
 
 ```bash
-# Carbide Registry
-SOURCE_REGISTRY=rgcrprod.azurecr.us
-SOURCE_REGISTRY_USER=YOUR_CARBIDE_USER
-SOURCE_REGISTRY_PASS=YOUR_CARBIDE_PASS
+# authenticate into carbide secured registry
+cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
-# Working directories & TAR
-DEST_DIRECTORY=/tmp/rke2-images
-DEST_TAR=/tmp/rke2-images.tar.gz  # Change this to the location you want for your resulting TAR 
+# download the public key for carbide
+curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
 
-# RKE2 Version
-RKE2_RELEASE=v1.24.3+rke2r1
+# fetch the content from the carbide secured registry
+# verify the version, location of the key, and the platform/architecture
+hauler store sync --products rke2=v1.26.13+rke2r1 --key carbide-key.pub --platform linux/amd64
 
-if [[ -d "$DEST_DIRECTORY" ]]; then
-    echo "ERROR: Directory '$DEST_DIRECTORY' exists."
-    echo "Change or delete it before running."
-    exit 1
-fi
-
-if [[ -d "$DEST_TAR" ]]; then
-    echo "ERROR: Directory '$DEST_TAR' exists."
-    echo "Change or delete it before running."
-    exit 1
-fi
-
-cosign login -u $SOURCE_REGISTRY_USER -p $SOURCE_REGISTRY_PASS $SOURCE_REGISTRY
-mkdir -p "$DEST_DIRECTORY"
-
-RKE2_IMAGES=$(curl --silent -L https://github.com/rancher/rke2/releases/download/$RKE2_RELEASE/rke2-images-all.linux-amd64.txt)
-for image in $RKE2_IMAGES; do
-    source_image=$(echo $image | sed "s|docker.io|$SOURCE_REGISTRY|g")
-    dest_image=$(echo $image | sed "s|docker.io|TARGET_REGISTRY|g")
-    
-    # Create manifest to use during load
-    img_id_num=$(mktemp -d XXXXXXXXXXXXXXXXXXXX)
-    echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
-    # Save image locally
-    mkdir $DEST_DIRECTORY/$img_id_num
-    cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
-done
-
-# Compress directory
-tar zcf "$DEST_TAR" -C "$DEST_DIRECTORY" .
-
-# Clean up working directory
-rm -rf $DEST_DIRECTORY
-```
-
-## Longhorn
-
-```bash
-# Carbide Registry
-SOURCE_REGISTRY=rgcrprod.azurecr.us
-SOURCE_REGISTRY_USER=YOUR_CARBIDE_USER
-SOURCE_REGISTRY_PASS=YOUR_CARBIDE_PASS
-
-# Working directories & TAR
-DEST_DIRECTORY=/tmp/longhorn-images
-DEST_TAR=/tmp/longhorn-images.tar.gz  # Change this to the location you want for your resulting TAR 
-
-# Longhorn Version
-LONGHORN_RELEASE=v1.3.1
-
-if [[ -d "$DEST_DIRECTORY" ]]; then
-    echo "ERROR: Directory '$DEST_DIRECTORY' exists."
-    echo "Change or delete it before running."
-    exit 1
-fi
-
-if [[ -d "$DEST_TAR" ]]; then
-    echo "ERROR: Directory '$DEST_TAR' exists."
-    echo "Change or delete it before running."
-    exit 1
-fi
-
-cosign login -u $SOURCE_REGISTRY_USER -p $SOURCE_REGISTRY_PASS $SOURCE_REGISTRY
-mkdir -p "$DEST_DIRECTORY"
-
-
-LONGHORN_IMAGES=$(curl --silent -L https://raw.githubusercontent.com/longhorn/longhorn/$LONGHORN_RELEASE/deploy/longhorn-images.txt)
-for image in $LONGHORN_IMAGES; do
-    source_image="$SOURCE_REGISTRY/$image"
-    dest_image="TARGET_REGISTRY/$image"
-    
-    # Create manifest to use during load
-    img_id_num=$(mktemp -d XXXXXXXXXXXXXXXXXXXX)
-    echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
-    # Save image locally
-    mkdir $DEST_DIRECTORY/$img_id_num
-    cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
-done
-
-# Compress directory
-tar zcf "$DEST_TAR" -C "$DEST_DIRECTORY" .
-
-# Clean up working directory
-rm -rf $DEST_DIRECTORY
-```
-
-## NeuVector
-```bash
-# Carbide Registry
-SOURCE_REGISTRY=rgcrprod.azurecr.us
-SOURCE_REGISTRY_USER=YOUR_CARBIDE_USER
-SOURCE_REGISTRY_PASS=YOUR_CARBIDE_PASS
-
-# Working directories & TAR
-DEST_DIRECTORY=/tmp/neuvector-images
-DEST_TAR=/tmp/neuvector-images.tar.gz  # Change this to the location you want for your resulting TAR 
-
-# NeuVector Chart Version
-NEUVECTOR_RELEASE=v2.4.2
-
-if [[ -d "$DEST_DIRECTORY" ]]; then
-    echo "ERROR: Directory '$DEST_DIRECTORY' exists."
-    echo "Change or delete it before running."
-    exit 1
-fi
-
-if [[ -d "$DEST_TAR" ]]; then
-    echo "ERROR: Directory '$DEST_TAR' exists."
-    echo "Change or delete it before running."
-    exit 1
-fi
-
-cosign login -u $SOURCE_REGISTRY_USER -p $SOURCE_REGISTRY_PASS $SOURCE_REGISTRY
-mkdir -p "$DEST_DIRECTORY"
-
-# Add the neuvector repo (required Helm)
-helm repo add neuvector https://neuvector.github.io/neuvector-helm
-helm repo update
-
-# Grab the list of images and download them (requires docker, grep, sed, and awk)
-for image in $(helm template neuvector neuvector/core --version $NEUVECTOR_RELEASE | grep 'image:' | sed 's/"//g' | sed "s/'//g" | awk '{ print $2 }'); do
-    source_image=$(echo $image | sed "s/docker.io/$SOURCE_REGISTRY/g")
-    dest_image=$(echo $image | sed "s/docker.io/TARGET_REGISTRY/g")
-    
-    # Create manifest to use during load
-    img_id_num=$(mktemp -d XXXXXXXXXXXXXXXXXXXX)
-    echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
-    # Save image locally
-    mkdir $DEST_DIRECTORY/$img_id_num
-    cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
-done
-
-# Compress directory
-tar zcf "$DEST_TAR" -C "$DEST_DIRECTORY" .
-
-# Clean up working directory
-rm -rf $DEST_DIRECTORY
-```
-
-## Kubewarden
-
-```bash
-# Carbide Registry
-SOURCE_REGISTRY=rgcrprod.azurecr.us
-SOURCE_REGISTRY_USER=YOUR_CARBIDE_USER
-SOURCE_REGISTRY_PASS=YOUR_CARBIDE_PASS
-
-# Working directories & TAR
-DEST_DIRECTORY=/tmp/kubewarden-images
-DEST_TAR=/tmp/kubewarden-images.tar.gz  # Change this to the location you want for your resulting TAR 
-
-if [[ -d "$DEST_DIRECTORY" ]]; then
-    echo "ERROR: Directory '$DEST_DIRECTORY' exists."
-    echo "Change or delete it before running."
-    exit 1
-fi
-
-if [[ -d "$DEST_TAR" ]]; then
-    echo "ERROR: Directory '$DEST_TAR' exists."
-    echo "Change or delete it before running."
-    exit 1
-fi
-
-cosign login -u $SOURCE_REGISTRY_USER -p $SOURCE_REGISTRY_PASS $SOURCE_REGISTRY
-mkdir -p "$DEST_DIRECTORY"
-
-# Add the Kubewarden repo (required Helm)
-helm repo add kubewarden https://charts.kubewarden.io
-helm repo update
-
-# Grab the list of images and download them (requires docker, grep, sed, and awk)
-for image in $(helm template kubewarden/kubewarden-controller | grep 'image:' | sed 's/"//g' | sed "s/'//g" | awk '{ print $2 }'); do
-    source_image=$(echo $image | sed "s/ghcr.io/$SOURCE_REGISTRY/g")
-    dest_image=$(echo $image | sed "s/ghcr.io/TARGET_REGISTRY/g")
-    
-    # Create manifest to use during load
-    img_id_num=$(mktemp -d XXXXXXXXXXXXXXXXXXXX)
-    echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
-    # Save image locally
-    mkdir $DEST_DIRECTORY/$img_id_num
-    cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
-done
-
-for image in $(helm template kubewarden/kubewarden-defaults | grep 'image:' | sed 's/"//g' | sed "s/'//g" | awk '{ print $2 }'); do
-    source_image=$(echo $image | sed "s/ghcr.io/$SOURCE_REGISTRY/g")
-    dest_image=$(echo $image | sed "s/ghcr.io/TARGET_REGISTRY/g")
-    
-    # Create manifest to use during load
-    img_id_num=$(mktemp -d XXXXXXXXXXXXXXXXXXXX)
-    echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
-    # Save image locally
-    mkdir $DEST_DIRECTORY/$img_id_num
-    cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
-done
-
-# Compress directory
-tar zcf "$DEST_TAR" -C "$DEST_DIRECTORY" .
-
-# Clean up working directory
-rm -rf $DEST_DIRECTORY
+# save and output the content from the hauler store to tarball
+hauler store save --filename rke2-images.tar.zst
 ```
 
 ## Rancher
@@ -338,107 +86,86 @@ rm -rf $DEST_DIRECTORY
 ### Cert Manager
 
 ```bash
-# Carbide Registry
-SOURCE_REGISTRY=rgcrprod.azurecr.us
-SOURCE_REGISTRY_USER=YOUR_CARBIDE_USER
-SOURCE_REGISTRY_PASS=YOUR_CARBIDE_PASS
+# authenticate into carbide secured registry
+cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
-# Working directories & TAR
-DEST_DIRECTORY=/tmp/cert-manager-images
-DEST_TAR=/tmp/cert-manager-images.tar.gz  # Change this to the location you want for your resulting TAR 
+# download the public key for carbide
+curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
 
-# Cert Manager Chart Version
-CERT_MANAGER_RELEASE=v1.7.3
+# fetch the content from the carbide secured registry
+# verify the version, location of the key, and the platform/architecture
+hauler store sync --products cert-manager=v1.14.1 --key carbide-key.pub --platform linux/amd64
 
-if [[ -d "$DEST_DIRECTORY" ]]; then
-    echo "ERROR: Directory '$DEST_DIRECTORY' exists."
-    echo "Change or delete it before running."
-    exit 1
-fi
-
-if [[ -d "$DEST_TAR" ]]; then
-    echo "ERROR: Directory '$DEST_TAR' exists."
-    echo "Change or delete it before running."
-    exit 1
-fi
-
-cosign login -u $SOURCE_REGISTRY_USER -p $SOURCE_REGISTRY_PASS $SOURCE_REGISTRY
-mkdir -p "$DEST_DIRECTORY"
-
-# Add the cert manager repo (required Helm)
-helm repo add jetstack https://charts.jetstack.io
-helm repo update
-
-# Grab the list of images and download them (requires docker, grep, sed, and awk)
-for image in $(helm template jetstack/cert-manager --version $CERT_MANAGER_RELEASE | grep 'image:' | sed 's/"//g' | sed "s/'//g" | awk '{ print $2 }'); do
-    source_image=$(echo $image | sed "s/quay.io/$SOURCE_REGISTRY/g")
-    dest_image=$(echo $image | sed "s/quay.io/TARGET_REGISTRY/g")
-    
-    # Create manifest to use during load
-    img_id_num=$(mktemp -d XXXXXXXXXXXXXXXXXXXX)
-    echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
-    # Save image locally
-    mkdir $DEST_DIRECTORY/$img_id_num
-    cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
-done
-
-# Compress directory
-tar zcf "$DEST_TAR" -C "$DEST_DIRECTORY" .
-
-# Clean up working directory
-rm -rf $DEST_DIRECTORY
+# save and output the content from the hauler store to tarball
+hauler store save --filename cert-manager-images.tar.zst
 ```
 
 ### Rancher
 
 ```bash
-# Carbide Registry
-SOURCE_REGISTRY=rgcrprod.azurecr.us
-SOURCE_REGISTRY_USER=YOUR_CARBIDE_USER
-SOURCE_REGISTRY_PASS=YOUR_CARBIDE_PASS
+# authenticate into carbide secured registry
+cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
-# Working directories & TAR
-DEST_DIRECTORY=/tmp/rancher-images
-DEST_TAR=/tmp/rancher-images.tar.gz  # Change this to the location you want for your resulting TAR 
+# download the public key for carbide
+curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
 
-# Rancher Version
-RANCHER_RELEASE=v2.7.1
+# fetch the content from the carbide secured registry
+# verify the version, location of the key, and the platform/architecture
+hauler store sync --products rancher=v2.8.2 --key carbide-key.pub --platform linux/amd64
 
-if [[ -d "$DEST_DIRECTORY" ]]; then
-    echo "ERROR: Directory '$DEST_DIRECTORY' exists."
-    echo "Change or delete it before running."
-    exit 1
-fi
-
-if [[ -d "$DEST_TAR" ]]; then
-    echo "ERROR: Directory '$DEST_TAR' exists."
-    echo "Change or delete it before running."
-    exit 1
-fi
-
-cosign login -u $SOURCE_REGISTRY_USER -p $SOURCE_REGISTRY_PASS $SOURCE_REGISTRY
-mkdir -p "$DEST_DIRECTORY"
-
-RANCHER_IMAGES=$(curl --silent -L https://github.com/rancher/rancher/releases/download/$RANCHER_RELEASE/rancher-images.txt)
-for image in $RANCHER_IMAGES; do
-    source_image="$SOURCE_REGISTRY/$image"
-    dest_image="TARGET_REGISTRY/$image"
-    
-    # Create manifest to use during load
-    img_id_num=$(mktemp -d XXXXXXXXXXXXXXXXXXXX)
-    echo "$img_id_num|$dest_image" >> $DEST_DIRECTORY/manifest.txt
-    
-    # Save image locally
-    mkdir $DEST_DIRECTORY/$img_id_num
-    cosign save --dir "$DEST_DIRECTORY/$img_id_num" $source_image
-done
-
-# Compress directory
-tar zcf "$DEST_TAR" -C "$DEST_DIRECTORY" .
-
-# Clean up working directory
-rm -rf $DEST_DIRECTORY
+# save and output the content from the hauler store to tarball
+hauler store save --filename rancher-images.tar.zst
 ```
 
-See [Validate Images in the Airgap](validating-airgap-images.md) and [Loading Local Images to Registry](loading-images.md) for information on validating the images and loading the images into your airgapped registry.
+## Longhorn
+
+```bash
+# authenticate into carbide secured registry
+cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
+
+# download the public key for carbide
+curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
+
+# fetch the content from the carbide secured registry
+# verify the version, location of the key, and the platform/architecture
+hauler store sync --products longhorn=v1.6.0 --key carbide-key.pub --platform linux/amd64
+
+# save and output the content from the hauler store to tarball
+hauler store save --filename longhorn-images.tar.zst
+```
+
+## NeuVector
+
+```bash
+# authenticate into carbide secured registry
+cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
+
+# download the public key for carbide
+curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
+
+# fetch the content from the carbide secured registry
+# verify the version, location of the key, and the platform/architecture
+hauler store sync --products neuvector=v5.3.0 --key carbide-key.pub --platform linux/amd64
+
+# save and output the content from the hauler store to tarball
+hauler store save --filename neuvector-images.tar.zst
+```
+
+## Kubewarden
+
+```bash
+# authenticate into carbide secured registry
+cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
+
+# download the public key for carbide
+curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
+
+# fetch the content from the carbide secured registry
+# verify the version, location of the key, and the platform/architecture
+hauler store sync --products kubewarden=kubewarden-controller-2.0.8 --key carbide-key.pub --platform linux/amd64
+
+# save and output the content from the hauler store to tarball
+hauler store save --filename kubewarden-images.tar.zst
+```
+
+See [Loading Local Images to Registry](loading-images.md) for information on loading the images into your airgapped registry.

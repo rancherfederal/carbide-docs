@@ -25,7 +25,7 @@ curl -sfL https://get.k3s.io | sh - --system-default-registry YOUR_REGISTRY_DOMA
 
 ### Usage with `rke2`
 
-Similar to `k3s`, the SSF images are pulled upon bootstrapping by configuring `rke2`'s mirroring configuration as described [here](https://rke2.io).
+Similar to `k3s`, the Carbide Secured Registry (CSR) images are pulled upon bootstrapping by configuring `rke2`'s mirroring configuration as described [here](https://rke2.io).
 
 The full configuration using the shared alpha account is below:
 

@@ -1,10 +1,10 @@
 # Getting Started
 
-This will guide you through getting started with STIGATRON.
+This will guide you through getting started with Airgapped Docs.
 
-## STIGATRON Images
+## Airgapped Docs Images
 
-The images for STIGATRON can be found [here](https://github.com/rancherfederal/carbide-releases/releases). You'll need to pull these images using `hauler`.
+The images for Airgapped Docs can be found [here](https://github.com/rancherfederal/carbide-releases/releases). You'll need to pull these images using `hauler`.
 
 ### Internet-Connected Environment
 
@@ -16,16 +16,15 @@ If you're working in an airgapped environment, look [here](../registry-docs/down
 
 On the airgap, look [here](../registry-docs/loading-images.md) for loading the localized images into the airgapped registry.
 
-## STIGATRON Helm Chart
+## Airgapped Docs Helm Chart
 
-The chart for STIGATRON can be found [here](../carbide-charts.md). You'll need to pull the chart using `hauler`.
-
+The chart for Airgapped Docs can be found [here](../carbide-charts.md). You'll need to pull the chart using `hauler`.
 
 ## Configuring Registry Credentials
 
 ### Local Cluster
 
-On the local cluster running Rancher Multi-cluster Manager, you'll need to configure credentials for the registry with the STIGATRON images. See the [Rancher Configuration](../registry-docs/rancher-config.md) on how to set up those credentials.
+On the local cluster running Rancher Multi-cluster Manager, you'll need to configure credentials for the registry with the Airgapped Docs images. See the [Rancher Configuration](../registry-docs/rancher-config.md) on how to set up those credentials.
 
 ### Downstream Clusters
 

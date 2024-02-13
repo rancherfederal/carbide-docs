@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Rancher Government Carbide',
-  tagline: 'Securing your cloud-native mission',
+  tagline: 'Securing Cloud Native Missions',
   url: 'https://rancherfederal.github.io',
   baseUrl: '/carbide-docs/',
   onBrokenLinks: 'throw',
@@ -48,13 +48,6 @@ const config = {
           editUrl:
             'https://github.com/rancherfederal/carbide-docs/edit/main/',
         },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/rancherfederal/carbide-docs/edit/main/',
-        },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -85,9 +78,13 @@ const config = {
             type: 'doc',
             docId: 'intro',
             position: 'left',
-            label: 'Docs',
+            label: 'Documentation',
           },
-          // {to: '/blog', label: 'Blog', position: 'left'},
+          {
+            href: 'https://ranchergovernment.com/contact',
+            label: 'Contact Sales',
+            position: 'right',
+          },
           {
             href: 'https://github.com/rancherfederal/carbide-docs/issues',
             label: 'Submit Feedback',
@@ -99,18 +96,14 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'Documentation',
             items: [
               {
-                label: 'Carbide Docs',
-                to: '/docs/intro',
-              },
-              {
-                label: 'Registry',
+                label: 'Carbide Registry Docs',
                 to: '/docs/registry-docs/introduction',
               },
               {
-                label: 'STIGATRON',
+                label: 'STIGATRON Docs',
                 to: '/docs/stigatron-docs/introduction',
               },
               {
