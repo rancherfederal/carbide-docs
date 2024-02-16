@@ -10,7 +10,7 @@ If you're copying images into a connected registry, check the documents [here](c
 
 ```bash
 # authenticate into carbide secured registry
-cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
+hauler login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # download the public key for carbide
 curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
@@ -51,7 +51,7 @@ hauler store save --filename carbide-images.tar.zst
 
 ```bash
 # authenticate into carbide secured registry
-cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
+hauler login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # download the public key for carbide
 curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
@@ -68,7 +68,7 @@ hauler store save --filename k3s-images.tar.zst
 
 ```bash
 # authenticate into carbide secured registry
-cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
+hauler login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # download the public key for carbide
 curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
@@ -87,7 +87,7 @@ hauler store save --filename rke2-images.tar.zst
 
 ```bash
 # authenticate into carbide secured registry
-cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
+hauler login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # download the public key for carbide
 curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
@@ -104,7 +104,7 @@ hauler store save --filename cert-manager-images.tar.zst
 
 ```bash
 # authenticate into carbide secured registry
-cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
+hauler login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # download the public key for carbide
 curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
@@ -121,7 +121,7 @@ hauler store save --filename rancher-images.tar.zst
 
 ```bash
 # authenticate into carbide secured registry
-cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
+hauler login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # download the public key for carbide
 curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
@@ -138,7 +138,7 @@ hauler store save --filename longhorn-images.tar.zst
 
 ```bash
 # authenticate into carbide secured registry
-cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
+hauler login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # download the public key for carbide
 curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
@@ -155,7 +155,7 @@ hauler store save --filename neuvector-images.tar.zst
 
 ```bash
 # authenticate into carbide secured registry
-cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
+hauler login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # download the public key for carbide
 curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
