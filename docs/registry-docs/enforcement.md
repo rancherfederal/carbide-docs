@@ -33,7 +33,7 @@ If your Rancher system images are in a private registry requiring authentication
 
 ```bash
 # authenticate into carbide secured registry
-cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
+hauler login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # download the public key for carbide
 curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
@@ -51,7 +51,7 @@ Use the below script, substituting your registry, to both validate and save loca
 
 ```bash
 # authenticate into carbide secured registry
-cosign login -u <redacted> -p <redacted> rgcrprod.azurecr.us
+hauler login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # download the public key for carbide
 curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
