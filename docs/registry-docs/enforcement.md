@@ -65,7 +65,7 @@ hauler store save --filename kubewarden-policy.tar.zst
 
 ### Loading Policy Artifact to a Registry (Airgaped Environments)
 
-To move the Policy Artifact into your registry, use the following script and the resulting TAR from the [Saving Policy](enforcement.md#saving-the-policy-artifact).
+Use the below script, substituting your registry, to load the policy artifact:
 
 ```bash
 # load the content from the tarball to the hauler store

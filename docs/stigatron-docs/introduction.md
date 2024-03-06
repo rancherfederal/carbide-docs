@@ -8,7 +8,7 @@ As our product is still at Initial Operation Capability (IOC), there are some ex
 
 - Installation and packaging is still in progress and improving.
 
-If you see issues and areas for improvement, please submit Github issues [here](https://github.com/rancherfederal/carbide-charts/issues/).
+If you see issues and areas for improvement, please submit Github issues [here](https://github.com/rancherfederal/carbide-charts/issues).
 
 ## What is this?
 

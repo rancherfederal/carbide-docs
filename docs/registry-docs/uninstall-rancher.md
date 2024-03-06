@@ -62,7 +62,7 @@ See the [RKE2/K3s Uninstall](uninstall-kubernetes.md) documentation.
 
 ### Reverting `Rancher` Chart
 
-Follow Rancher's [Installation Guide](https://rancher.com/docs/rancher/v2.7/en/installation/install-rancher-on-k8s/), you can revert to using DockerHub images by removing values from the Helm upgrade command.
+Follow Rancher's [Installation Guide](https://rancher.com/docs/rancher/v2.7/en/installation/install-rancher-on-k8s), you can revert to using DockerHub images by removing values from the Helm upgrade command.
 
 ```bash
 helm upgrade rancher rancher-latest/rancher \
