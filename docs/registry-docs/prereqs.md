@@ -17,7 +17,7 @@ The Carbide Secured Registry (rgcrprod.azurecr.us) is _not_ intended to be used 
 curl -sfL https://get.hauler.dev | bash
 ```
 
-**Supply Chain Tool: [cosign](https://docs.sigstore.dev/)**
+**Supply Chain Tool: [cosign](https://docs.sigstore.dev)**
 
 ```bash
 # example installation steps
@@ -28,7 +28,7 @@ sudo mv cosign-linux-amd64 /usr/local/bin/cosign
 sudo chmod 755 /usr/local/bin/cosign
 ```
 
-**Container Tool: [helm](https://helm.sh/docs/)**
+**Container Tool: [helm](https://helm.sh/docs)**
 
 ```bash
 # example installation steps

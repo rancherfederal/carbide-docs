@@ -9,7 +9,7 @@ As our product is still in the IOC phase, there are some expectations to level-s
 
 **DISCLAIMER**:  The Secured Registry (rgcrprod.azurecr.us) is _not_ intended to be used as the primary registry for running Kubernetes clusters. It is only intended as the acquisition point to obtain the Carbide secured images. Customers should seed their own private OCI registries, and use that registry for their Kubernetes clusters.
 
-If you see issues and areas for improvement, please submit Github issues [here](https://github.com/rancherfederal/carbide-docs/issues/).
+If you see issues and areas for improvement, please submit Github issues [here](https://github.com/rancherfederal/carbide-docs/issues).
 
 ## What is this?
 Here at Rancher Government Solutions, we take the security of our products seriously.  Products like `rke2` are tailor built to address the "secure by default" needs of the federal government, while still maintaining the same ease of deployments that our users have come to love from Rancher products.
