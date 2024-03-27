@@ -20,7 +20,7 @@ configs:
 You will also need to utilize the `system-default-registry` flag when installing K3s to ensure it uses the registry. For instance:
 
 ```bash
-curl -sfL https://get.k3s.io | sh - --system-default-registry YOUR_REGISTRY_DOMAIN_HERE
+curl -sfL https://get.k3s.io | sh -s - --system-default-registry=<YOUR_REGISTRY_DOMAIN_HERE>
 ```
 
 ### Usage with `rke2`
