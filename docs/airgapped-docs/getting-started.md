@@ -57,8 +57,8 @@ If you're working with a cluster that was imported or is to be imported into the
 # /etc/rancher/k3s/registries.yaml
 # /etc/rancher/rke2/registries.yaml
 configs:
-  "YOUR_REGISTRY_HOSTNAME":
+  "<registry-url>":
     auth:
-      username: YOUR_REGISTRY_USERNAME
-      password: YOUR_REGISTRY_PASSWORD
+      username: <redacted>
+      password: <redacted>
 ```
