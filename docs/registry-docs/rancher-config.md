@@ -31,23 +31,28 @@ After adding the Cert Manager repo and installing the CRDs, use the following to
 ```
 cat <<EOT > /tmp/cert-manager-values.yaml
 image:
-  registry: YOUR_REGISTRY_DOMAIN_HERE
+  registry: <registry-url>
   repository: jetstack/cert-manager-controller
 
 webhook:
   image:
-    registry: YOUR_REGISTRY_DOMAIN_HERE
+    registry: <registry-url>
     repository: jetstack/cert-manager-webhook
 
 cainjector:
   image:
-    registry: YOUR_REGISTRY_DOMAIN_HERE
+    registry: <registry-url>
     repository: jetstack/cert-manager-cainjector
 
 startupapicheck:
   image:
-    registry: YOUR_REGISTRY_DOMAIN_HERE
-    repository: jetstack/cert-manager-ctl
+    registry: <registry-url>
+    repository: jetstack/cert-manager-startupapicheck
+
+acmesolver:
+  image:
+    registry: <registry-url>
+    repository: jetstack/cert-manager-acmesolver
 EOT
 ```
 
@@ -99,10 +104,10 @@ The full configuration using the shared alpha account is below:
 mirrors:
   docker.io:
     endpoint:
-      - 'https://YOUR_REGISTRY_DOMAIN'
+      - "https://<registry-url>"
 
 configs:
-  'YOUR_REGISTRY_DOMAIN':
+  "<registry-url>":
     auth:
       username: <redacted>
       password: <redacted>
@@ -131,8 +136,8 @@ helm install rancher carbide-charts/rancher \
   --namespace cattle-system \
   --set hostname=rancher.my.org \
   --set replicas=3 \
-  --set rancherImage=YOUR_REGISTRY_DOMAIN/rancher/rancher
-  --set systemDefaultRegistry=YOUR_REGISTRY_DOMAIN
+  --set rancherImage=<registry-url>/rancher/rancher
+  --set systemDefaultRegistry=<registry-url>
 ```
 
 **NOTE:** This requires configuring your above K3s/RKE2 `registries.yaml` to work.
@@ -150,10 +155,10 @@ write_files:
       mirrors:
         docker.io:
             endpoint:
-            - "https://YOUR_REGISTRY_DOMAIN"
+            - "https://<registry-url>"
 
         configs:
-        "YOUR_REGISTRY_DOMAIN":
+        "<registry-url>":
             auth:
             username: <redacted>
             password: <redacted>

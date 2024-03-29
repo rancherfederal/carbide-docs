@@ -11,7 +11,7 @@ The full configuration using your authenticated registry is below:
 ```yaml
 # /etc/rancher/k3s/registries.yaml
 configs:
-  "YOUR_REGISTRY_DOMAIN_HERE":
+  "<registry-url>":
     auth:
       username: <redacted>
       password: <redacted>
@@ -20,7 +20,7 @@ configs:
 You will also need to utilize the `system-default-registry` flag when installing K3s to ensure it uses the registry. For instance:
 
 ```bash
-curl -sfL https://get.k3s.io | sh -s - --system-default-registry=<YOUR_REGISTRY_DOMAIN_HERE>
+curl -sfL https://get.k3s.io | sh -s - --system-default-registry=<registry-url>
 ```
 
 ### Usage with `rke2`
@@ -32,7 +32,7 @@ The full configuration using the shared alpha account is below:
 ```yaml
 # /etc/rancher/rke2/registries.yaml
 configs:
-  "YOUR_REGISTRY_DOMAIN_HERE":
+  "<registry-url>":
     auth:
       username: <redacted>
       password: <redacted>
@@ -44,6 +44,6 @@ You will also need to utilize the `system-default-registry` flag when installing
 # /etc/rancher/rke2/config.yaml
 node-name: controlplane1
 write-kubeconfig-mode: 0640
-system-default-registry: YOUR_REGISTRY_DOMAIN_HERE
+system-default-registry: <registry-url>
 ...
 ```

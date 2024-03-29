@@ -19,7 +19,7 @@ You will also need to unset the `system-default-registry` configuration when ins
 For instance, if you originally ran the following when using Carbide images:
 
 ```bash
-curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --flannel-backend none" K3S_TOKEN=12345 sh - --system-default-registry YOUR_REGISTRY_DOMAIN_HERE
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --flannel-backend none" K3S_TOKEN=12345 sh - --system-default-registry <registry-url>
 ```
 
 You'd need to run:
