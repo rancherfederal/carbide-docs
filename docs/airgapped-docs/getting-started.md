@@ -4,7 +4,7 @@ This will guide you through getting started with Airgapped Docs.
 
 ## Airgapped Docs Images
 
-The images for Airgapped Docs can be found [here](https://github.com/rancherfederal/carbide-releases/releases). You'll need to pull these images using `hauler`.
+The images for Airgapped Docs can be found [here](https://rancherfederal.github.io/carbide-docs/docs/registry-docs/downloading-images). You'll need to pull these images using `hauler`.
 
 ### Internet-Connected Environment
 
