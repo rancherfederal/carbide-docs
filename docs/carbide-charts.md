@@ -4,9 +4,9 @@
 
 ```bash
 NAME                            CHART VERSION   APP VERSION     DESCRIPTION
-carbide-charts/airgapped-docs   0.1.47          0.1.2           Rancher Government Airgapped Docs
+carbide-charts/airgapped-docs   0.1.49          0.1.4           Rancher Government Airgapped Docs
 carbide-charts/heimdall2        0.1.45          0.1.1           Rancher Government Heimdall2 Tool
-carbide-charts/rancher          2.8.2           v2.8.2          Install Rancher Server to manage Kubernetes...
+carbide-charts/rancher          2.8.3           v2.8.3          Install Rancher Server to manage Kubernetes...
 carbide-charts/stigatron        0.2.5           0.2.2           Rancher Government Stigatron Extension
 carbide-charts/stigatron-ui     0.2.3           0.2.0           Rancher Government Stigatron UI Extension
 ```
@@ -44,25 +44,35 @@ metadata:
   name: carbide-charts
 spec:
   charts:
-    - name: airgapped-docs
-      repoURL: https://rancherfederal.github.io/carbide-charts
-      version: 0.1.47
-    - name: heimdall2
-      repoURL: https://rancherfederal.github.io/carbide-charts
-      version: 0.1.45
     - name: rancher
       repoURL: https://rancherfederal.github.io/carbide-charts
-      version: 2.8.2
+      version: 2.8.3
+    - name: airgapped-docs
+      repoURL: https://rancherfederal.github.io/carbide-charts
+      version: 0.1.49
     - name: stigatron
       repoURL: https://rancherfederal.github.io/carbide-charts
       version: 0.2.5
     - name: stigatron-ui
       repoURL: https://rancherfederal.github.io/carbide-charts
       version: 0.2.3
+---
+apiVersion: content.hauler.cattle.io/v1alpha1
+kind: Charts
+metadata:
+  name: carbide-dependency-charts
+spec:
+  charts:
+    - name: heimdall2
+      repoURL: https://rancherfederal.github.io/carbide-charts
+      version: 0.1.45
+    - name: nats
+      repoURL: https://nats-io.github.io/k8s/helm/charts
+      version: 1.1.5
 EOF
 
 # fetch the content from generated hauler manifest
-hauler store sync -f carbide-charts.yaml
+hauler store sync --files carbide-charts.yaml --store carbide-store
 
 # save and output the content from the hauler store to tarball
 hauler store save --filename carbide-charts.tar.zst

@@ -40,7 +40,7 @@ hauler store copy --username <redacted> --password <redacted> registry://<regist
 
 ```bash
 # load the content from the tarball to the hauler store
-hauler store load cert-manager-images.tar.zst
+hauler store load certmanager-images.tar.zst
 
 # copy the content from the hauler store to your registry
 hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
