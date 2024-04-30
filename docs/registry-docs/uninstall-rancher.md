@@ -20,7 +20,7 @@ If you want to go back to using Docker Hub images directly, you'll need to upgra
 helm install cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.7.1
+  --version v1.14.4
 ```
 
 ## Registry Auth Scenarios

@@ -62,7 +62,7 @@ Then use the following `helm install` command to use the images:
 helm install cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.7.1 \
+  --version v1.14.4 \
   -f /tmp/values.yaml
 ```
 
