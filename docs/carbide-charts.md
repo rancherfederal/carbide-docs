@@ -72,7 +72,8 @@ spec:
 EOF
 
 # fetch the content from generated hauler manifest
-hauler store sync --files carbide-charts.yaml --store carbide-store
+# verify the version and the platform/architecture
+hauler store sync --files carbide-charts.yaml --store carbide-store --platform <platform/arch>
 
 # save and output the content from the hauler store to tarball
 hauler store save --filename carbide-charts.tar.zst

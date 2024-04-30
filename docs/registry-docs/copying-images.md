@@ -38,7 +38,7 @@ EOF
 
 # fetch the content from generated hauler manifest
 # verify the location of the key and the platform/architecture
-hauler store sync --files carbide-images.yaml --store carbide-store
+hauler store sync --files carbide-images.yaml --store carbide-store --platform <platform/arch>
 
 # copy the content from the hauler store to your registry
 hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
@@ -55,7 +55,7 @@ curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/mai
 
 # fetch the content from the carbide secured registry
 # verify the version, location of the key, and the platform/architecture
-hauler store sync --products k3s=v1.27.12-k3s1 --key carbide-key.pub --store k3s-store
+hauler store sync --products k3s=v1.27.12-k3s1 --key carbide-key.pub --store k3s-store --platform <platform/arch>
 
 # copy the content from the hauler store to your registry
 hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
@@ -72,7 +72,7 @@ curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/mai
 
 # fetch the content from the carbide secured registry
 # verify the version, location of the key, and the platform/architecture
-hauler store sync --products rke2=v1.27.12+rke2r1 --key carbide-key.pub --store rke2-store
+hauler store sync --products rke2=v1.27.12+rke2r1 --key carbide-key.pub --store rke2-store --platform <platform/arch>
 
 # copy the content from the hauler store to your registry
 hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
@@ -91,7 +91,7 @@ curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/mai
 
 # fetch the content from the carbide secured registry
 # verify the version, location of the key, and the platform/architecture
-hauler store sync --products cert-manager=v1.14.4 --key carbide-key.pub --store certmanager-store
+hauler store sync --products cert-manager=v1.14.4 --key carbide-key.pub --store certmanager-store --platform <platform/arch>
 
 # copy the content from the hauler store to your registry
 hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
@@ -108,7 +108,7 @@ curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/mai
 
 # fetch the content from the carbide secured registry
 # verify the version, location of the key, and the platform/architecture
-hauler store sync --products rancher=v2.8.3 --key carbide-key.pub --store rancher-store
+hauler store sync --products rancher=v2.8.3 --key carbide-key.pub --store rancher-store --platform <platform/arch>
 
 # copy the content from the hauler store to your registry
 hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
@@ -125,7 +125,7 @@ curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/mai
 
 # fetch the content from the carbide secured registry
 # verify the version, location of the key, and the platform/architecture
-hauler store sync --products longhorn=v1.6.1 --key carbide-key.pub --store longhorn-store
+hauler store sync --products longhorn=v1.6.1 --key carbide-key.pub --store longhorn-store --platform <platform/arch>
 
 # copy the content from the hauler store to your registry
 hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
@@ -142,7 +142,7 @@ curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/mai
 
 # fetch the content from the carbide secured registry
 # verify the version, location of the key, and the platform/architecture
-hauler store sync --products neuvector=v5.3.2 --key carbide-key.pub --store neuvector-store
+hauler store sync --products neuvector=v5.3.2 --key carbide-key.pub --store neuvector-store --platform <platform/arch>
 
 # copy the content from the hauler store to your registry
 hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
@@ -159,7 +159,7 @@ curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/mai
 
 # fetch the content from the carbide secured registry
 # verify the version, location of the key, and the platform/architecture
-hauler store sync --products kubewarden=kubewarden-controller-2.0.11 --key carbide-key.pub --store kubewarden-store
+hauler store sync --products kubewarden=kubewarden-controller-2.0.11 --key carbide-key.pub --store kubewarden-store --platform <platform/arch>
 
 # copy the content from the hauler store to your registry
 hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
