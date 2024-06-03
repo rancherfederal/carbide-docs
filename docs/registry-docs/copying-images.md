@@ -38,6 +38,7 @@ EOF
 
 # fetch the content from generated hauler manifest
 # verify the location of the key and the platform/architecture
+# key verification is not used here due to Natsio images not being signed
 hauler store sync --files carbide-images.yaml --store carbide-store --platform <platform/arch>
 
 # copy the content from the hauler store to your registry
