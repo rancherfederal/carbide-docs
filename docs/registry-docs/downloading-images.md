@@ -38,10 +38,11 @@ EOF
 
 # fetch the content from generated hauler manifest
 # verify the location of the key and the platform/architecture
-hauler store sync --files carbide-images.yaml --store carbide-store --platform <platform/arch>
+# key verification is not used here due to natsio images not being signed
+hauler store sync --store carbide-store --files carbide-images.yaml --platform <platform/arch>
 
 # save and output the content from the hauler store to tarball
-hauler store save --filename carbide-images.tar.zst
+hauler store save --store carbide-store --filename carbide-images.tar.zst
 ```
 
 ## K3s
@@ -55,10 +56,10 @@ curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/mai
 
 # fetch the content from the carbide secured registry
 # verify the version, location of the key, and the platform/architecture
-hauler store sync --products k3s=v1.27.12-k3s1 --key carbide-key.pub --store k3s-store --platform <platform/arch>
+hauler store sync --store k3s-store --products k3s=v1.27.12-k3s1 --key carbide-key.pub --platform <platform/arch>
 
 # save and output the content from the hauler store to tarball
-hauler store save --filename k3s-images.tar.zst
+hauler store save --store k3s-store --filename k3s-images.tar.zst
 ```
 
 ## RKE2
@@ -72,10 +73,10 @@ curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/mai
 
 # fetch the content from the carbide secured registry
 # verify the version, location of the key, and the platform/architecture
-hauler store sync --products rke2=v1.27.12+rke2r1 --key carbide-key.pub --store rke2-store --platform <platform/arch>
+hauler store sync --store rke2-store --products rke2=v1.27.12+rke2r1 --key carbide-key.pub --platform <platform/arch>
 
 # save and output the content from the hauler store to tarball
-hauler store save --filename rke2-images.tar.zst
+hauler store save --store rke2-store --filename rke2-images.tar.zst
 ```
 
 ## Rancher
@@ -91,10 +92,10 @@ curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/mai
 
 # fetch the content from the carbide secured registry
 # verify the version, location of the key, and the platform/architecture
-hauler store sync --products cert-manager=v1.14.4 --key carbide-key.pub --store certmanager-store --platform <platform/arch>
+hauler store sync --store certmanager-store --products cert-manager=v1.14.4 --key carbide-key.pub --platform <platform/arch>
 
 # save and output the content from the hauler store to tarball
-hauler store save --filename certmanager-images.tar.zst
+hauler store save --store certmanager-store --filename certmanager-images.tar.zst
 ```
 
 ### Rancher
@@ -108,10 +109,10 @@ curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/mai
 
 # fetch the content from the carbide secured registry
 # verify the version, location of the key, and the platform/architecture
-hauler store sync --products rancher=v2.8.3 --key carbide-key.pub --store rancher-store --platform <platform/arch>
+hauler store sync --store rancher-store --products rancher=v2.8.3 --key carbide-key.pub --platform <platform/arch>
 
 # save and output the content from the hauler store to tarball
-hauler store save --filename rancher-images.tar.zst
+hauler store save --store rancher-store --filename rancher-images.tar.zst
 ```
 
 ## Longhorn
@@ -125,10 +126,10 @@ curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/mai
 
 # fetch the content from the carbide secured registry
 # verify the version, location of the key, and the platform/architecture
-hauler store sync --products longhorn=v1.6.1 --key carbide-key.pub --store longhorn-store --platform <platform/arch>
+hauler store sync --store longhorn-store --products longhorn=v1.6.1 --key carbide-key.pub --platform <platform/arch>
 
 # save and output the content from the hauler store to tarball
-hauler store save --filename longhorn-images.tar.zst
+hauler store save --store longhorn-store --filename longhorn-images.tar.zst
 ```
 
 ## NeuVector
@@ -142,10 +143,10 @@ curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/mai
 
 # fetch the content from the carbide secured registry
 # verify the version, location of the key, and the platform/architecture
-hauler store sync --products neuvector=v5.3.2 --key carbide-key.pub --store neuvector-store --platform <platform/arch>
+hauler store sync --store neuvector-store --products neuvector=v5.3.2 --key carbide-key.pub --platform <platform/arch>
 
 # save and output the content from the hauler store to tarball
-hauler store save --filename neuvector-images.tar.zst
+hauler store save --store neuvector-store --filename neuvector-images.tar.zst
 ```
 
 ## Kubewarden
@@ -159,10 +160,10 @@ curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/mai
 
 # fetch the content from the carbide secured registry
 # verify the version, location of the key, and the platform/architecture
-hauler store sync --products kubewarden=kubewarden-controller-2.0.11 --key carbide-key.pub --store kubewarden-store --platform <platform/arch>
+hauler store sync --store kubewarden-store --products kubewarden=kubewarden-controller-2.0.11 --key carbide-key.pub --platform <platform/arch>
 
 # save and output the content from the hauler store to tarball
-hauler store save --filename kubewarden-images.tar.zst
+hauler store save --store kubewarden-store --filename kubewarden-images.tar.zst
 ```
 
 See [Loading Local Images to Registry](loading-images.md) for information on loading the images into your airgapped registry.
