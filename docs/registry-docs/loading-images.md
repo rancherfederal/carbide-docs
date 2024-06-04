@@ -8,30 +8,30 @@ Make sure you've checked out the section on [Downloading Images](downloading-ima
 
 ```bash
 # load the content from the tarball to the hauler store
-hauler store load carbide-images.tar.zst
+hauler store load --store carbide-store carbide-images.tar.zst
 
 # copy the content from the hauler store to your registry
-hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
+hauler store copy --store carbide-store --username <redacted> --password <redacted> registry://<registry-url>
 ```
 
 ## K3s
 
 ```bash
 # load the content from the tarball to the hauler store
-hauler store load k3s-images.tar.zst
+hauler store load --store k3s-store k3s-images.tar.zst
 
 # copy the content from the hauler store to your registry
-hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
+hauler store copy --store k3s-store --username <redacted> --password <redacted> registry://<registry-url>
 ```
 
 ## RKE2
 
 ```bash
 # load the content from the tarball to the hauler store
-hauler store load rke2-images.tar.zst
+hauler store load --store rke2-store rke2-images.tar.zst
 
 # copy the content from the hauler store to your registry
-hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
+hauler store copy --store rke2-store --username <redacted> --password <redacted> registry://<registry-url>
 ```
 
 ## Rancher
@@ -40,48 +40,48 @@ hauler store copy --username <redacted> --password <redacted> registry://<regist
 
 ```bash
 # load the content from the tarball to the hauler store
-hauler store load certmanager-images.tar.zst
+hauler store load --store certmanager-store certmanager-images.tar.zst
 
 # copy the content from the hauler store to your registry
-hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
+hauler store copy --store certmanager-store --username <redacted> --password <redacted> registry://<registry-url>
 ```
 
 ### Rancher
 
 ```bash
 # load the content from the tarball to the hauler store
-hauler store load rancher-images.tar.zst
+hauler store load --store rancher-store rancher-images.tar.zst
 
 # copy the content from the hauler store to your registry
-hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
+hauler store copy --store rancher-store --username <redacted> --password <redacted> registry://<registry-url>
 ```
 
 ## Longhorn
 
 ```bash
 # load the content from the tarball to the hauler store
-hauler store load longhorn-images.tar.zst
+hauler store load --store longhorn-store longhorn-images.tar.zst
 
 # copy the content from the hauler store to your registry
-hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
+hauler store copy --store longhorn-store --username <redacted> --password <redacted> registry://<registry-url>
 ```
 
 ## NeuVector
 
 ```bash
 # load the content from the tarball to the hauler store
-hauler store load neuvector-images.tar.zst
+hauler store load --store neuvector-store neuvector-images.tar.zst
 
 # copy the content from the hauler store to your registry
-hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
+hauler store copy --store neuvector-store --username <redacted> --password <redacted> registry://<registry-url>
 ```
 
 ## Kubewarden
 
 ```bash
 # load the content from the tarball to the hauler store
-hauler store load kubewarden-images.tar.zst
+hauler store load --store kubewarden-store kubewarden-images.tar.zst
 
 # copy the content from the hauler store to your registry
-hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
+hauler store copy --store kubewarden-store --username <redacted> --password <redacted> registry://<registry-url>
 ```
