@@ -73,20 +73,20 @@ EOF
 
 # fetch the content from generated hauler manifest
 # verify the version and the platform/architecture
-hauler store sync --files carbide-charts.yaml --store carbide-store --platform <platform/arch>
+hauler store sync --store carbide-store --files carbide-charts.yaml --platform <platform/arch>
 
 # save and output the content from the hauler store to tarball
-hauler store save --filename carbide-charts.tar.zst
+hauler store save --store carbide-store --filename carbide-charts.tar.zst
 ```
 
 #### On Airgapped Environment
 
 ```bash
 # load the content from the tarball to the hauler store
-hauler store load carbide-charts.tar.zst
+hauler store load --store carbide-store carbide-charts.tar.zst
 
 # server the content from the hauler store
-hauler store serve fileserver
+hauler store serve fileserver --store carbide-store
 
 # example install of a helm chart
 helm install <release-name> http://<FQDN or IP>:<PORT>/<chart>.tgz
