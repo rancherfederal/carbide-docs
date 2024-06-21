@@ -23,12 +23,12 @@ Before pulling images or even after images have been pushed to a registry, you s
 
 **NOTE:** You'll need to substitute `rgcrprod.azurecr.us` with your own registry domain, if verifying images in your own registry.
 
-<details open>
-<summary><b>Carbide Images v2</b> (Starting 03/2024)</summary>
-
 In Carbide Images v2 (or Cosign v2), the attachment of supply chain artifacts to the top layer of an image has been deprecated. In order for us to maintain interoperability, we have migrated our images and supply chain artifacts to be attached at the individual layer for a specific platform or architecture of an image.
 
 If you would like to see more information, please see the noticed posted [here](https://github.com/sigstore/cosign/blob/main/specs/SBOM_SPEC.md)!
+
+<details open>
+<summary><b>Carbide Images v2</b> (After 03/2024)</summary>
 
 ## Display Supply Chain Artifacts
 
