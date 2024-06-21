@@ -36,18 +36,23 @@ const sidebars = {
             'registry-docs/validating-images',
             {
               type: 'category',
-              label: 'Connected Environments',
+              label: 'Seeding a Registry',
               items: [
-                // 'registry-docs/pulling-images',
-                'registry-docs/copying-images',
-              ],
-            },
-            {
-              type: 'category',
-              label: 'Deploying Into Airgaps',
-              items: [
-                'registry-docs/downloading-images',
-                'registry-docs/loading-images',
+                {
+                  type: 'category',
+                  label: 'Connected Environments',
+                  items: [
+                    'registry-docs/copying-images',
+                  ],
+                },
+                {
+                  type: 'category',
+                  label: 'Airgapped Environments',
+                  items: [
+                    'registry-docs/downloading-images',
+                    'registry-docs/loading-images',
+                  ],
+                },
               ],
             },
           ],

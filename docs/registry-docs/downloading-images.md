@@ -1,12 +1,10 @@
 # Downloading the Images
 
-This page will walk you through how you can locally download secured images from the hardened registry and package them to move over an airgap to your registry.
+This page will walk you through locally downloading our secured images from our hardened registry, as well as packaging them to move over an airgap into your registry.
 
-If you're copying images into a connected registry, check the documents [here](copying-images.md).
+If you're hauling images into a connected registry, check the documentation [here](copying-images.md).
 
-## Carbide
-
-**NOTE:** We are actively working to improve the collection and formatting of the below procceses. Additionally, please see the [Hauler Docs](https://rancherfederal.github.io/hauler-docs/docs/guides-references/hauler-content/images) for how to specify a specific platform.
+## Setup
 
 ```bash
 # authenticate into carbide secured registry
@@ -14,7 +12,15 @@ hauler login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 
 # download the public key for carbide
 curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
+```
 
+## Downloading Secured Images
+
+### Carbide
+
+**NOTE:** We are actively working to improve the collection and formatting of the below procceses. Additionally, please see the [Hauler Docs](https://rancherfederal.github.io/hauler-docs/docs/guides-references/hauler-content/images) for how to specify a specific platform.
+
+```bash
 # generate the hauler manifest for carbide
 cat <<EOF > carbide-images.yaml
 apiVersion: content.hauler.cattle.io/v1alpha1
@@ -45,15 +51,9 @@ hauler store sync --store carbide-store --files carbide-images.yaml --platform <
 hauler store save --store carbide-store --filename carbide-images.tar.zst
 ```
 
-## K3s
+### K3s
 
 ```bash
-# authenticate into carbide secured registry
-hauler login -u <redacted> -p <redacted> rgcrprod.azurecr.us
-
-# download the public key for carbide
-curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
-
 # fetch the content from the carbide secured registry
 # verify the version, location of the key, and the platform/architecture
 hauler store sync --store k3s-store --products k3s=v1.27.12-k3s1 --key carbide-key.pub --platform <platform/arch>
@@ -62,15 +62,9 @@ hauler store sync --store k3s-store --products k3s=v1.27.12-k3s1 --key carbide-k
 hauler store save --store k3s-store --filename k3s-images.tar.zst
 ```
 
-## RKE2
+### RKE2
 
 ```bash
-# authenticate into carbide secured registry
-hauler login -u <redacted> -p <redacted> rgcrprod.azurecr.us
-
-# download the public key for carbide
-curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
-
 # fetch the content from the carbide secured registry
 # verify the version, location of the key, and the platform/architecture
 hauler store sync --store rke2-store --products rke2=v1.27.12+rke2r1 --key carbide-key.pub --platform <platform/arch>
@@ -79,17 +73,11 @@ hauler store sync --store rke2-store --products rke2=v1.27.12+rke2r1 --key carbi
 hauler store save --store rke2-store --filename rke2-images.tar.zst
 ```
 
-## Rancher
+### Rancher
 
-### Cert Manager
+#### Cert Manager
 
 ```bash
-# authenticate into carbide secured registry
-hauler login -u <redacted> -p <redacted> rgcrprod.azurecr.us
-
-# download the public key for carbide
-curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
-
 # fetch the content from the carbide secured registry
 # verify the version, location of the key, and the platform/architecture
 hauler store sync --store certmanager-store --products cert-manager=v1.14.4 --key carbide-key.pub --platform <platform/arch>
@@ -98,15 +86,9 @@ hauler store sync --store certmanager-store --products cert-manager=v1.14.4 --ke
 hauler store save --store certmanager-store --filename certmanager-images.tar.zst
 ```
 
-### Rancher
+#### Rancher
 
 ```bash
-# authenticate into carbide secured registry
-hauler login -u <redacted> -p <redacted> rgcrprod.azurecr.us
-
-# download the public key for carbide
-curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
-
 # fetch the content from the carbide secured registry
 # verify the version, location of the key, and the platform/architecture
 hauler store sync --store rancher-store --products rancher=v2.8.3 --key carbide-key.pub --platform <platform/arch>
@@ -115,15 +97,9 @@ hauler store sync --store rancher-store --products rancher=v2.8.3 --key carbide-
 hauler store save --store rancher-store --filename rancher-images.tar.zst
 ```
 
-## Longhorn
+### Longhorn
 
 ```bash
-# authenticate into carbide secured registry
-hauler login -u <redacted> -p <redacted> rgcrprod.azurecr.us
-
-# download the public key for carbide
-curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
-
 # fetch the content from the carbide secured registry
 # verify the version, location of the key, and the platform/architecture
 hauler store sync --store longhorn-store --products longhorn=v1.6.1 --key carbide-key.pub --platform <platform/arch>
@@ -132,15 +108,9 @@ hauler store sync --store longhorn-store --products longhorn=v1.6.1 --key carbid
 hauler store save --store longhorn-store --filename longhorn-images.tar.zst
 ```
 
-## NeuVector
+### NeuVector
 
 ```bash
-# authenticate into carbide secured registry
-hauler login -u <redacted> -p <redacted> rgcrprod.azurecr.us
-
-# download the public key for carbide
-curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
-
 # fetch the content from the carbide secured registry
 # verify the version, location of the key, and the platform/architecture
 hauler store sync --store neuvector-store --products neuvector=v5.3.2 --key carbide-key.pub --platform <platform/arch>
@@ -149,15 +119,9 @@ hauler store sync --store neuvector-store --products neuvector=v5.3.2 --key carb
 hauler store save --store neuvector-store --filename neuvector-images.tar.zst
 ```
 
-## Kubewarden
+### Kubewarden
 
 ```bash
-# authenticate into carbide secured registry
-hauler login -u <redacted> -p <redacted> rgcrprod.azurecr.us
-
-# download the public key for carbide
-curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
-
 # fetch the content from the carbide secured registry
 # verify the version, location of the key, and the platform/architecture
 hauler store sync --store kubewarden-store --products kubewarden=kubewarden-controller-2.0.11 --key carbide-key.pub --platform <platform/arch>
