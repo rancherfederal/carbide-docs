@@ -1,6 +1,6 @@
 # Rancher Manager Configuration
 
-This page will walk you through how to configure Rancher Manager images instead of the upstream Docker hub images, both for its own components and downstream Rancher Kubernetes clusters (RKE2/K3s).
+This page will walk you through how to configure Rancher Manager to use images from the **CSR (Carbide Secured Registry)** instead of the upstream Docker Hub images. This will apply to both its own components and downstream Rancher Kubernetes clusters (RKE2/K3s).
 
 **NOTE**: Due to current limitations of cloud providers, this project will not work for managing Cloud Provider clusters (AKS, EKS, GKE). If you're currently using Rancher to manage those workloads, do not use this project. We intend to improve this experience in the future.
 
@@ -16,7 +16,7 @@ This page will walk you through how to configure Rancher Manager images instead 
 
 ## Configuring Cert Manager
 
-As Rancher has a dependency on Cert Manager, you'll need to update your Helm install of Cert Manager to use Carbide Secured Registry (CSR) images that are validated and signed by Rancher Government.
+As Rancher has a dependency on Cert Manager, you'll need to update your helm install of Cert Manager to use images from the CSR.
 
 If you're following Rancher's [Connected](https://rancher.com/docs/rancher/v2.6/en/installation/install-rancher-on-k8s/#4-install-cert-manager) installation instructions, you'll need to follow the next steps to use the Carbide Secured Registry (CSR) images for cert-manager.
 
@@ -163,4 +163,48 @@ write_files:
             username: <redacted>
             password: <redacted>
     permissions: '0644'
+```
+
+--- stuff from airgapped docs/stigatron "getting started"
+## Configuring Registry Credentials
+
+### Local Cluster
+
+On the local cluster running Rancher Multi-cluster Manager, you'll need to configure credentials for the registry with the STIGATRON images. See the [Rancher Configuration](../registry-docs/rancher-config.md) on how to set up those credentials.
+
+### Downstream Clusters
+
+For downstream clusters, you'll need to also configure registry credentials. Depending on how RKE2 was configured and set up, there are a few ways to do this.
+
+### Rancher-Provisioned Cluster
+
+If you provisioned or are provisioning RKE2 directly from the Rancher UI, you can configure/update that cluster with credentials.
+
+1. Click the upper-left menu and navigate to `Cluster Management`.
+2. If updating an existing cluster, select that cluster, click the 3-dot menu in the upper-right, and select `Edit Config`. If creating a new cluster, just click `Create` in the upper-left.
+3. Once you get to the screen to update/create the cluster's node pools, scroll to the bottom under `Cluster Configuration` and find the `Registries` tab.
+4. Select the second option (`Use specified private registry for Rancher System Container Images`).
+5. Enter your registry hostname in the first box.
+6. In the `Authentication` box, select `Create a HTTP Basic Auth Secret` and enter your credentials.
+
+- For future clusters using the same registry, you can just select existing secret.
+
+7. Click `Save`.
+
+![Rancher Registry Configuration](/img/registry-configuration.png)
+
+8. Wait for cluster to reconcile.
+
+### Imported Cluster
+
+If you're working with a cluster that was imported or is to be imported into the Rancher MCM, you'll need to update the containerd `registries.yaml` file on every node, substituting your registry hostname and credentials:
+
+```bash
+# /etc/rancher/k3s/registries.yaml
+# /etc/rancher/rke2/registries.yaml
+configs:
+  "<registry-url>":
+    auth:
+      username: <redacted>
+      password: <redacted>
 ```
