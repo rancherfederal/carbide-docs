@@ -4,16 +4,6 @@ This page will walk you through locally downloading our secured images from our 
 
 If you're hauling images into a connected registry, check the documentation [here](copying-images.md).
 
-## Setup
-
-```bash
-# authenticate into carbide secured registry
-hauler login -u <redacted> -p <redacted> rgcrprod.azurecr.us
-
-# download the public key for carbide
-curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
-```
-
 ## Downloading Secured Images
 
 ### Carbide

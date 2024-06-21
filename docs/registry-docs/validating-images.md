@@ -2,21 +2,6 @@
 
 This will guide you through validating the signatures and attestations of each image in the secured registry, as well as how to download artifacts about the image (Software Bill of Materials, Vulnerability Scan, Cryptographic Signature, etc...).
 
-#### carbide-key.pub
-
-```bash
-# download the public key for carbide
-curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
-
-# view the public key for carbide
-cat carbide-key.pub
-
------BEGIN PUBLIC KEY-----
-MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE5zlXeLmRxBHbVmDRZpnCFdzKhyKO
-tCAZva7CLlk/6gxvCM0QkIKznfaGTRMMYTaHMdQSau6yulDLlpokA++i8Q==
------END PUBLIC KEY-----
-```
-
 ## Secure Supply Chain
 
 Before pulling images or even after images have been pushed to a registry, you should always verify those images against the carbide public key. Below are the instructions for using `cosign` directly from a registry.
