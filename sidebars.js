@@ -61,8 +61,13 @@ const sidebars = {
           type: 'category',
           label: 'Configuration',
           items: [
-            'registry-docs/kubernetes-config',
-            'registry-docs/rancher-config'
+            'registry-docs/configuration/kubernetes',
+            'registry-docs/configuration/rancher',
+            {
+              type: 'doc',
+                id: 'carbide-charts',
+              label: 'Helm Chart Configuration',
+            },
           ],
         },
         'registry-docs/enforcement',
@@ -76,7 +81,6 @@ const sidebars = {
         },
       ],
     },
-    'carbide-charts',
     {
       type: 'category',
       label: 'STIGATRON',
@@ -88,7 +92,6 @@ const sidebars = {
           label: 'Installation',
           items: [
             'stigatron-docs/prereqs',
-            'stigatron-docs/getting-started',
             'stigatron-docs/installation',
           ],
         },
@@ -114,7 +117,6 @@ const sidebars = {
           label: 'Installation',
           items: [
             'airgapped-docs/prereqs',
-            'airgapped-docs/getting-started',
             'airgapped-docs/installation',
           ],
         },
