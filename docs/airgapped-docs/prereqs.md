@@ -4,7 +4,6 @@ In order to utilize Airgapped Docs, you will need the following prerequisites:
 
 - **Rancher v2.7.0 or higher:** https://ranchermanager.docs.rancher.com/integrations-in-rancher/rancher-extensions
 - **Helm:** https://helm.sh/docs/intro/install
-- Access to the `local` cluster, to be able to install and deploy the app(s).
 - Access to the `downstream` cluster(s), to be able to install and deploy the app(s).
 
 It is also assumed you have followed all of the Carbide Secured Registry (CSR) documentation.
