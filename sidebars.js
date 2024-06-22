@@ -22,7 +22,7 @@ const sidebars = {
     'intro',
     {
       type: 'category',
-      label: 'Carbide Secured Registry',
+      label: 'Carbide Secured Registry (CSR)',
       collapsed: false,
       items: [
         'registry-docs/introduction',
@@ -58,16 +58,16 @@ const sidebars = {
           ],
         },
         {
+          type: 'doc',
+            id: 'registry-docs/carbide-charts',
+          label: 'Helm Charts',
+        },
+        {
           type: 'category',
           label: 'Configuration',
           items: [
             'registry-docs/configuration/kubernetes',
             'registry-docs/configuration/rancher',
-            {
-              type: 'doc',
-                id: 'carbide-charts',
-              label: 'Helm Chart Configuration',
-            },
           ],
         },
         'registry-docs/enforcement',

@@ -1,6 +1,6 @@
 # Rancher Manager Configuration
 
-This page will walk you through how to configure Rancher Manager to use images from the **CSR (Carbide Secured Registry)** instead of the upstream Docker Hub images. This will apply to both its own components and downstream Rancher Kubernetes clusters (RKE2/K3s).
+This page will walk you through how to configure Rancher Manager to use images from the CSR instead of the upstream Docker Hub images. This will apply to both its own components and downstream Rancher Kubernetes clusters (RKE2/K3s).
 
 **NOTE**: Due to current limitations of cloud providers, this project will not work for managing Cloud Provider clusters (AKS, EKS, GKE). If you're currently using Rancher to manage those workloads, do not use this project. We intend to improve this experience in the future.
 
