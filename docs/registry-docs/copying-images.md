@@ -1,6 +1,6 @@
 # Copying Images to a Registry
 
-This page will walk you through copying our secured images into your own registry for later use.
+This page will walk you through hauling our secured images into your own registry for later use.
 
 If you're hauling images into an airgapped registry, check the documentation [here](downloading-images.md).
 

@@ -13,4 +13,4 @@ This means you have:
 - the carbide helm charts available for use
 - configured k3s/rke2 to use your registry
 - configured Rancher Manager to use your registry
-- setup policy enforcement to only allow images from the CSR to run
+- setup policy enforcement to only allow images from the CSR

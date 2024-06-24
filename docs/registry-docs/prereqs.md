@@ -6,7 +6,7 @@ Below are all the things you need to get started with the Hardened Container Reg
 
 ## Required Tooling
 
-**Packaging/Airgapping: [hauler](https://hauler.dev)**
+**Packaging/Airgapping: [Hauler](https://hauler.dev)**
 ```bash
 # example installation steps
 # please see the docs: https://rancherfederal.github.io/hauler-docs/docs/introduction/install
@@ -14,7 +14,7 @@ Below are all the things you need to get started with the Hardened Container Reg
 curl -sfL https://get.hauler.dev | bash
 ```
 
-**Supply Chain Verification: [cosign](https://docs.sigstore.dev)**
+**Supply Chain Verification: [Cosign](https://docs.sigstore.dev)**
 ```bash
 # example installation steps
 # please see the docs: https://docs.sigstore.dev/system_config/installation
@@ -24,7 +24,7 @@ sudo mv cosign-linux-amd64 /usr/local/bin/cosign
 sudo chmod 755 /usr/local/bin/cosign
 ```
 
-**K8s Package Management: [helm](https://helm.sh/docs)**
+**K8s Package Management: [Helm](https://helm.sh/docs)**
 ```bash
 # example installation steps
 # please see the docs: https://helm.sh/docs/intro/install
@@ -52,6 +52,6 @@ tCAZva7CLlk/6gxvCM0QkIKznfaGTRMMYTaHMdQSau6yulDLlpokA++i8Q==
 ## Setup
 
 ```bash
-# authenticate into carbide secured registry
+# log in to carbide secured registry
 hauler login -u <redacted> -p <redacted> rgcrprod.azurecr.us
 ```

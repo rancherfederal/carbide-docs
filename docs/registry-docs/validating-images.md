@@ -6,7 +6,7 @@ This will guide you through validating the signatures and attestations of each i
 
 Before pulling images or even after images have been pushed to a registry, you should always verify those images against the carbide public key. Below are the instructions for using `cosign` directly from a registry.
 
-**NOTE:** You'll need to substitute `rgcrprod.azurecr.us` with your own registry domain, if verifying images in your own registry.
+> **NOTE:** You'll need to substitute `rgcrprod.azurecr.us` with your own registry domain, if verifying images in your own registry.
 
 In Carbide Images v2 (or Cosign v2), the attachment of supply chain artifacts to the top layer of an image has been deprecated. In order for us to maintain interoperability, we have migrated our images and supply chain artifacts to be attached at the individual layer for a specific platform or architecture of an image.
 
