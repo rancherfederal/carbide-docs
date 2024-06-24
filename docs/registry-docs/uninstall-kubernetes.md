@@ -12,7 +12,7 @@ Upon restart of your pods, they should be utilizing the upstream images.
 
 ### Reverting to DockerHub Images (Directly)
 
-If you want to revert to using images directly from Docker Hub, you'll need to delete the `registries.yaml` configuration file made [here](kubernetes-config.md#usage-with-k3s).
+If you want to revert to using images directly from Docker Hub, you'll need to delete the `registries.yaml` configuration file made [here](configuration/kubernetes.md#usage-with-k3s).
 
 You will also need to unset the `system-default-registry` configuration when installing K3s by re-running the `curl` command used to install K3s on each node, with the parameter unset.
 
@@ -38,7 +38,7 @@ Upon restart of your pods, they should be utilizing the upstream images.
 
 ### Reverting to DockerHub Images (Directly)
 
-If you want to revert to using images directly from Docker Hub, you'll need to delete the `registries.yaml` configuration file made [here](kubernetes-config.md#usage-with-rke2).
+If you want to revert to using images directly from Docker Hub, you'll need to delete the `registries.yaml` configuration file made [here](configuration/kubernetes.md#usage-with-rke2).
 
 You'll also need to clean up the `system-default-registry` key/value from your `/etc/rancher/rke2/config.yaml` file on each node, and restart rke2.
 
