@@ -6,7 +6,8 @@ If you're hauling images into an airgapped registry, check the documentation [he
 
 ## Copying Secured Images
 
-**NOTE:** We are actively working to improve the collection and formatting of the below procceses. Additionally, please see the [Hauler Docs](https://rancherfederal.github.io/hauler-docs/docs/guides-references/hauler-content/images) for how to specify a specific platform.
+>**NOTE:** We are actively working to improve the collection and formatting of the below procceses. Additionally, please see the [Hauler Docs](https://rancherfederal.github.io/hauler-docs/docs/guides-references/hauler-content/images) for how to specify a specific platform.
+
 ### Carbide
 
 ```bash
