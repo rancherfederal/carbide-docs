@@ -2,7 +2,9 @@
 
 This page will walk you through locally downloading our secured images from our hardened registry, as well as packaging them to move over an airgap into your registry.
 
-If you're hauling images into a connected registry, check the documentation [here](copying-images.md).
+> This demonstration will be using `hauler`, but any tool with the ability to push/pull an oci image will be adequate.
+
+If you're copying images into a connected registry, check the documentation [here](copying-images.md).
 
 ## Downloading Secured Images
 

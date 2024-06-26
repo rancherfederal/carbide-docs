@@ -1,8 +1,10 @@
 # Loading Images to a Registry
 
-This page will walk you through seeding your registry with local images from the hardened registry for all Rancher components.
+This page will walk you through seeding your registry with downloaded images from the CSR for all Rancher components.
 
-Make sure you've checked out the section on [Downloading Images](downloading-images.md) and that you've airgapped the tarballs onto your network.
+> This demonstration will be using `hauler`, but any tool with the ability to push/pull an oci image will be adequate.
+
+This assumes you've followed the [downloading images](downloading-images.md) section and that you've transferred your tarballs to your airgapped environment.
 
 ## Carbide
 

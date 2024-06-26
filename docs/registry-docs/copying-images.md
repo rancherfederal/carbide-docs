@@ -1,8 +1,10 @@
 # Copying Images to a Registry
 
-This page will walk you through hauling our secured images into your own registry for later use.
+This page will walk you through copying our secured images into your own registry for later use.
 
-If you're hauling images into an airgapped registry, check the documentation [here](downloading-images.md).
+> This demonstration will be using `hauler`, but any tool with the ability to push/pull an oci image will be adequate.
+
+If you're copying images into an airgapped registry, check the documentation [here](downloading-images.md).
 
 ## Copying Secured Images
 
