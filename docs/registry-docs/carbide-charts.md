@@ -1,7 +1,8 @@
 # Carbide Helm Charts
 
-### Available Helm Charts
+Along with the our secured images provided through the CSR, we also provide helm charts to install various components of the carbide product suite. These include charts include the necessary components to run STIGATRON, an airgapped copy of all rancher product docs, as well as custom build of rancher with our white-labeling.
 
+**Available Helm Charts**
 ```bash
 NAME                            CHART VERSION   APP VERSION     DESCRIPTION
 carbide-charts/airgapped-docs   0.1.49          0.1.4           Rancher Government Airgapped Docs
@@ -11,10 +12,11 @@ carbide-charts/stigatron        0.2.5           0.2.2           Rancher Governme
 carbide-charts/stigatron-ui     0.2.3           0.2.0           Rancher Government Stigatron UI Extension
 ```
 
-## How To Use (Connected Environments)
+The charts are available at https://rancherfederal.github.io/carbide-charts.
 
-### For Helm Chart Repositories
+## Obtaining Chart Manifests
 
+### Connected Environments
 ```bash
 # add and update the helm chart repository
 helm repo add carbide-charts https://rancherfederal.github.io/carbide-charts
@@ -27,14 +29,11 @@ helm search repo carbide-charts
 helm install <release-name> carbide-charts/<chart>
 ```
 
-If you would like to do add the Carbide Helm Charts to the Rancher Manager Chart Catalog, so you are able to use the user interface to install them, please follow the steps in the [Rancher Manager Docs](https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/helm-charts-in-rancher).
+If you would like to add the Carbide Helm Charts to the Rancher Manager Chart Catalog (so you can use the user interface to install them) please follow the steps in the [Rancher Manager Docs](https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/helm-charts-in-rancher).
 
-## How to Use (Airgaped Environments)
+### Airgapped Environments
 
-### For Helm Chart Repositories
-
-#### On Connected Environment
-
+#### In Connected Environment
 ```bash
 # generate the hauler manfiest for the carbide charts
 cat <<EOF > carbide-charts.yaml
@@ -79,8 +78,7 @@ hauler store sync --store carbide-store --files carbide-charts.yaml --platform <
 hauler store save --store carbide-store --filename carbide-charts.tar.zst
 ```
 
-#### On Airgapped Environment
-
+#### In Airgapped Environment
 ```bash
 # load the content from the tarball to the hauler store
 hauler store load --store carbide-store carbide-charts.tar.zst

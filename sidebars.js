@@ -22,7 +22,7 @@ const sidebars = {
     'intro',
     {
       type: 'category',
-      label: 'Carbide Secured Registry',
+      label: 'Carbide Secured Registry (CSR)',
       collapsed: false,
       items: [
         'registry-docs/introduction',
@@ -36,28 +36,38 @@ const sidebars = {
             'registry-docs/validating-images',
             {
               type: 'category',
-              label: 'Connected Environments',
+              label: 'Seeding a Registry',
               items: [
-                // 'registry-docs/pulling-images',
-                'registry-docs/copying-images',
-              ],
-            },
-            {
-              type: 'category',
-              label: 'Deploying Into Airgaps',
-              items: [
-                'registry-docs/downloading-images',
-                'registry-docs/loading-images',
+                {
+                  type: 'category',
+                  label: 'Connected Environments',
+                  items: [
+                    'registry-docs/copying-images',
+                  ],
+                },
+                {
+                  type: 'category',
+                  label: 'Airgapped Environments',
+                  items: [
+                    'registry-docs/downloading-images',
+                    'registry-docs/loading-images',
+                  ],
+                },
               ],
             },
           ],
         },
         {
+          type: 'doc',
+            id: 'registry-docs/carbide-charts',
+          label: 'Helm Charts',
+        },
+        {
           type: 'category',
           label: 'Configuration',
           items: [
-            'registry-docs/kubernetes-config',
-            'registry-docs/rancher-config'
+            'registry-docs/configuration/kubernetes',
+            'registry-docs/configuration/rancher',
           ],
         },
         'registry-docs/enforcement',
@@ -71,7 +81,6 @@ const sidebars = {
         },
       ],
     },
-    'carbide-charts',
     {
       type: 'category',
       label: 'STIGATRON',
@@ -83,7 +92,6 @@ const sidebars = {
           label: 'Installation',
           items: [
             'stigatron-docs/prereqs',
-            'stigatron-docs/getting-started',
             'stigatron-docs/installation',
           ],
         },
@@ -109,7 +117,6 @@ const sidebars = {
           label: 'Installation',
           items: [
             'airgapped-docs/prereqs',
-            'airgapped-docs/getting-started',
             'airgapped-docs/installation',
           ],
         },

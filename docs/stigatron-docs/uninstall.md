@@ -5,7 +5,7 @@
 On the `local` cluster running Rancher MCM, run the following Helm command to remove the UI Extension.
 
 ```bash
-helm uninstall -n carbide-stigatron-system stigatron-ui carbide-charts/stigatron-ui
+helm uninstall -n carbide-stigatron-system stigatron-ui
 ```
 
 ## Downstream Clusters

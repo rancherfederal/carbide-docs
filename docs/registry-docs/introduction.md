@@ -7,7 +7,7 @@ As our product is still in the IOC phase, there are some expectations to level-s
 
 * IOC users can expect tooling and processes to be changed, improved and streamlined continuously as we strive to improve the Carbide offering.
 
-**DISCLAIMER**:  The Secured Registry (rgcrprod.azurecr.us) is _not_ intended to be used as the primary registry for running Kubernetes clusters. It is only intended as the acquisition point to obtain the Carbide secured images. Customers should seed their own private OCI registries, and use that registry for their Kubernetes clusters.
+> **DISCLAIMER**:  The Secured Registry (rgcrprod.azurecr.us) is _not_ intended to be used as the primary registry for running Kubernetes clusters. It is only intended as the acquisition point to obtain the Carbide secured images. Customers should seed their own private OCI registries, and use that registry for their Kubernetes clusters.
 
 If you see issues and areas for improvement, please submit Github issues [here](https://github.com/rancherfederal/carbide-docs/issues).
 

@@ -10,6 +10,11 @@ The full configuration using your authenticated registry is below:
 
 ```yaml
 # /etc/rancher/k3s/registries.yaml
+mirrors:
+  docker.io:
+      endpoint:
+      - "https://<registry-url>"
+
 configs:
   "<registry-url>":
     auth:
@@ -31,6 +36,11 @@ The full configuration using the shared alpha account is below:
 
 ```yaml
 # /etc/rancher/rke2/registries.yaml
+mirrors:
+  docker.io:
+      endpoint:
+      - "https://<registry-url>"
+
 configs:
   "<registry-url>":
     auth:
@@ -46,4 +56,35 @@ node-name: controlplane1
 write-kubeconfig-mode: 0640
 system-default-registry: <registry-url>
 ...
+```
+
+#### `registries.yaml` Strategy Approaches
+
+| Scenario                    | Best practice                                                            |
+| --------------------------- | ------------------------------------------------------------------------ |
+| Use of a 'golden machine image'     | Pre-configure `registries.yaml` on golden machine image before host provisioning |
+| Rancher provisioned cluster | Embed a `cloud-init` file into cluster provisioning (Example below)      |
+| Ansible/Saltstack/Manual    | Pre-configure `registries.yaml` on host before cluster provisioning      |
+
+#### Example `cloud-init` (`RKE2`)
+
+```yaml
+# cloud-init
+
+runcmd:
+  - mkdir /etc/rancher/rke2
+write_files:
+  - path: /etc/rancher/rke2/registries.yaml
+    content: |
+      mirrors:
+        docker.io:
+            endpoint:
+            - "https://<registry-url>"
+
+        configs:
+        "<registry-url>":
+            auth:
+            username: <redacted>
+            password: <redacted>
+    permissions: '0644'
 ```

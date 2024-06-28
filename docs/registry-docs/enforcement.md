@@ -1,6 +1,6 @@
 # Enforcement
 
-This page will walk you through configuring Policy Enforcement (Kubewarden, Kyverno, Open Policy Agent) to ensure images running in your cluster that come from the hardened registry are validated against our public key before deploying.
+This page will walk you through configuring a few example policy enforcement engines to validate your cluster images against our public key. This should ensure only the images from our hardened registry are allowed to run.
 
 ## Kubewarden Enforcement
 
@@ -32,12 +32,6 @@ If your Rancher system images are in a private registry requiring authentication
 ### Copying Policy Artifact to a Registry (Connected Environments)
 
 ```bash
-# authenticate into carbide secured registry
-hauler login -u <redacted> -p <redacted> rgcrprod.azurecr.us
-
-# download the public key for carbide
-curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
-
 # fetch the image from the carbide secured registry
 hauler store add image rgcrprod.azurecr.us/policies/verify-image-signatures:v0.1.7 --key carbide-key.pub --platform linux/amd64
 
@@ -45,17 +39,11 @@ hauler store add image rgcrprod.azurecr.us/policies/verify-image-signatures:v0.1
 hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
 ```
 
-### Saving Policy Artifact (Airgaped Environments)
+### Saving Policy Artifact (Airgapped Environments)
 
 Use the below script, substituting your registry, to both validate and save locally the policy artifact:
 
 ```bash
-# authenticate into carbide secured registry
-hauler login -u <redacted> -p <redacted> rgcrprod.azurecr.us
-
-# download the public key for carbide
-curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
-
 # fetch the image from the carbide secured registry
 hauler store add image rgcrprod.azurecr.us/policies/verify-image-signatures:v0.1.7 --key carbide-key.pub --platform linux/amd64
 
@@ -63,7 +51,7 @@ hauler store add image rgcrprod.azurecr.us/policies/verify-image-signatures:v0.1
 hauler store save --filename kubewarden-policy.tar.zst
 ```
 
-### Loading Policy Artifact to a Registry (Airgaped Environments)
+### Loading Policy Artifact to a Registry (Airgapped Environments)
 
 Use the below script, substituting your registry, to load the policy artifact:
 

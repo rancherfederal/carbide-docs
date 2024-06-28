@@ -2,33 +2,18 @@
 
 This will guide you through validating the signatures and attestations of each image in the secured registry, as well as how to download artifacts about the image (Software Bill of Materials, Vulnerability Scan, Cryptographic Signature, etc...).
 
-#### carbide-key.pub
-
-```bash
-# download the public key for carbide
-curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
-
-# view the public key for carbide
-cat carbide-key.pub
-
------BEGIN PUBLIC KEY-----
-MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE5zlXeLmRxBHbVmDRZpnCFdzKhyKO
-tCAZva7CLlk/6gxvCM0QkIKznfaGTRMMYTaHMdQSau6yulDLlpokA++i8Q==
------END PUBLIC KEY-----
-```
-
 ## Secure Supply Chain
 
 Before pulling images or even after images have been pushed to a registry, you should always verify those images against the carbide public key. Below are the instructions for using `cosign` directly from a registry.
 
-**NOTE:** You'll need to substitute `rgcrprod.azurecr.us` with your own registry domain, if verifying images in your own registry.
-
-<details open>
-<summary><b>Carbide Images v2</b> (Starting 03/2024)</summary>
+> **NOTE:** You'll need to substitute `rgcrprod.azurecr.us` with your own registry domain, if verifying images in your own registry.
 
 In Carbide Images v2 (or Cosign v2), the attachment of supply chain artifacts to the top layer of an image has been deprecated. In order for us to maintain interoperability, we have migrated our images and supply chain artifacts to be attached at the individual layer for a specific platform or architecture of an image.
 
 If you would like to see more information, please see the noticed posted [here](https://github.com/sigstore/cosign/blob/main/specs/SBOM_SPEC.md)!
+
+<details open>
+<summary><b>Carbide Images v2</b> (After 03/2024)</summary>
 
 ## Display Supply Chain Artifacts
 
