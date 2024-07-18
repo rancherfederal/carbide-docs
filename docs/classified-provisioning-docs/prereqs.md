@@ -6,9 +6,9 @@ In order to utilize Classified Provisioning in SC2S/C2S, you will need the follo
 
 The following tools are required to package Classified Provisioning artifacts and install/upgrade Rancher.
 
-- **Hauler**: https://rancherfederal.github.io/hauler-docs/docs/introduction/install
-- **Helm:** https://helm.sh/docs/intro/install
-- **Rancher:** https://ranchermanager.docs.rancher.com/integrations-in-rancher/rancher-extensions
+- [Hauler](https://rancherfederal.github.io/hauler-docs/docs/introduction/install)
+- [Helm](https://helm.sh/docs/intro/install)
+- [Rancher](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade)
 
 ## IAM Role & Instance Profile
 

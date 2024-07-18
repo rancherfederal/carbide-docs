@@ -1,9 +1,5 @@
 # Introduction
 
-This page will walk through Installation and Usage of the STIGATRON component of Rancher Government Carbide.
-
-## What is Classified Provisioning from Carbide?
-
 In classified regions of AWS, the ability to natively provision RKE2 clusters through the Rancher MCM provides a lot of benefits in comparison to importing clusters.
 
 | Feature/Functionality | Imported Cluster | Native Provisioned Cluster |

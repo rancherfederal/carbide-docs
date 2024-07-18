@@ -2,75 +2,75 @@
 
 ## Bundle Artifacts in Connected Environment
 
+In a connected environment, utilize the `hauler` CLI to verify and collect the Classified Provisioning images from the Carbide registry.
 
+1. Download the Carbide public key.
 
-### Enabling UI Extensions
+    ```bash
+    wget -O /tmp/carbide-key.pub https://github.com/rancherfederal/carbide-releases/releases/download/0.1.1/carbide-key.pub
+    ```
 
-On the `local` cluster running Rancher MCM, you'll need to first enable Extensions.
+1. Create the Hauler manifest file.
 
-1. Log into the Rancher MCM as an administrator.
-2. Click the menu in the upper-left of the main dashboard and click the `Extensions` link near the bottom.
-3. Click the `Enable` button on the Extensions screen.
-4. Click `Ok`, when prompted to Enable Extension Support.
+    ```bash
+    cat <EOT > /tmp/manifest.yaml
+    apiVersion: content.hauler.cattle.io/v1alpha1
+    kind: Images
+    metadata:
+      name: carbide-rancher-extra
+      annotations:
+        hauler.dev/version: "v2.8.5-carbide-1"
+        hauler.dev/key: "/tmp/carbide-key.pub"
+    spec:
+      images:
+        - name: "rgcrprod.azurecr.us/rancher/machine:v0.15.0-rancher112-carbide-1"
+        - name: "rgcrprod.azurecr.us/rancher/rancher:v2.8.5-carbide-1"
+        - name: "rgcrprod.azurecr.us/rancher/rancher-agent:v2.8.5-carbide-1"
+    EOT
+    ```
 
-![Enable Extensions](/img/stigatron/enable-extensions.png)
+    **NOTE**: If deploying to a different architecture than the server used to pull your images, be sure to set the `hauler.dev/platform` annotation. For instance:
 
-### Installing STIGATRON UI Plugin
+    ```yaml
+    apiVersion: content.hauler.cattle.io/v1alpha1
+    kind: Images
+    metadata:
+      name: carbide-rancher-extra
+      annotations:
+        hauler.dev/version: "v2.8.5-carbide-1"
+        hauler.dev/key: "/tmp/carbide-key.pub"
+        hauler.dev/platform: "linux/amd64"
+    ...
+    ```
 
-Next, on the same `local` cluster, run the following Helm commands to install the UI Plugin for STIGATRON (see the `tgz` method above for airgap with no Helm repository) and ensure to substitute your registry:
+2. Validate & pull the images to the local Hauler store.
 
-```bash
-helm install -n carbide-stigatron-system --create-namespace \
-  --set "global.cattle.systemDefaultRegistry=<registry-url>" \
-  stigatron-ui carbide-charts/stigatron-ui
-```
+    ```bash
+    hauler store sync --files /tmp/manifest.yaml
+    hauler store save
+    ```
 
-Check the status of the rollout:
+3. Move the resulting `haul.tar.zst` file into your air-gapped, classified environment. 
 
-```bash
-helm status -n carbide-stigatron-system stigatron-ui
-```
+## Copy Files to Your Classified Registry
 
-## Downstream Clusters
+1. Copy the `haul.tar.zst` and the `hauler` CLI to a server in your classified environment. Ensure `hauler` is added to your PATH.
 
-### Installing CIS Benchmark Operator
+2. Load the bundle to the local store & copy the images to your registry.
 
-On downstream clusters, you'll need to first install Rancher's CIS Benchmark Operator:
+    ```bash
+    hauler store load haul.tar.zst
+    hauler store copy -u john.doe -p password registry://registry.url.example.com
+    ```
 
-1. Navigate to your cluster in the `Explore Cluster` menu.
-2. On the left, select `Apps` and click `Charts`.
-3. In the `Filter` box on the right, type `CIS Benchmark`.
-4. Review the `Chart Information` and when ready click `Install`.
-5. Leave all default values, select `Next`, and then click `Install`.
-6. Wait for the installation to complete and feel free to close the kubectl shell.
+## Update Your Rancher Installation
 
-### Creating the License Secret
+1. Using `helm` and the [airgapped Rancher chart tarball](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/other-installation-methods/air-gapped-helm-cli-install/install-rancher-ha), upgrade your existing Rancher installation with the new tag.
 
-Next, you'll need to create the `carbide-stigatron-system` namespace and create a secret named `stigatron-license` containing your Carbide License. _This step is **critical**, as STIGATRON operator will not start without this secret present:_
+    ```bash
+    helm upgrade -n cattle-system --reuse-values --set rancherImageTag=v2.8.5-carbide-1 rancher rancher-2.8.5.tgz
+    ```
 
-```bash
-# Create the namespace
-kubectl create namespace carbide-stigatron-system
+\
+For more information about Air-gaped Installation of Rancher, see the [Rancher air-gapped](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/other-installation-methods/air-gapped-helm-cli-install) docs.
 
-# Now create the secret, substituting your license
-kubectl create secret generic stigatron-license -n carbide-stigatron-system --from-literal=license=YOUR_LICENSE_HERE
-```
-
-### Installing STIGATRON Operator
-
-Next, you'll need to run the following Helm command to install the STIGATRON Operator (**NOTE:** Using carbide-stigatron-system as the namespace is required):
-
-```bash
-helm install -n carbide-stigatron-system \
-  --set "global.cattle.systemDefaultRegistry=<registry-url>" \
-  --set "heimdall2.global.cattle.systemDefaultRegistry=<registry-url>" \
-  stigatron carbide-charts/stigatron
-```
-
-Check the status of the rollout:
-
-```bash
-helm status -n carbide-stigatron-system stigatron
-```
-
-You should now see `STIGATRON` on the left menu of your Explore Cluster.
