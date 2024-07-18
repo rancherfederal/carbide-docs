@@ -12,7 +12,7 @@ The following tools are required to package Classified Provisioning artifacts an
 
 ## IAM Role & Instance Profile
 
-The following IAM role needs to be created in the account and accessible to attach to the EC2 instances running Rancher MCM, substituting the AWS region and AWS account ID for the placeholders:
+The AmazonEC2 provisioner requires a certain amount of access to read, write, and delete some AWS resources. Enabling this sans principal credentials (access key, secret key) requires an [EC2 instance profile](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#ec2-instance-profile) associated with an IAM Role, for each Rancher MCM node, having the following policy:
 
 ```json
 {
