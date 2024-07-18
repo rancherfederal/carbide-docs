@@ -13,7 +13,7 @@ In a connected environment, utilize the `hauler` CLI to verify and collect the C
 1. Create the Hauler manifest file.
 
     ```bash
-    cat <EOT > /tmp/manifest.yaml
+    cat <<EOT > /tmp/manifest.yaml
     apiVersion: content.hauler.cattle.io/v1alpha1
     kind: Images
     metadata:
@@ -26,7 +26,7 @@ In a connected environment, utilize the `hauler` CLI to verify and collect the C
         - name: "rgcrprod.azurecr.us/rancher/machine:v0.15.0-rancher112-carbide-1"
         - name: "rgcrprod.azurecr.us/rancher/rancher:v2.8.5-carbide-1"
         - name: "rgcrprod.azurecr.us/rancher/rancher-agent:v2.8.5-carbide-1"
-    EOT
+EOT
     ```
 
     **NOTE**: If deploying to a different architecture than the server used to pull your images, be sure to set the `hauler.dev/platform` annotation. For instance:
@@ -43,9 +43,10 @@ In a connected environment, utilize the `hauler` CLI to verify and collect the C
     ...
     ```
 
-2. Validate & pull the images to the local Hauler store.
+2. Login into the Carbide registry, then validate & pull the images to the local Hauler store.
 
     ```bash
+    hauler login rgcrprod.azurecr.us -u USERNAME_PLACEHOLDER -p PASSWORD_PLACEHOLDER
     hauler store sync --files /tmp/manifest.yaml
     hauler store save
     ```
