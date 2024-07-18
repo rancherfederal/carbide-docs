@@ -21,7 +21,7 @@
 
     **NOTE**: In SC2S/C2S, not all Instance Types are available. Ensure you are leverage an Instance Type that is **available in your environment**. This list will be dynamic in the future.
 
-    **NOTE**: If no security group is provided, Rancher will attempt to create a Security Group. If the ability to create Security Groups is limited, have a Security Group created by your Account Manager/Broker that has the [appropriate port configuration](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/installation-requirements/port-requirements) and select that existing Security Group in the `Advanced` settings.
+    **NOTE**: If no security group is provided, Rancher will attempt to create a Security Group. If the ability to create Security Groups is limited, have a Security Group created by your Account Manager/Broker that has the [appropriate port configuration](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/installation-requirements/port-requirements#rancher-aws-ec2-security-group) and select that existing Security Group in the `Advanced` settings.
 
     ![Create RKE2 Cluster in C2S](/img/classified-provisioning/create-carbide-cloud-creds.png)
 
