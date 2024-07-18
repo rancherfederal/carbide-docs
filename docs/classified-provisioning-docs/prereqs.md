@@ -8,7 +8,7 @@ The following tools are required to package Classified Provisioning artifacts an
 
 - [Hauler](https://rancherfederal.github.io/hauler-docs/docs/introduction/install)
 - [Helm](https://helm.sh/docs/intro/install)
-- [Rancher](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade)
+- [Rancher](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade) (v2.7.13, v2.7.14, v2.8.4 or greater)
 
 ## IAM Role & Instance Profile
 
