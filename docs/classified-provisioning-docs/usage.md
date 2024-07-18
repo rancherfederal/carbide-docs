@@ -29,7 +29,7 @@
 
 ### Registry Configuration
 
-When using a private registry, downstream clusters need to be configured to have the right authentication and certificate information to access that registry via the [registries.yaml](https://docs.rke2.io/install/containerd_registry_configuration) file. Rancher provisioned clusters can be configured through the UI to generate.
+When using a private registry, downstream clusters must be configured with correct authentication and certificate information to access that registry via the [registries.yaml](https://docs.rke2.io/install/containerd_registry_configuration) file. Rancher provisioned clusters can be configured through the UI to generate.
 
 1. Under the `Cluster Configuration` section when provisioning a cluster, select the `Registries` section.
 
