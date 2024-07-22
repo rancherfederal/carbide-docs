@@ -26,7 +26,7 @@ In a connected environment, utilize the `hauler` CLI to verify and collect the C
         - name: "rgcrprod.azurecr.us/rancher/machine:v0.15.0-rancher112-carbide-1"
         - name: "rgcrprod.azurecr.us/rancher/rancher:v2.8.5-carbide-1"
         - name: "rgcrprod.azurecr.us/rancher/rancher-agent:v2.8.5-carbide-1"
-EOT
+    EOT
     ```
 
     **NOTE**: If deploying to a different architecture than the server used to pull your images, be sure to set the `hauler.dev/platform` annotation. For instance:
@@ -40,7 +40,6 @@ EOT
         hauler.dev/version: "v2.8.5-carbide-1"
         hauler.dev/key: "/tmp/carbide-key.pub"
         hauler.dev/platform: "linux/amd64"
-    ...
     ```
 
 2. Login into the Carbide registry, then validate & pull the images to the local Hauler store.
@@ -72,6 +71,5 @@ EOT
     helm upgrade -n cattle-system --reuse-values --set rancherImageTag=v2.8.5-carbide-1 rancher rancher-2.8.5.tgz
     ```
 
-\
 For more information about Air-gaped Installation of Rancher, see the [Rancher air-gapped](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/other-installation-methods/air-gapped-helm-cli-install) docs.
 
