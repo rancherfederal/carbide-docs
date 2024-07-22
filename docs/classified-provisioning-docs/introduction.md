@@ -2,6 +2,8 @@
 
 In classified regions of AWS, the ability to natively provision RKE2 clusters through the Rancher MCM provides a lot of benefits in comparison to importing clusters.
 
+Classified Provisioning provides the ability to natively provision clusters through Rancher onto the same AWS account that Rancher is running in through the use of IAM roles attached to the instances running Rancher. This greatly simplifies Day 2 Operations and enables a seamless experience in any environment.
+
 | Feature/Functionality | Imported Cluster | Native Provisioned Cluster |
 |-|-|-|
 | Cluster Access with `kubectl` or `kubeconfig` | &#x2713; | &#x2713; |
@@ -19,6 +21,3 @@ In classified regions of AWS, the ability to natively provision RKE2 clusters th
 | Automated Cluster Encryption Key Rotation | | &#x2713; |
 | Ability to Snapshot, Backup, & Restore | | &#x2713; |
 | Configuring PSS/PSA/PSP | | &#x2713; |
-
-
-Classified Provisioning provides the ability to natively provision clusters through Rancher onto the same AWS account that Rancher is running in through the use of IAM roles attached to the instances running Rancher. This greatly simplifies Day 2 Operations and enables a seamless experience in any environment.
