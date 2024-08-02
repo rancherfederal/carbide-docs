@@ -83,6 +83,17 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Classified Provisioning',
+      collapsed: false,
+      items: [
+        'classified-provisioning-docs/introduction',
+        'classified-provisioning-docs/prereqs',
+        'classified-provisioning-docs/installation',
+        'classified-provisioning-docs/usage',
+      ],
+    },
+    {
+      type: 'category',
       label: 'STIGATRON',
       collapsed: false,
       items: [
