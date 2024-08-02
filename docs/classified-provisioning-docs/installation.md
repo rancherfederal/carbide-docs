@@ -76,6 +76,5 @@ In a connected environment, utilize the `hauler` CLI to verify and collect the C
     helm upgrade -n cattle-system --reuse-values --set rancherImageTag=v2.8.5-carbide-1 rancher rancher-2.8.5.tgz
     ```
 
-\
 For more information about Air-gaped Installation of Rancher, see the [Rancher air-gapped](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/other-installation-methods/air-gapped-helm-cli-install) docs.
 
