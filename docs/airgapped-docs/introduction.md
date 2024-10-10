@@ -1,12 +1,12 @@
 # Introduction
 
-This page will walk through installation and usage of the Airgapped Docs component of Rancher Government Carbide.
+This section will walk through installation and usage of the offline documentation for Rancher Government Carbide.
 
 ## What's included?
 
-When in an airgap, having accessibility to documentation can be critical to mission success, especially while troubleshooting problems.
+When in an airgap, having accessibile documentation can be critical to mission success, especially while troubleshooting problems.
 
-Carbide Airgapped Docs will give users access to documentation for not only Carbide itself, but the entire supported Rancher product porfolio. This includes capabililites like query and copy/paste shortcuts.
+Carbide offline docs give users access to documentation for Carbide and the entire supported Rancher product porfolio, right from the cluster menu. This includes convenient options like query and copy/paste shortcuts.
 
 ## IOC Expectations
 
