@@ -23,9 +23,9 @@ In a connected environment, utilize the `hauler` CLI to verify and collect the C
         hauler.dev/key: "/tmp/carbide-key.pub"
     spec:
       images:
-        - name: "rgcrprod.azurecr.us/rancher/machine:v0.15.0-rancher112-carbide-1"
-        - name: "rgcrprod.azurecr.us/rancher/rancher:v2.8.5-carbide-1"
-        - name: "rgcrprod.azurecr.us/rancher/rancher-agent:v2.8.5-carbide-1"
+        - name: "rgcrprod.azurecr.us/rancher/machine:v0.15.0-rancher118-carbide-1"
+        - name: "rgcrprod.azurecr.us/rancher/rancher:v2.9.3-carbide-1"
+        - name: "rgcrprod.azurecr.us/rancher/rancher-agent:v2.9.3-carbide-1"
     EOT
     ```
 
@@ -41,9 +41,9 @@ In a connected environment, utilize the `hauler` CLI to verify and collect the C
         hauler.dev/platform: "linux/amd64"
     spec:
       images:
-        - name: "rgcrprod.azurecr.us/rancher/machine:v0.15.0-rancher112-carbide-1"
-        - name: "rgcrprod.azurecr.us/rancher/rancher:v2.8.5-carbide-1"
-        - name: "rgcrprod.azurecr.us/rancher/rancher-agent:v2.8.5-carbide-1"
+        - name: "rgcrprod.azurecr.us/rancher/machine:v0.15.0-rancher118-carbide-1"
+        - name: "rgcrprod.azurecr.us/rancher/rancher:v2.9.3-carbide-1"
+        - name: "rgcrprod.azurecr.us/rancher/rancher-agent:v2.9.3-carbide-1"
     ```
 
 2. Login into the Carbide registry, then validate & pull the images to the local Hauler store.
@@ -73,7 +73,7 @@ In a connected environment, utilize the `hauler` CLI to verify and collect the C
 1. Using `helm` and the [airgapped Rancher chart tarball](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/other-installation-methods/air-gapped-helm-cli-install/install-rancher-ha), upgrade your existing Rancher installation with the new tag.
 
     ```bash
-    helm upgrade -n cattle-system --reuse-values --set rancherImageTag=v2.8.5-carbide-1 rancher rancher-2.8.5.tgz
+    helm upgrade -n cattle-system --reuse-values --set rancherImageTag=v2.9.3-carbide-1 rancher rancher-2.9.3.tgz
     ```
 
 For more information about Air-gaped Installation of Rancher, see the [Rancher air-gapped](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/other-installation-methods/air-gapped-helm-cli-install) docs.
