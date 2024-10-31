@@ -10,6 +10,8 @@
 
 Additionally, **Rancher Government** actively tests and validates this configuration through regions in [AWS GovCloud](https://aws.amazon.com/govcloud-us/) and through regions in [Sequoia Combine](https://www.sequoiainc.com/combine) (Classified Cloud Region Emulator).
 
+**Classified Provisioning** provides the ability to natively provision clusters through Rancher onto the same AWS account that Rancher is running in through the use of IAM roles attached to the instances running Rancher. This greatly simplifies Day 2 Operations and enables a seamless experience in any environment.
+
 ## Challenges
 
 At a high level, the Classified Cloud Regions, such as AWS, introduce significant complexities and challenges for engineering solutions to deploy, provision, manage, and maintain infrastructure.
