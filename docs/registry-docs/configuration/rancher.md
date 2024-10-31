@@ -1,6 +1,6 @@
-# Rancher Manager Configuration
+# Rancher Configuration
 
-This page will walk you through how to configure Rancher Manager to use images from the CSR instead of the upstream Docker Hub images. This will apply to both its own components and downstream Rancher Kubernetes clusters (RKE2/K3s).
+This page will walk you through how to configure Rancher to use images from the CSR instead of the upstream Docker Hub images. This will apply to both its own components and downstream Rancher Kubernetes clusters (RKE2/K3s).
 
 > **NOTE**: Due to current limitations of cloud providers, this project will not work for managing Cloud Provider clusters (AKS, EKS, GKE). If you're currently using Rancher to manage those workloads, do not use this project. We intend to improve this experience in the future.
 
@@ -18,13 +18,13 @@ This page will walk you through how to configure Rancher Manager to use images f
 
 As Rancher has a dependency on Cert Manager, you'll need to update/install Cert Manager with the images provided by the CSR.
 
-If you're following Rancher's [Connected](https://rancher.com/docs/rancher/v2.6/en/installation/install-rancher-on-k8s/#4-install-cert-manager) installation instructions, you'll need to follow the next steps to use the Carbide Secured Registry (CSR) images for cert-manager.
+If you're following Rancher's [connected installation](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/install-upgrade-on-a-kubernetes-cluster#4-install-cert-manager) instructions, you'll need to follow the steps below to use the Carbide Secured Registry (CSR) images for cert-manager.
 
-If using the [Airgapped](https://rancher.com/docs/rancher/v2.6/en/installation/other-installation-methods/air-gap/install-rancher/#1-add-the-cert-manager-repo) installation instructions, make sure you've pulled the images to your local/airgapped registry.
+If using the [airgapped installation](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/other-installation-methods/air-gapped-helm-cli-install/install-rancher-ha) instructions, make sure you've pulled the images to your local/airgapped registry.
 
 #### Configuring Cert Manager
 
-Follow Rancher's [Connected](https://rancher.com/docs/rancher/v2.6/en/installation/install-rancher-on-k8s/#4-install-cert-manager) installation instructions, but using the following steps instead of the `helm install` command from the docs.
+Follow Rancher's [connected installation](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/install-upgrade-on-a-kubernetes-cluster#4-install-cert-manager) instructions, but using the following steps instead of the `helm install` command from the docs.
 
 After adding the Cert Manager repo and installing the CRDs, use the following to create a temporary `values.yaml` for your chart, subsituting your registry domain:
 
@@ -96,7 +96,7 @@ You can follow these steps to configure a private registry when you create a clu
 
 #### New Rancher Installations
 
-Follow Rancher's [Installation Guide](https://rancher.com/docs/rancher/v2.5/en/installation/install-rancher-on-k8s), making sure to use the carbide chart obtained in the previous [helm chart](../carbide-charts.md) section.
+Follow Rancher's [Installation Guide](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/install-upgrade-on-a-kubernetes-cluster), making sure to use the carbide chart obtained in the previous [helm chart](../carbide-charts.md) section.
 
 When installing Rancher, to utilize the private registry, you'll need to set the following values in your helm values:
 
