@@ -103,3 +103,62 @@ The AmazonEC2 provisioner requires a certain amount of access to read, write, an
 This role needs to then be attached to all EC2 instances that Rancher MCM is running on.
 
 ![Modify IAM Role](/img/classified-provisioning/modify-iam-role.png)
+
+## Rancher Manager Configurations
+
+Rancher Manager needs to be configured with the following values to support full air-gap as well as custom CA certifications.
+
+### Helm Values
+
+Configure the follow Helm values for your Rancher helm deployment, adjusting the `rancher-url` and `registry-url` for your specific environment.
+
+```yaml
+additionalTrustedCAs: true
+hostname: <rancher-url>
+ingress:
+  tls:
+    source: secret
+rancherImage: <registry-url>/rancher/rancher
+rancherImageTag: v2.9.3-carbide-1
+systemDefaultRegistry: <registry-url>
+useBundledSystemChart: true
+privateCA: true
+```
+
+### Custom CA Certificate Secret
+
+For Rancher to make requests to the Classified AWS endpoints, you need to create a secret containing the AWS CA of your specific environment.
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: tls-ca-additional
+  namespace: cattle-system
+data:
+  ca-additional.pem: <encodedPrivateBundle>
+type: Opaque
+```
+**NOTE**: Ensure this secret matches the name and namespace above.
+
+### Registry configuration
+
+You need to configure your Kubernetes cluster to utilize your private registry. Configure the `registries.yaml` file in your RKE2/K3s configuration directories with the following:
+
+```yaml
+mirrors:
+  '*':
+    endpoint:
+      - 'https://<registry-url>'
+
+configs:
+  '<registry-url>':
+    auth:
+      username: <redacted>
+      password: <redacted>
+```
+
+For more information on Registry configuration, check out the RKE2 docs [here](https://docs.rke2.io/install/containerd_registry_configuration). 
+
+For more detailed information about Air-Gapped Rancher, check out the Rancher docs [here](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/other-installation-methods/air-gapped-helm-cli-install).
+
