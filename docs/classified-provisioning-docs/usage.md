@@ -2,17 +2,17 @@
 
 ## Creating a Carbide Cloud Credential
 
-1. In the Rancher MCM's menu, access Cloud Credentials (`Cluster Management` -> `Cloud Credentials`)
+1. In the Rancher Mananger menu, access Cloud Credentials (`Cluster Management` -> `Cloud Credentials`)
 
 2. Select `Create` and choose `Amazon`.
 
-3. Choose a name, enable the `Carbide Instance Credential`, select the default region for your environment, and click `Create`.
+3. Choose a name, click the toggle to enable the `Carbide Instance Credential`, select the default region for your environment, and click `Create`.
 
     ![Create Carbide Cloud Credential](/img/classified-provisioning/create-carbide-cloud-creds.png)
 
 ## Creating a Classified Cluster
 
-1. In the Rancher MCM's menu, access `Cluster Management` and click `Create`. Ensure the `RKE2/K3s` toggle is enabled and select `Amazon EC2`.
+1. In the Rancher Manager menu, access `Cluster Management` and click `Create`. Ensure the `RKE2/K3s` toggle is enabled and select `Amazon EC2`.
 
 2. Select the Cloud Credentials created in the previous step, then add node pools as you normally would for provisioning a cluster from Rancher.
 

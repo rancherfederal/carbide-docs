@@ -12,7 +12,7 @@ The following tools are required to package Classified Provisioning artifacts an
 
 ## IAM Role & Instance Profile
 
-The AmazonEC2 provisioner requires a certain amount of access to read, write, and delete some AWS resources. Enabling this sans principal credentials (access key, secret key) requires an [EC2 instance profile](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#ec2-instance-profile) associated with an IAM Role, for each Rancher MCM node, having the following policy:
+The Amazon EC2 provisioner requires a certain amount of access to read, write, and delete some AWS resources. Enabling this sans principal credentials (i.e. access key and secret key) requires an [EC2 Instance Profile](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#ec2-instance-profile) associated with an IAM Role, for each node in the Rancher Management cluster, with the following policy:
 
 ```json
 {
@@ -100,13 +100,11 @@ The AmazonEC2 provisioner requires a certain amount of access to read, write, an
 }
 ```
 
-This role needs to then be attached to all EC2 instances that Rancher MCM is running on.
-
 ![Modify IAM Role](/img/classified-provisioning/modify-iam-role.png)
 
 ## Rancher Manager Configurations
 
-Rancher Manager needs to be configured with the following values to support full air-gap as well as custom CA certifications.
+Rancher Manager needs to be configured with the following values to support full airgapped deployments as well as your custom certificates and certificate authority (CA).
 
 ### Helm Values
 
@@ -147,18 +145,17 @@ You need to configure your Kubernetes cluster to utilize your private registry. 
 
 ```yaml
 mirrors:
-  '*':
+  "*":
     endpoint:
-      - 'https://<registry-url>'
+      - "https://<registry-url>"
 
 configs:
-  '<registry-url>':
+  "<registry-url>":
     auth:
       username: <redacted>
       password: <redacted>
 ```
 
-For more information on Registry configuration, check out the RKE2 docs [here](https://docs.rke2.io/install/containerd_registry_configuration). 
+For more information on Registry configuration, check out the RKE2 docs [here](https://docs.rke2.io/install/containerd_registry_configuration).
 
 For more detailed information about Air-Gapped Rancher, check out the Rancher docs [here](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/other-installation-methods/air-gapped-helm-cli-install).
-

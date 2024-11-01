@@ -7,74 +7,69 @@ In a connected environment, utilize the `hauler` CLI to verify and collect the C
 1. Download the Carbide public key.
 
     ```bash
-    # Download the public key for Carbide
-    curl -sfOL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub
+    # download the public key for carbide
+    curl -sfL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub -o /tmp/carbide-key.pub
     ```
 
 1. Create the Hauler manifest file.
 
-    ```bash
-    cat <<EOT > /tmp/manifest.yaml
-    apiVersion: content.hauler.cattle.io/v1alpha1
-    kind: Images
-    metadata:
-      name: carbide-rancher-extra
-      annotations:
-        hauler.dev/key: "/tmp/carbide-key.pub"
-    spec:
-      images:
-        - name: "rgcrprod.azurecr.us/rancher/machine:v0.15.0-rancher118-carbide-1"
-        - name: "rgcrprod.azurecr.us/rancher/rancher:v2.9.3-carbide-1"
-        - name: "rgcrprod.azurecr.us/rancher/rancher-agent:v2.9.3-carbide-1"
-    EOT
-    ```
-
-    **NOTE**: If deploying to a different architecture than the server used to pull your images, be sure to set the `hauler.dev/platform` annotation. For instance:
-
     ```yaml
+    cat <<EOF > /tmp/carbide-provisioning-manifest.yaml
     apiVersion: content.hauler.cattle.io/v1alpha1
     kind: Images
     metadata:
-      name: carbide-rancher-extra
+      name: carbide-provisioning-images
       annotations:
-        hauler.dev/key: "/tmp/carbide-key.pub"
-        hauler.dev/platform: "linux/amd64"
+        hauler.dev/key: /tmp/carbide-key.pub
+        # hauler.dev/platform: linux/amd64 # only fetch specific platform/architecture
     spec:
       images:
-        - name: "rgcrprod.azurecr.us/rancher/machine:v0.15.0-rancher118-carbide-1"
-        - name: "rgcrprod.azurecr.us/rancher/rancher:v2.9.3-carbide-1"
-        - name: "rgcrprod.azurecr.us/rancher/rancher-agent:v2.9.3-carbide-1"
+        - name: rgcrprod.azurecr.us/rancher/machine:v0.15.0-rancher118-carbide-1
+        - name: rgcrprod.azurecr.us/rancher/rancher:v2.9.3-carbide-1
+        - name: rgcrprod.azurecr.us/rancher/rancher-agent:v2.9.3-carbide-1
+    ---
+    apiVersion: content.hauler.cattle.io/v1alpha1
+    kind: Charts
+    metadata:
+      name: carbide-provisioning-charts
+    spec:
+      charts:
+        - name: rancher
+          repoURL: https://rancherfederal.github.io/carbide-charts
+          version: 2.9.3
+    EOF
     ```
 
-2. Login into the Carbide registry, then validate & pull the images to the local Hauler store.
+2. Login into the Carbide registry with your Carbide Credentials, and then validate and fetch the images to the local `hauler` store.
 
     ```bash
-    hauler login -u <redacted> -p <redacted> rgcrprod.azurecr.us
-    hauler store sync --files /tmp/manifest.yaml
+    hauler login rgcrprod.azurecr.us -u <redacted> -p <redacted>
+    hauler store sync --files /tmp/carbide-provisioning-manifest.yaml
     hauler store save --filename carbide-provisioning-images.tar.zst
     ```
 
-3. Move the resulting `carbide-provisioning-images.tar.zst` file into your air-gapped, classified environment. 
+3. Move the resulting `carbide-provisioning-images.tar.zst` file into your airgapped/classified environment.
 
 ## Copy Files to Your Classified Registry
 
-1. Copy the `carbide-provisioning-images.tar.zst` and the `hauler` CLI to a server in your classified environment. Ensure `hauler` is added to your PATH.
+1. Copy the `carbide-provisioning-images.tar.zst` and the `hauler` binary to a server in your airgapped/classified environment. Please ensure `hauler` is added to your PATH.
 
-2. Load the bundle to the local store & copy the images to your registry.
+2. Load the bundle to the local store and copy the images to your registry.
 
     ```bash
-    hauler login -u <redacted> -p <redacted> registry.url.example.com
+    hauler login <registry-url> -u <redacted> -p <redacted>
     hauler store load carbide-provisioning-images.tar.zst
-    hauler store copy registry://registry.url.example.com
+    hauler store copy registry://<registry-url>
     ```
 
 ## Update Your Rancher Installation
 
-1. Using `helm` and the [airgapped Rancher chart tarball](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/other-installation-methods/air-gapped-helm-cli-install/install-rancher-ha), upgrade your existing Rancher installation with the new tag.
+1. Extract the Carbide Rancher chart from the local `hauler` store and upgrade your existing Rancher installation with the new rancher image tag...
 
     ```bash
-    helm upgrade -n cattle-system --reuse-values --set rancherImageTag=v2.9.3-carbide-1 rancher rancher-2.9.3.tgz
+    hauler store extract hauler/rancher:2.9.3
+    helm upgrade -i rancher rancher-2.9.3.tgz -n cattle-system --reuse-values --set rancherImageTag=v2.9.3-carbide-1
     ```
 
-For more information about Airgapped Installation of Rancher, see the [Rancher airgapped](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/other-installation-methods/air-gapped-helm-cli-install) docs.
+For more information about airgapped installation of Rancher, see the docs [here](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/other-installation-methods/airgapped-helm-cli-install).
 
