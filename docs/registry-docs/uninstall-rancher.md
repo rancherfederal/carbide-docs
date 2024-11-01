@@ -1,6 +1,6 @@
-# Rancher Manager Uninstall
+# Rancher Uninstall
 
-This page will walk you through how to uninstall Carbide Registry Images from Rancher Manager both for its own components and downstream Rancher Kubernetes clusters (RKE2/K3s).
+This page will walk you through how to uninstall Carbide Registry Images from Rancher, both for its own components and downstream Rancher Kubernetes clusters (RKE2/K3s).
 
 ## Reverting Cert Manager
 

@@ -1,6 +1,6 @@
 # Carbide Helm Charts
 
-Along with the our secured images provided through the CSR, we also provide helm charts to install various components of the carbide product suite. These include charts include the necessary components to run STIGATRON, an airgapped copy of all rancher product docs, as well as custom build of rancher with our white-labeling.
+Along with our secured images, we also provide helm charts through the CSR to install various components of the Carbide product suite. These charts include the necessary components to run [STIGATRON](https://rancherfederal.github.io/carbide-docs/docs/stigatron-docs/introduction), an airgapped copy of all Rancher product docs, and a custom build of Rancher with our white-labeling.
 
 **Available Helm Charts**
 ```bash
@@ -29,7 +29,7 @@ helm search repo carbide-charts
 helm install <release-name> carbide-charts/<chart>
 ```
 
-If you would like to add the Carbide Helm Charts to the Rancher Manager Chart Catalog (so you can use the user interface to install them) please follow the steps in the [Rancher Manager Docs](https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/helm-charts-in-rancher).
+If you would like to add the Carbide Helm Charts to the Rancher Chart Catalog (so you can use the user interface to install them) please follow the steps in the [Rancher Docs](https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/helm-charts-in-rancher).
 
 ### Airgapped Environments
 

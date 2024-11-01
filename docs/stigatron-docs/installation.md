@@ -4,9 +4,9 @@
 
 ### Enabling UI Extensions
 
-On the `local` cluster running Rancher MCM, you'll need to first enable Extensions.
+On the `local` cluster running Rancher, you'll need to first enable Extensions.
 
-1. Log into the Rancher MCM as an administrator.
+1. Log into Rancher as an administrator.
 2. Click the menu in the upper-left of the main dashboard and click the `Extensions` link near the bottom.
 3. Click the `Enable` button on the Extensions screen.
 4. Click `Ok`, when prompted to Enable Extension Support.
