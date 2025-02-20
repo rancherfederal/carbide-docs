@@ -1,8 +1,10 @@
-# Usage
+# Provisioning Clusters
+
+The following instructions apply to the Amazon EC2 C2S region, which is currently available in Tech Preview.
 
 ## Creating a Carbide Cloud Credential
 
-1. In the Rancher Mananger menu, access Cloud Credentials (`Cluster Management` -> `Cloud Credentials`)
+1. In the Rancher Mananger menu, access Cloud Credentials (`Cluster Management` -> `Cloud Credentials`).
 
 2. Select `Create` and choose `Amazon`.
 
@@ -16,14 +18,15 @@
 
 2. Select the Cloud Credentials created in the previous step, then add node pools as you normally would for provisioning a cluster from Rancher.
 
+    **PLEASE NOTE, in C2S:**
 
-    **NOTE**: In SC2S/C2S, it is **required** for you to enter an `AMI ID` and the respective `SSH User` for that AMI ID under the `Advanced` settings.
+    - It is **required** for you to enter an `AMI ID` and the respective `SSH User` for that AMI ID under the `Advanced` settings.
 
-    **NOTE**: In SC2S/C2S, not all Instance Types are available. Ensure you are leverage an Instance Type that is **available in your environment**. This list will be dynamic in the future.
+    - Not all Instance Types are available. Ensure you are leverage an Instance Type that is **available in your environment**. This list will be dynamic in the future.
 
-    **NOTE**: In SC2S/C2S, **encrypted EBS volumes** are required. Ensure you select the `Encrypt EBS Volumes` and choose a respective KMS key when provisioning.
+    - **Encrypted EBS volumes** are required. Ensure you select the `Encrypt EBS Volumes` and choose a respective KMS key when provisioning.
 
-    **NOTE**: If no security group is provided, Rancher will attempt to create a Security Group. If the ability to create Security Groups is limited, have a Security Group created by your Account Manager/Broker that has the [appropriate port configuration](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/installation-requirements/port-requirements#rancher-aws-ec2-security-group) and select that existing Security Group in the `Advanced` settings.
+    - If no security group is provided, Rancher will attempt to create a Security Group. If the ability to create Security Groups is limited, have a Security Group created by your Account Manager/Broker that has the [appropriate port configuration](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/installation-requirements/port-requirements#rancher-aws-ec2-security-group) and select that existing Security Group in the `Advanced` settings.
 
     ![Create RKE2 Cluster in C2S](/img/classified-provisioning/create-carbide-cloud-creds.png)
 
@@ -31,12 +34,12 @@
 
 ### Registry Configuration
 
-When using a private registry, downstream clusters must be configured with correct authentication and certificate information to access that registry via the [registries.yaml](https://docs.rke2.io/install/containerd_registry_configuration) file. Rancher provisioned clusters can be configured through the UI to generate.
+When using a private registry, downstream clusters must be configured with correct authentication and certificate information to access that registry via the [registries.yaml](https://docs.rke2.io/install/containerd_registry_configuration) file. Rancher provisioned clusters can be configured through the UI to generate the registries.yaml file.
 
 1. Under the `Cluster Configuration` section when provisioning a cluster, select the `Registries` section.
 
 2. Enter the registry domain in the `Container Registry` box, and either select existing registry credentials or create new credentials for authentication to the registry.
 
-3. If advanced configuration (mirroring, certificates, additional authentication), add those to the advanced settings.
+3. If advanced configuration (mirroring, certificates, additional authentication) is required, add those to the advanced settings.
 
 For more information, see the [RKE2 Containerd Registry Configuration](https://docs.rke2.io/install/containerd_registry_configuration) documentation.
