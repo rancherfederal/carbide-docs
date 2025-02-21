@@ -74,3 +74,8 @@
   font-family: nasalization;
   color: red;
 }
+
+table td{
+  text-align: center;
+  font-weight: bold;
+}
