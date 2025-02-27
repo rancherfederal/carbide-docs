@@ -1,6 +1,6 @@
 # Introduction
 
-> **DISCLAIMER**: IC Cloud Support is currently in **Tech Preview**, and is not recommended for production workloads. We are actively working towards full support (GA) for this functionality. 
+> **DISCLAIMER**: IC Cloud Support is currently in **Tech Preview**, and is not supported for production workloads. We recommend testing this feature on greenfield, non-production instances of Rancher Government only. We are actively working towards full support (GA) for this functionality. 
 
 **Rancher Government Solutions** now enables the native deployment, provisioning, and management of clusters on Intelligence Community Cloud Regions. This added functionality is unique to the `Rancher Government` product. 
 

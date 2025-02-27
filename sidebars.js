@@ -83,7 +83,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Classified Provisioning',
+      label: 'IC Cloud Support',
       collapsed: false,
       items: [
         'classified-provisioning-docs/introduction',
