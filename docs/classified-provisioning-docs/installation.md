@@ -4,10 +4,9 @@
 
 In a connected environment, utilize the `Hauler` CLI to verify and collect the Rancher Government images and helm chart from the Carbide Secured Registry.
 
-1. Download the Carbide public key.
+1. Download the public key for Carbide.
 
     ```bash
-    # download the public key for carbide
     curl -sfL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-key.pub -o /tmp/carbide-key.pub
     ```
 
@@ -34,13 +33,51 @@ In a connected environment, utilize the `Hauler` CLI to verify and collect the R
     hauler store copy registry://<registry-url>
     ```
 
-## Update Your Rancher Installation
+## Rancher Government Helm Chart
 
-1. Extract the Rancher Government chart from the local `Hauler` store and upgrade your existing Rancher installation with the new rancher image tag... 
+1. Add and update the helm repository.
 
     ```bash
-    hauler store extract hauler/rancher:2.10.3
-    helm upgrade -i rancher rancher-2.10.3.tgz -n cattle-system --reuse-values --set rancherImageTag=v2.10.3
+    helm repo add carbide-charts https://rancherfederal.github.io/carbide-charts
+    helm repo update carbide-charts
+    ```
+
+2. Update the values for your environment and set the rancherImageTag with the `-carbide-*` tag.
+
+    ```bash
+    helm install rancher carbide-charts/rancher \
+    --namespace cattle-system \
+    --set hostname=<rancher.my.org> \
+    --set bootstrapPassword=admin \
+    --set rancherImageTag=v2.10.3-carbide-1 \
+    --set carbide.whitelabel.enabled=false \
+    --version=v2.10.3
+    ```
+
+## Upgrade Your Rancher Installation
+
+1. Add and update the helm repository.
+
+    ```bash
+    helm repo add carbide-charts https://rancherfederal.github.io/carbide-charts
+    helm repo update carbide-charts
+    ```
+
+2. Get existing values.
+
+    ```bash
+    helm get values -n cattle-system rancher > /tmp/values.yaml
+    ```
+
+3. Update values for your environment and set rancherImageTag with the `-carbide-*` tag.
+
+    ```bash
+    helm upgrade rancher carbide-charts/rancher \
+    --namespace cattle-system \
+    -f /tmp/values.yaml \
+    --set rancherImageTag=v2.10.3-carbide-1 \
+    --set carbide.whitelabel.enabled=false \
+    --version=v2.10.3
     ```
 
 For more information about airgapped installation of Rancher, see the docs [here](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/other-installation-methods/airgapped-helm-cli-install).
