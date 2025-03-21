@@ -17,15 +17,23 @@ The charts are available at https://rancherfederal.github.io/carbide-charts.
 ## Obtaining Chart Manifests
 
 ### Connected Environments
+
+Add and update the helm chart repository:
+
 ```bash
-# add and update the helm chart repository
 helm repo add carbide-charts https://rancherfederal.github.io/carbide-charts
 helm repo update
+```
 
-# view the charts in the helm chart repository
+View the charts in the helm chart repository:
+
+```bash
 helm search repo carbide-charts
+```
 
-# example install of a helm chart
+Example install of a helm chart:
+
+```bash
 helm install <release-name> carbide-charts/<chart>
 ```
 
@@ -34,8 +42,10 @@ If you would like to add the Carbide Helm Charts to the Rancher Chart Catalog (s
 ### Airgapped Environments
 
 #### In Connected Environment
+
+Generate the Hauler manfiest for the Carbide Helm Charts:
+
 ```bash
-# generate the hauler manfiest for the carbide charts
 cat <<EOF > carbide-charts.yaml
 apiVersion: content.hauler.cattle.io/v1alpha1
 kind: Charts
@@ -69,23 +79,36 @@ spec:
       repoURL: https://nats-io.github.io/k8s/helm/charts
       version: 1.1.5
 EOF
+```
 
-# fetch the content from generated hauler manifest
-# verify the version and the platform/architecture
+Fetch the content from generated Hauler manifest and verify the version and the platform/architecture:
+
+```bash
 hauler store sync --store carbide-store --files carbide-charts.yaml --platform <platform/arch>
+```
 
-# save and output the content from the hauler store to tarball
+Save and output the content from the Hauler store to tarball:
+
+```bash
 hauler store save --store carbide-store --filename carbide-charts.tar.zst
 ```
 
 #### In Airgapped Environment
+
+Load the content from the tarball to the Hauler store:
+
 ```bash
-# load the content from the tarball to the hauler store
 hauler store load --store carbide-store carbide-charts.tar.zst
+```
 
-# server the content from the hauler store
+Serve the content from the Hauler store:
+
+```bash
 hauler store serve fileserver --store carbide-store
+```
 
-# example install of a helm chart
+Example install of a helm chart:
+
+```bash
 helm install <release-name> http://<FQDN or IP>:<PORT>/<chart>.tgz
 ```
