@@ -1,25 +1,37 @@
 # Enforcement
 
-This page will walk you through configuring a few example policy enforcement engines to validate your cluster images against our public key. This should ensure only the images from our hardened registry are allowed to run.
+Policy enforcement engines can be used to validate your cluster images against our public key. This will ensure only the images from our hardened registry are allowed to run.
 
 ## Kubewarden Enforcement
 
+The Kubewarden images can be pulled from the Carbide Secured Registry (CSR).
+
 ### Installation
 
-To install Kubewarden, run the following commands, substituting your registry information:
+To install Kubewarden, run the following commands, substituting your registry information.
+
+1. Add and update the helm chart repository.
 
 ```bash
-# add and update the helm chart repository
 helm repo add kubewarden https://charts.kubewarden.io
 helm repo update
+```
 
-# install the crds helm chart
+2. Install the CRDs helm chart.
+
+```bash
 helm install --wait -n kubewarden --create-namespace kubewarden-crds kubewarden/kubewarden-crds
+```
 
-# install the controller helm chart
+3. Install the controller helm chart.
+
+```bash
 helm install --wait -n kubewarden kubewarden-controller kubewarden/kubewarden-controller --set "common.cattle.systemDefaultRegistry=<registry-url>"
+```
 
-# install the defaults helm chart
+4. Install the defaults helm chart.
+
+```bash
 helm install --wait -n kubewarden kubewarden-defaults kubewarden/kubewarden-defaults --set "common.cattle.systemDefaultRegistry=<registry-url>" kubewarden/kubewarden-defaults
 ```
 
@@ -31,35 +43,47 @@ If your Rancher system images are in a private registry requiring authentication
 
 ### Copying Policy Artifact to a Registry (Connected Environments)
 
-```bash
-# fetch the image from the carbide secured registry
-hauler store add image rgcrprod.azurecr.us/policies/verify-image-signatures:v0.1.7 --key carbide-key.pub --platform linux/amd64
+1. Fetch the image from the Carbide Secured Registry.
 
-# copy the content from the hauler store to your registry
+```bash
+hauler store add image rgcrprod.azurecr.us/policies/verify-image-signatures:v0.1.7 --key carbide-key.pub --platform linux/amd64
+```
+
+2. Copy the content from the Hauler store to your registry.
+
+```bash
 hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
 ```
 
-### Saving Policy Artifact (Airgapped Environments)
+### Airgapped Environments
 
-Use the below script, substituting your registry, to both validate and save locally the policy artifact:
+Use the below steps, substituting your registry, to validate and locally save the policy artifact.
+
+#### Saving Policy Artifact
+
+1. Fetch the image from the Carbide Secured Registry.
 
 ```bash
-# fetch the image from the carbide secured registry
 hauler store add image rgcrprod.azurecr.us/policies/verify-image-signatures:v0.1.7 --key carbide-key.pub --platform linux/amd64
+```
 
-# save and output the content from the hauler store to tarball
+2. Save and output the content from the Hauler store to tarball.
+
+```bash
 hauler store save --filename kubewarden-policy.tar.zst
 ```
 
-### Loading Policy Artifact to a Registry (Airgapped Environments)
+#### Loading Policy Artifact to a Registry
 
-Use the below script, substituting your registry, to load the policy artifact:
+3. Load the content from the tarball to the Hauler store.
 
 ```bash
-# load the content from the tarball to the hauler store
 hauler store load kubewarden-policy.tar.zst
+```
 
-# copy the content from the hauler store to your registry
+4. Copy the content from the Hauler store to your registry.
+
+```bash
 hauler store copy --username <redacted> --password <redacted> registry://<registry-url>
 ```
 
@@ -133,7 +157,7 @@ spec:
 
 ### Installation
 
-See the docs on how to install [Kyverno](https://kyverno.io/docs/installation) onto your cluster.
+Follow the instructions to install [Kyverno](https://kyverno.io/docs/installation) onto your cluster.
 
 ### Private Registry
 
@@ -178,7 +202,3 @@ spec:
                       tCAZva7CLlk/6gxvCM0QkIKznfaGTRMMYTaHMdQSau6yulDLlpokA++i8Q==
                       -----END PUBLIC KEY-----
 ```
-
-## OPA Gatekeeper Enforcement
-
-Gatekeeper can be used to verify image signatures through its [External Data Provider](https://open-policy-agent.github.io/gatekeeper/website/docs/externaldata).
