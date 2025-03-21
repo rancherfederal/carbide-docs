@@ -2,19 +2,19 @@
 
 This page will walk you through how to configure Rancher to use images from the CSR instead of the upstream Docker Hub images. This will apply to both its own components and downstream Rancher Kubernetes clusters (RKE2/K3s).
 
-> **NOTE**: Due to current limitations of cloud providers, this project will not work for managing Cloud Provider clusters (AKS, EKS, GKE). If you're currently using Rancher to manage those workloads, do not use this project. We intend to improve this experience in the future.
+> **NOTE**: Due to current limitations of cloud providers, this project will not work for managing hosted clusters (AKS, EKS, GKE). If you're currently using Rancher to manage those workloads, do not use this project. We intend to improve this experience in the future.
 
 ## Compatibility Matrix
 
 | Infra   | Provisioner                  | Registry Auth Strategy                          | Test Status |
 | ------- | ---------------------------- | ----------------------------------------------- | ----------- |
-| Any     | Rancher (Cloud provisioner)  | Global Registry (Rancher)                       | Validated   |
-| Any     | Rancher (Custom provisioner) | Authenticated Registry (Manual registries.yaml) | Validated   |
+| Any     | Rancher (Cloud Provisioner)  | Global Registry (Rancher)                       | Validated   |
+| Any     | Rancher (Custom Provisioner) | Authenticated Registry (Manual registries.yaml) | Validated   |
 | Any     | Self Installation            | Global Registry (Rancher)                       | Validated   |
 | Any     | Imported Cluster             | Unknown                                         |             |
 | AWS-EKS | Rancher                      | ECR (public or private)                         |             |
 
-### Preliminary Setup
+## Preliminary Setup
 
 As Rancher has a dependency on Cert Manager, you'll need to update/install Cert Manager with the images provided by the CSR.
 
@@ -22,7 +22,7 @@ If you're following Rancher's [connected installation](https://ranchermanager.do
 
 If using the [airgapped installation](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/other-installation-methods/air-gapped-helm-cli-install/install-rancher-ha) instructions, make sure you've pulled the images to your local/airgapped registry.
 
-#### Configuring Cert Manager
+### Configuring Cert Manager
 
 Follow Rancher's [connected installation](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/install-upgrade-on-a-kubernetes-cluster#4-install-cert-manager) instructions, but using the following steps instead of the `helm install` command from the docs.
 
@@ -86,17 +86,17 @@ helm install cert-manager jetstack/cert-manager \
 You can follow these steps to configure a private registry when you create a cluster:
 
 1. Click **☰ > Cluster Management**.
-1. On the **Clusters** page, click **Create**.
+1. On the `Clusters` page, click `Create`.
 1. Choose a cluster type.
-1. In the **Cluster Configuration** go to the **Registries** tab and click **Pull images for Rancher from a private registry**.
+1. In the `Cluster Configuration` go to the `Registries` tab and select **Pull images for Rancher from a private registry**.
 1. Enter the registry hostname and credentials.
-1. Click **Create**.
+1. Click `Create`.
 
 **Result:** The new cluster will be able to pull images from the private registry.
 
 #### New Rancher Installations
 
-Follow Rancher's [Installation Guide](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/install-upgrade-on-a-kubernetes-cluster), making sure to use the carbide chart obtained in the previous [helm chart](../carbide-charts.md) section.
+Follow Rancher's [Installation Guide](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/install-upgrade-on-a-kubernetes-cluster), making sure to use the Carbide chart obtained in the previous [helm chart](../carbide-charts.md) section.
 
 When installing Rancher, to utilize the private registry, you'll need to set the following values in your helm values:
 
