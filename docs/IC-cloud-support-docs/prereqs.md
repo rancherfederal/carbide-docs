@@ -12,6 +12,8 @@ The following tools are required to install/upgrade Rancher Government.
 
 > **NOTE:** This feature is only availabe in the Rancher Government product. Carbide customers can download the required artifacts from the [Carbide Portal](https://portal.ranchercarbide.dev/) or the [Carbide Secured Regsitry](/docs/registry-docs/downloading-images.md).
 
+![Rancher Government Portal](/img/classified-provisioning/RancherGovPortal.png)
+
 ## IAM Role & Instance Profile
 
 The Amazon EC2 provisioner requires a certain amount of access to read, write, and delete some AWS resources. Enabling these sans principal credentials (i.e. access key and secret key) requires an [EC2 Instance Profile](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#ec2-instance-profile), associated with an IAM Role, for each node in the Rancher management cluster, with the following policy:

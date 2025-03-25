@@ -86,10 +86,10 @@ const sidebars = {
       label: 'IC Cloud Support',
       collapsed: false,
       items: [
-        'classified-provisioning-docs/introduction',
-        'classified-provisioning-docs/prereqs',
-        'classified-provisioning-docs/installation',
-        'classified-provisioning-docs/usage',
+        'IC-cloud-support-docs/introduction',
+        'IC-cloud-support-docs/prereqs',
+        'IC-cloud-support-docs/installation',
+        'IC-cloud-support-docs/usage',
       ],
     },
     {
