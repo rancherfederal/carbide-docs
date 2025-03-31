@@ -1,5 +1,7 @@
 # Installation
 
+>:warning: **DISCLAIMER**: Due to upstream changes outside RGS control, development of STIGATRON has been temporarily paused. STIGATRON will not be available in the Carbide Secured Registry and current users may experience issues. We are working with the necessary parties to identify a solution as soon as possible. Thank you for your patience. 
+
 ## Local Cluster
 
 ### Enabling UI Extensions
