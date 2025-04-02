@@ -1,5 +1,7 @@
 # Uninstall
 
+>:warning: **DISCLAIMER**: Due to upstream changes outside RGS control, development of STIGATRON has been temporarily paused. STIGATRON will not be available in the Carbide Secured Registry and current users may experience issues. We are working with the necessary parties to identify a solution as soon as possible. Thank you for your patience.
+
 ## Local Cluster
 
 On the `local` cluster running Rancher, run the following Helm command to remove the UI Extension.
