@@ -83,6 +83,17 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'IC Cloud Support',
+      collapsed: false,
+      items: [
+        'IC-cloud-support-docs/introduction',
+        'IC-cloud-support-docs/prereqs',
+        'IC-cloud-support-docs/installation',
+        'IC-cloud-support-docs/usage',
+      ],
+    },
+    {
+      type: 'category',
       label: 'STIGATRON',
       collapsed: false,
       items: [
