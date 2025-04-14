@@ -2,7 +2,7 @@
 
 ## Downstream Clusters
 
-Run the following Helm command to install Airgapped Docs chart, substituting your registry in:
+Run the following Helm command to install the `airgapped-docs` chart, substituting your registry in:
 
 ```bash
 helm install -n carbide-docs-system --create-namespace \
@@ -16,11 +16,11 @@ Check the status of the rollout:
 helm status -n carbide-docs-system airgapped-docs
 ```
 
-You should now see `Airgapped Docs` on the left menu of your Explore Cluster.
+You should now see `Airgapped Docs` on the left menu of your cluster.
 
 ## Selecting Documentation for Low-Compute Environments
 
-There may be situations where you are running in a low-compute, low-resource environment or are not using specific products and do not want to utilize specific documentation from Airgapped Docs. For those situations, you can disable specific products during installation, such as:
+There may be situations where you are running in a low-compute, low-resource environment or are not using specific products and do not want to utilize specific offline documentation. For those situations, you can disable specific products during installation, such as:
 
 ```bash
 # Disable neuvector docs
