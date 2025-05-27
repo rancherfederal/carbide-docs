@@ -47,7 +47,7 @@ Generate the Hauler manfiest for the Carbide Helm Charts:
 
 ```bash
 cat <<EOF > carbide-charts.yaml
-apiVersion: content.hauler.cattle.io/v1alpha1
+apiVersion: content.hauler.cattle.io/v1
 kind: Charts
 metadata:
   name: carbide-charts
@@ -66,7 +66,7 @@ spec:
       repoURL: https://rancherfederal.github.io/carbide-charts
       version: 0.2.3
 ---
-apiVersion: content.hauler.cattle.io/v1alpha1
+apiVersion: content.hauler.cattle.io/v1
 kind: Charts
 metadata:
   name: carbide-dependency-charts
