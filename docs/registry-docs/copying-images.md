@@ -15,7 +15,7 @@ If you're copying images into an airgapped registry, check the documentation [he
 ```bash
 # generate the hauler manifest for carbide
 cat <<EOF > carbide-images.yaml
-apiVersion: content.hauler.cattle.io/v1alpha1
+apiVersion: content.hauler.cattle.io/v1
 kind: Images
 metadata:
   name: carbide-images
@@ -25,7 +25,7 @@ spec:
   images:
 $(curl -sfL https://raw.githubusercontent.com/rancherfederal/carbide-releases/main/carbide-images.txt | sed '/nats/d' | sed 's/^/    - name: /')
 ---
-apiVersion: content.hauler.cattle.io/v1alpha1
+apiVersion: content.hauler.cattle.io/v1
 kind: Images
 metadata:
   name: carbide-dependency-images
