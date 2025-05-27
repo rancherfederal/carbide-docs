@@ -37,7 +37,7 @@ If you would like to add the Carbide Helm Charts to the Rancher Chart Catalog (s
 ```bash
 # generate the hauler manfiest for the carbide charts
 cat <<EOF > carbide-charts.yaml
-apiVersion: content.hauler.cattle.io/v1alpha1
+apiVersion: content.hauler.cattle.io/v1
 kind: Charts
 metadata:
   name: carbide-charts
@@ -56,7 +56,7 @@ spec:
       repoURL: https://rancherfederal.github.io/carbide-charts
       version: 0.2.3
 ---
-apiVersion: content.hauler.cattle.io/v1alpha1
+apiVersion: content.hauler.cattle.io/v1
 kind: Charts
 metadata:
   name: carbide-dependency-charts

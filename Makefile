@@ -32,6 +32,6 @@ local-build:
 local-serve:
 	npm run serve
 
-# clear build outputs
-clear:
+# clean build outputs
+clean:
 	npm run clear && rm -rf node_modules
