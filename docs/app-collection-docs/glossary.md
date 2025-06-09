@@ -23,9 +23,7 @@ Artifacts are continuously built, and updated through revisions.
 
 ### Branch
 
-A branch is a set of versions where backwards compatibility is ensured. Each component follows its own branching strategy, as defined in the upstream project. It is assumed that the upstream project follows semantic versioning.
-
-Branches will be marked as inactive once they are end-of-life (EOL) and no longer recieving updates from upstream. It is recommended to upgrade onto a supported branch as soon as possible. 
+A branch is a set of versions where backwards compatibility is expected. Each component follows its own branching strategy, as defined in the upstream project. It is assumed that the upstream project follows semantic versioning.
 
 ### Component
 
