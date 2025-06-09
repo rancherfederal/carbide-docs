@@ -1,6 +1,6 @@
 {
   "label": "STIGATRON Security Operator",
-  "position": 6,
+  "position": 5,
   "link": {
     "type": "generated-index",
     "description": "Operator to enhance the experience when working with the DISA Fully Certified RKE2 STIG"
