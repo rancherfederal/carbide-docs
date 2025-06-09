@@ -1,4 +1,4 @@
-# Glosary
+# Glossary
 
 The following are relevant terms that will help you get started with the RGS Application Collection.
 
