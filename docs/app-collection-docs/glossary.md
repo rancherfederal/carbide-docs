@@ -8,7 +8,7 @@ An application is a product that users can install into their environments. This
 
 An application can be a database, an API gateway, a load balancer, a runtime, etc. Most applications are cloud-native, but there are also containerized applications for specific purposes. For example, Argo CD (cloud-native application) or Git (containerized application).
 
-Depending on the application type, it will be installed either as a `Helm Chart` or as a `Single Container`.
+Depending on the application type, it will be installed either as a `Helm Chart` (for apps comprised of multiple containers) or as a `Single Container`.
 
 ### Artifact
 
