@@ -1,0 +1,8 @@
+{
+  "label": "RGS Application Collection",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "Collection of secure development and production applications"
+  }
+}

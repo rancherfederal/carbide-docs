@@ -180,4 +180,18 @@ Save tarball:
 hauler store save --store kubewarden-store --filename kubewarden-images.tar.zst
 ```
 
+### Application Collection
+
+Sync app:
+
+```bash
+hauler store sync --store application-store --products apps-<application-name>=0.28.1 --key carbide-key.pub --platform <platform/arch>
+```
+
+Save tarball:
+
+```bash
+hauler store save --store application-store ---filename application.tar.zst
+```
+
 See [Loading Local Images to Registry](loading-images.md) for information on loading the images into your airgapped registry.

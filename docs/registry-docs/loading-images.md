@@ -132,3 +132,17 @@ Copy to registry:
 ```bash
 hauler store copy --store kubewarden-store --username <redacted> --password <redacted> registry://<registry-url>
 ```
+
+### Application Collection
+
+Load from tarball:
+
+```bash
+hauler store load --store application-store application.tar.zst
+```
+
+Copy to registry:
+
+```bash
+hauler store copy --store application-store --username <redacted> --password <redacted> registry://<registry-url>
+```

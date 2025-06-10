@@ -179,3 +179,17 @@ Copy to registry:
 ```bash
 hauler store copy --store kubewarden-store --username <redacted> --password <redacted> registry://<registry-url>
 ```
+
+### Application Collection
+
+Sync app:
+
+```bash
+hauler store sync --store application-store --products apps-<application-name>=0.28.1 --key carbide-key.pub --platform <platform/arch>
+```
+
+Copy to registry:
+
+```bash
+hauler store copy --store application-store --username <redacted> --password <redacted> registry://<registry-url>
+```
