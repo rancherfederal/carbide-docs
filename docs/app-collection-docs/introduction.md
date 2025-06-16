@@ -6,7 +6,9 @@ The RGS Application Collection (AppCo) offers a curated, trusted, and up-to-date
 
 RGS Application Collection is updated regularly to ensure you have the latest application versions available and dependency bumps are done frequently. We also scan regularly so you have updated vulnerability data available. 
 
-RGS AppCo is delivered via the [Carbide Secured Registry](/docs/registry-docs/introduction.md), with SLSA L3 pipelines, SBOM generation, vulnerability scans, and cryptographically verifiable artifacts. AppCo is also available on the RGS Customer Portal and integrated with `Hauler`.
+### What's the differnce between the RGS Application Collection and SUSE App Collection? 
+
+The RGS Application Collection offers the same rebuilt application images as SUSE. However, while the applications are the same, RGS AppCo metadata is different. The images are delivered via the [Carbide Secured Registry](/docs/registry-docs/introduction.md), with SLSA L3 pipelines, SBOM generation, vulnerability scans, and cryptographically verifiable artifacts. RGS AppCo is also available on the Carbide Portal and integrated with `Hauler` for easy air-gapping. 
 
 ### How can I access the collection? 
 
