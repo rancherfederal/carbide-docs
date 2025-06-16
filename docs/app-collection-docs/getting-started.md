@@ -37,9 +37,3 @@ hauler store load --store application-store application.tar.zst
 
 hauler store copy --store application-store --username <redacted> --password <redacted> registry://<registry-url>
 ```
-
-### Using Helm
-
-For applications with helm charts, you can pull the latest chart and use HelmOps to manage your desired apps. The Carbide Portal conveniently provides the `helm pull` command as applicable.
-
-![helm-command](/img/appco/helm-command-appco.png)
