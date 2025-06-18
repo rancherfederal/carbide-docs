@@ -4,7 +4,9 @@
 
 As with the other products in the Carbide Suite, you can pull artifacts from the Carbide Secured Regsitry to seed your private registry. This can be done in both connected and airgapped environments. 
 
-Please ensure you have the [Prerequisites](/docs/registry-docs/prereqs.md) and follow the [Seeding a Registry](/docs/registry-docs/copying-images.md) steps. 
+Please ensure you have the [Prerequisites](/docs/registry-docs/prereqs.md) and follow the [Seeding a Registry](/docs/registry-docs/copying-images.md) steps.
+
+> **Note:** Using the following `hauler store sync` commands, Hauler will automatically pull both the helm chart and the images required for the application. 
 
 #### Copy Images in a Connected Environment using `Hauler`
 
