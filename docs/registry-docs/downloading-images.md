@@ -8,7 +8,9 @@ This example uses [Hauler](https://docs.hauler.dev/docs/intro), but any tool wit
 
 ## Downloading Secured Images
 
->**NOTE:** The following steps are for pulling the multi-arch images. Please see the [Hauler Docs](https://rancherfederal.github.io/hauler-docs/docs/guides-references/hauler-content/images) for how to specify a specific platform.
+The following steps are for pulling the multi-arch images. Please see the [Hauler Docs](https://rancherfederal.github.io/hauler-docs/docs/guides-references/hauler-content/images) for how to specify a specific platform.
+
+If using the `hauler store sync` command from the Carbide portal, you may now select your platform in the UI and the `--platform` flag will be added to the command for you.
 
 ### Carbide
 
