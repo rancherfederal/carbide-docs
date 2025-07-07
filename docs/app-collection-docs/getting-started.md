@@ -6,7 +6,7 @@ As with the other products in the Carbide Suite, you can pull artifacts from the
 
 Please ensure you have the [Prerequisites](/docs/registry-docs/prereqs.md) and follow the [Seeding a Registry](/docs/registry-docs/copying-images.md) steps.
 
-> **Note:** Using the following `hauler store sync` commands, Hauler will automatically pull both the helm chart and the images required for the application. 
+> **Note:** Using the following `hauler store sync` commands, Hauler will automatically pull both the helm chart and the images required for the application. The `hauler store copy` function will copy helm charts into a `/charts` folder and container images into `/containers`.
 
 #### Copy Images in a Connected Environment using `Hauler`
 
