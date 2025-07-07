@@ -89,6 +89,7 @@ const sidebars = {
         'app-collection-docs/introduction',
         'app-collection-docs/glossary',
         'app-collection-docs/getting-started',
+        'app-collection-docs/appco-portal',
       ],
     },
     {
