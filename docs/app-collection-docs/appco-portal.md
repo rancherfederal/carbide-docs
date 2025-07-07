@@ -1,4 +1,4 @@
-# RGS Application Collection Portal
+# AppCo Portal
 
 The RGS Application Collection can be browsed in a new tab of the Carbide Portal, under `Applications`. You can filter by application category and type to find what you're looking for.
 
