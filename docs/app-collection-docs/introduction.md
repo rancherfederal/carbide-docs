@@ -14,6 +14,6 @@ The RGS Application Collection offers the same rebuilt application images as SUS
 
 ### How can I access the collection? 
 
-As RGS Rancher Carbide Suite or RGS Rancher Carbide customers, AppCo is included in your subscription. Your current license will automatically grant you access to these artifacts. If you're having trouble accessing the collection, or if you aren't yet a Suite or Carbide customer but are interested in trying it out, please [contact sales](https://ranchergovernment.com/the-rancher-government-subscription). 
+Your current license will automatically grant you access to these artifacts. If you're having trouble accessing the collection, or if you aren't yet a Carbide customer but are interested in trying it out, please [contact sales](https://ranchergovernment.com/the-rancher-government-subscription). 
 
 Check out the guide to [get started](/docs/app-collection-docs/getting-started.md)!
