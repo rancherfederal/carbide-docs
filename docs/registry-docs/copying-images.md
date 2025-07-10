@@ -8,7 +8,9 @@ This example uses [Hauler](https://docs.hauler.dev/docs/intro), but any tool wit
 
 ## Copying Secured Images
 
->**NOTE:** The following steps are for pulling the multi-arch images. Please see the [Hauler Docs](https://rancherfederal.github.io/hauler-docs/docs/guides-references/hauler-content/images) for how to specify a specific platform.
+The following steps are for pulling the multi-arch images. Please see the [Hauler Docs](https://rancherfederal.github.io/hauler-docs/docs/guides-references/hauler-content/images) for how to specify a specific platform.
+
+If using the `hauler store sync` command from the Carbide portal, you may now select your platform in the UI and the `--platform` flag will be added to the command for you. If you wish to pull the multi-arch images instead, remove `--platform` from the command.
 
 ### Carbide
 
@@ -41,7 +43,7 @@ You can optionally set metadata such as platform specs and public keys in the ma
 
 The `hauler store sync` command syncs the content specified in the manifest with the Hauler store, which can then be copied to your registry. 
 
-Setting `--store` allows you to specify the Hauler store, in this case, `carbide-store`. You may also specify the desired platform at this step with `--platform`. 
+Setting `--store` allows you to specify the Hauler store, in this case, `carbide-store`. You may also specify the desired platform at this step with `--platform`.
 
 ```bash
 hauler store sync --store carbide-store --files carbide-images.yaml --platform <platform/arch> --key carbide-key.pub
@@ -71,7 +73,7 @@ hauler login -u <username> -p <password> rgcrprod.azurecr.us
 
 **2. Sync Rancher to your Hauler store.**
 
-Specify the  `--products` flag with your desired version. 
+Specify the  `--products` flag with your desired version.
 
 ```bash
 hauler store sync --store rancher-store --products rancher=v2.8.3 --key carbide-key.pub --platform <platform/arch>
