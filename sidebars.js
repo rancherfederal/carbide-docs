@@ -83,6 +83,17 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'RGS Application Collection',
+      collapsed: false,
+      items: [
+        'app-collection-docs/introduction',
+        'app-collection-docs/glossary',
+        'app-collection-docs/getting-started',
+        'app-collection-docs/appco-portal',
+      ],
+    },
+    {
+      type: 'category',
       label: 'IC Cloud Support',
       collapsed: false,
       items: [
