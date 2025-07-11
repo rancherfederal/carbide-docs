@@ -6,7 +6,7 @@ In order to utilize IC Cloud Support with Rancher Government, you will need the 
 
 The following tools are required to install/upgrade Rancher Government.
 
-- [Hauler](https://rancherfederal.github.io/hauler-docs/docs/introduction/install), or Docker
+- [Hauler](https://docs.hauler.dev/docs/intro), or Docker
 - [Helm](https://helm.sh/docs/intro/install)
 - [Rancher Government](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade) (v2.10.3, v2.9.7, v2.8.13 or greater)
 
