@@ -35,7 +35,7 @@ Example installation steps:
 ```bash
 curl -sfL https://get.hauler.dev | bash
 ```
-For more options, visit the [Hauler install docs](https://rancherfederal.github.io/hauler-docs/docs/introduction/install).
+For more options, visit the [Hauler install docs](https://docs.hauler.dev/docs/introduction/install).
 
 ## Required Artifacts
 
