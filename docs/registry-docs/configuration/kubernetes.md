@@ -29,7 +29,7 @@ curl -sfL https://get.k3s.io | sh -s - --system-default-registry=<registry-url>
 
 ### Usage with RKE2
 
-Similar to k3s, the Carbide Secured Registry (CSR) images are pulled upon bootstrapping by configuring `RKE2`'s mirroring configuration as described [here](https://rke2.io).
+Similar to k3s, the Carbide Secured Registry (CSR) images are pulled upon bootstrapping by configuring `RKE2`'s mirroring configuration as described [here](https://docs.rke2.io/install/private_registry#mirrors).
 
 Set the mirrors in the `/etc/rancher/rke2/registries.yaml` file. A full example configuration using an authenticated registry is below:
 
