@@ -1,6 +1,6 @@
 # Prerequisites
 
->:warning: **DISCLAIMER**: Due to upstream changes outside RGS control, development of STIGATRON has been temporarily paused. STIGATRON will not be available in the Carbide Secured Registry and current users may experience issues. We are working with the necessary parties to identify a solution as soon as possible. Thank you for your patience.
+>:warning: **DEPRECATION NOTICE**: Please note, STIGATRON is now deprecated in favor of the more tightly integrated [Rancher Compliance Operator](../compliance-operator/introduction.md). The operator replicates the STIG checks performed by STIGATRON. Please see documentation for more details. 
 
 In order to utilize STIGATRON, you will need the following prerequisites:
 
