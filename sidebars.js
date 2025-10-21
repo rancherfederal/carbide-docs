@@ -105,6 +105,14 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Rancher Compliance Operator - RKE2 STIG',
+      collapsed: false,
+      items: [
+        'compliance-operator-docs/rke2-stig-scans',
+      ],
+    },
+    {
+      type: 'category',
       label: 'STIGATRON',
       collapsed: false,
       items: [
