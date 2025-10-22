@@ -1,6 +1,6 @@
 # Installation
 
->:warning: **DEPRECATION NOTICE**: Please note, STIGATRON is now deprecated in favor of the more tightly integrated [Rancher Compliance Operator](../compliance-operator/rke2-stig-scans.md). The operator replicates the STIG checks performed by STIGATRON. Please see documentation for more details. 
+>:warning: **DEPRECATION NOTICE**: Please note, STIGATRON is now deprecated in favor of the more tightly integrated [Rancher Compliance Operator](/docs/compliance-operator-docs/rke2-stig-scans/). The operator replicates the STIG checks performed by STIGATRON. Please see documentation for more details. 
 
 ## Local Cluster
 
