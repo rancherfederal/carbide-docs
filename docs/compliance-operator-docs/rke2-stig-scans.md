@@ -1,4 +1,4 @@
-# RKE2 STIG Scanning with the Rancher Compliance Operator
+# RKE2 STIG Scanning
 
 ### Rancher Compliance Operator for RKE2 STIG Cluster Scanning
 
@@ -17,6 +17,8 @@ The Rancher Compliance Operator provides a tightly integrated way to run RKE2 ST
 2. In the navigation bar, click **Apps > Charts**.
 
 3. Select **Rancher Compliance**.
+
+![Install Rancher Compliance](/img/compliance-operator/rancher-compliance.png)
 
 4. Click **Install**.
 
@@ -40,8 +42,10 @@ Once installed, the RKE2 STIG profile will appear in the Rancher Compliance appl
 
 2. Select the RKE2 STIG profile from the dropdown.
 
-**insert screenshot dropdown**
+![Profile Dropdown](/img/compliance-operator/scan-dropdown.png)
 
-3. Once executed, the scan results will be returned on the `Scans` page. 
+3. Once executed, the scan results will be returned on the `Scans` page, including Pass/Fail status and any remediations. 
 
-**insert scan result screenshot**
+![Passing Result](/img/compliance-operator/rke2-scan-pass.png)
+
+![Remediation Result](/img/compliance-operator/scan-result-remediation.png)
