@@ -1,6 +1,6 @@
 # Introduction
 
->:warning: **DEPRECATION NOTICE**: Please note, STIGATRON is now deprecated in favor of the more tightly integrated [Rancher Compliance Operator](../compliance-operator/introduction.md). The operator replicates the STIG checks performed by STIGATRON. Please see documentation for more details. 
+>:warning: **DEPRECATION NOTICE**: Please note, STIGATRON is now deprecated in favor of the more tightly integrated [Rancher Compliance Operator](../compliance-operator/rke2-stig-scans.md). The operator replicates the STIG checks performed by STIGATRON. Please see documentation for more details. 
 
 This section will walk through installation and usage of the STIGATRON component of Rancher Government Carbide.
 
