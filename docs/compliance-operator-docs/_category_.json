@@ -1,0 +1,8 @@
+{
+  "label": "Rancher Compliance Operator - RKE2 STIG",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "description": "Operator for scanning clusters against DISA Fully Certified RKE2 STIG"
+  }
+}
