@@ -32,10 +32,16 @@ helm pull oci://rgcrprod.azurecr.us/carbide-charts/rgs-stig-profiles --version 2
 
 ![STIG Profile Chart](/img/compliance-operator/stig-profile-chart.png)
 
+2. Push the chart to your local registry. 
+
+```bash
+helm push rgs-stig-profiles-2.12.4.tgz oci://<private-regstiry-url>/rgs-stig-profiles:2.12.4
+```
+
 2. From the Rancher local cluster, run: 
 
 ```bash
-helm install rgs-stig-profile -n compliance-operator-system oci://rgcrprod.azurecr.us/carbide-charts/rgs-stig-profiles:2.12.4
+helm install rgs-stig-profile -n compliance-operator-system oci://<private-regsitry-url>/rgs-stig-profiles:2.12.4
 ```
 
 3. Confirm the `rke2-stig-1.31` profile and benchmark appear under **Compliance > Profile** in the sidebar. 
