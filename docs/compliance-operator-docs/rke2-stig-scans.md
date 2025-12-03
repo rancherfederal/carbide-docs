@@ -2,13 +2,13 @@
 
 ### Rancher Compliance Operator for RKE2 STIG Cluster Scanning
 
-The Rancher Compliance Operator provides a tightly integrated way to run RKE2 STIG checks against downstream clusters. The operator is easy to install in a few clicks through the Rancher UI, and RGS provides a STIG profile to run checcks against RKE2 clusters. This returns visual results and direct remediation steps for any findings, simplifying STIG compliance management. 
+The Rancher Compliance Operator provides a tightly integrated way to run RKE2 STIG checks against downstream clusters. The operator is easy to install in a few clicks through the Rancher UI, and RGS provides a STIG profile to run checks against RKE2 clusters. This returns visual results and direct remediation steps for any findings, simplifying STIG compliance management. 
 
 ### Pre-requisites
 - Rancher 2.12+
 - RKE2 1.31+
 - CLI access to local cluster
-- RKE2 STIG profile 
+- RKE2 STIG profile (file) OR `rgs-stig-profiles` helm chart
 
 ### Install Rancher Compliance
 
@@ -23,6 +23,24 @@ The Rancher Compliance Operator provides a tightly integrated way to run RKE2 ST
 4. Click **Install**.
 
 ### Add STIG Profile
+
+1. Navigate to the Carbide portal and copy the helm command for the version of Rancher you're using. For example: 
+
+```bash
+helm pull oci://rgcrprod.azurecr.us/carbide-charts/rgs-stig-profiles --version 2.12.4
+```
+
+![STIG Profile Chart](/img/compliance-operator/stig-profile-chart.png)
+
+2. From the Rancher local cluster, run: 
+
+```bash
+helm install rgs-stig-profile -n compliance-operator-system oci://rgcrprod.azurecr.us/carbide-charts/rgs-stig-profiles:2.12.4
+```
+
+3. Confirm the `rke2-stig-1.31` profile and benchmark appear under **Compliance > Profile** in the sidebar. 
+
+Alternatively, you can apply the STIG profile file directly using the following steps. 
 
 1. If needed, request the STIG profile from [RGS Support](https://support.rancherfederal.com/).
 
