@@ -59,6 +59,14 @@ Use `--filename` to name the tar file output.
 hauler store save --store carbide-store --filename carbide-images.tar.zst
 ```
 
+If you intend to import your tarball directly to containerd, use the `--containerd` flag when you run the save command. This will ensure compatibility no matter the store's contents. 
+
+>Note: Available in Hauler v1.4.1+.
+
+```bash
+hauler store save --containerd --store carbide-store --filename carbide-images.tar.zst
+```
+
 ### Rancher
 
 Carbide customers can also fetch `collections` from the CSR, which will pull all the required artifacts for a product into the Hauler store.
