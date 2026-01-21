@@ -32,6 +32,14 @@ hauler store sync --store application-store --products apps-<application-name>=0
 hauler store save --store application-store ---filename application.tar.zst
 ```
 
+If you plan on loading images directly to `containerd`, set the flag when you save the tarball to ensure compatibility:
+
+>Note: Available in Hauler v1.4.1+.
+
+```bash
+hauler store save --store application-store application.tar.zst --containerd
+```
+
 In the airgap, load images and copy to your registry:
 
 ```bash
