@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.8.0">
 <title data-rh="true">RKE2 STIG Scanning | Rancher Government Carbide</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://rancherfederal.github.io/carbide-docs/docs/compliance-operator-docs/rke2-stig-scans"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="RKE2 STIG Scanning | Rancher Government Carbide"><meta data-rh="true" name="description" content="Rancher Compliance Operator for RKE2 STIG Cluster Scanning"><meta data-rh="true" property="og:description" content="Rancher Compliance Operator for RKE2 STIG Cluster Scanning"><link data-rh="true" rel="icon" href="/carbide-docs/img/carbide-logo.ico"><link data-rh="true" rel="canonical" href="https://rancherfederal.github.io/carbide-docs/docs/compliance-operator-docs/rke2-stig-scans"><link data-rh="true" rel="alternate" href="https://rancherfederal.github.io/carbide-docs/docs/compliance-operator-docs/rke2-stig-scans" hreflang="en"><link data-rh="true" rel="alternate" href="https://rancherfederal.github.io/carbide-docs/docs/compliance-operator-docs/rke2-stig-scans" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"RKE2 STIG Scanning","item":"https://rancherfederal.github.io/carbide-docs/docs/compliance-operator-docs/rke2-stig-scans"}]}</script><link rel="stylesheet" href="/carbide-docs/assets/css/styles.d6fda521.css">
-<script src="/carbide-docs/assets/js/runtime~main.27899b59.js" defer="defer"></script>
-<script src="/carbide-docs/assets/js/main.d910d4f9.js" defer="defer"></script>
+<script src="/carbide-docs/assets/js/runtime~main.50bc6d8b.js" defer="defer"></script>
+<script src="/carbide-docs/assets/js/main.f80a00c6.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;"><defs>
@@ -46,12 +46,12 @@
 <ol start="2">
 <li>Push the chart to your local registry.</li>
 </ol>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">helm push rgs-stig-profiles-2.12.4.tgz oci://&lt;private-regstiry-url&gt;/rgs-stig-profiles:2.12.4</span><br></span></code></pre></div></div>
-<ol start="2">
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">helm push rgs-stig-profiles-2.12.4.tgz oci://&lt;private-registry-url&gt;/rgs-stig-profiles:2.12.4</span><br></span></code></pre></div></div>
+<ol start="3">
 <li>From the Rancher local cluster, run:</li>
 </ol>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">helm install rgs-stig-profile -n compliance-operator-system oci://&lt;private-regsitry-url&gt;/rgs-stig-profiles:2.12.4</span><br></span></code></pre></div></div>
-<ol start="3">
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">helm install rgs-stig-profile -n compliance-operator-system oci://&lt;private-registry-url&gt;/rgs-stig-profiles:2.12.4</span><br></span></code></pre></div></div>
+<ol start="4">
 <li>Confirm the <code>rke2-stig-1.31</code> profile and benchmark appear under <strong>Compliance &gt; Profile</strong> in the sidebar.</li>
 </ol>
 <p>Alternatively, you can apply the STIG profile file directly using the following steps.</p>
