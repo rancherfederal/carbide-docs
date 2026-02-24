@@ -1,3 +1,6 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Installation
 
 ## Bundle Artifacts in Connected Environment
@@ -12,12 +15,24 @@ In a connected environment, utilize the `Hauler` CLI to verify and collect the R
 
 2. Login into the Carbide registry with your Carbide Credentials, then validate and fetch the images to the local `Hauler` store. Add the Rancher helm chart to your store, and save store as a tarball.
 
-    ```bash
-    hauler login rgcrprod.azurecr.us -u <redacted> -p <redacted>
-    hauler store sync --products rancher-government=v2.10.3 --key carbide-key.pub
-    hauler store add chart rancher --repo https://rancherfederal.github.io/carbide-charts --version 2.10.3
-    hauler store save --filename rancher-govt.tar.zst
-    ```
+<Tabs groupId="registry">
+   <TabItem value="harbor" label="Harbor Registry (Standard)" default>
+        ```bash
+        hauler login registry.ranchercarbide.dev -u <redacted> -p <redacted>
+        hauler store sync --products rancher=v2.13.2 --product-registry registry.ranchercarbide.dev --key carbide-key.pub
+        hauler store add chart rancher --repo https://rancherfederal.github.io/carbide-charts --version 2.13.2
+        hauler store save --filename rancher-govt.tar.zst
+        ```
+    </TabItem>
+    <TabItem value="ACR" label="Azure Container Registry (Legacy)">
+        ```bash
+        hauler login rgcrprod.azurecr.us -u <redacted> -p <redacted>
+        hauler store sync --products rancher=v2.13.2 --product-registry rgcrprod.azurecr.us --key carbide-key.pub
+        hauler store add chart rancher --repo https://rancherfederal.github.io/carbide-charts --version 2.13.2
+        hauler store save --filename rancher-govt.tar.zst
+        ```
+    </TabItem>
+</Tabs>
 
 3. Move the resulting `rancher-govt.tar.zst` file into your airgapped/classified environment.
 
@@ -49,9 +64,9 @@ In a connected environment, utilize the `Hauler` CLI to verify and collect the R
     --namespace cattle-system \
     --set hostname=<rancher.my.org> \
     --set bootstrapPassword=admin \
-    --set rancherImageTag=v2.10.3-carbide-1 \
+    --set rancherImageTag=v2.13.2-carbide-1 \
     --set carbide.whitelabel.enabled=false \
-    --version=v2.10.3
+    --version=v2.13.2
     ```
 
 ## Upgrade Your Rancher Installation
@@ -75,9 +90,9 @@ In a connected environment, utilize the `Hauler` CLI to verify and collect the R
     helm upgrade rancher carbide-charts/rancher \
     --namespace cattle-system \
     -f /tmp/values.yaml \
-    --set rancherImageTag=v2.10.3-carbide-1 \
+    --set rancherImageTag=v2.13.2-carbide-1 \
     --set carbide.whitelabel.enabled=false \
-    --version=v2.10.3
+    --version=v2.13.2
     ```
 
 For more information about airgapped installation of Rancher, see the docs [here](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/other-installation-methods/airgapped-helm-cli-install).

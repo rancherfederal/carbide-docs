@@ -1,3 +1,6 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # RKE2 STIG Scanning
 
 ### Rancher Compliance Operator for RKE2 STIG Cluster Scanning
@@ -26,9 +29,18 @@ The Rancher Compliance Operator provides a tightly integrated way to run RKE2 ST
 
 1. Navigate to the Carbide portal and copy the helm command for the version of Rancher you're using. For example: 
 
-```bash
-helm pull oci://rgcrprod.azurecr.us/carbide-charts/rgs-stig-profiles --version 2.12.4
-```
+<Tabs groupId="registry">
+   <TabItem value="harbor" label="Harbor Registry (Standard)" default>
+        ```bash
+        helm pull oci://registry.ranchercarbide.dev/carbide-charts/rgs-stig-profiles --version 2.12.4
+        ```
+    </TabItem>
+    <TabItem value="ACR" label="Azure Container Registry (Legacy)">
+        ```bash
+        helm pull oci://rgcrprod.azurecr.us/carbide-charts/rgs-stig-profiles --version 2.12.4
+        ```
+    </TabItem>
+</Tabs>
 
 ![STIG Profile Chart](/img/compliance-operator/stig-profile-chart.png)
 
