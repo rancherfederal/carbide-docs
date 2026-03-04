@@ -26,6 +26,7 @@ const sidebars = {
       collapsed: false,
       items: [
         'registry-docs/introduction',
+        'registry-docs/harbor-registry',
         'registry-docs/architecture',
         'registry-docs/release-cadence',
         {

@@ -1,8 +1,8 @@
-# Introduction
+# Harbor Registry
 
 RGS is transitioning the Carbide Secured Registry to be based on `Harbor`. If you are a new customer or have renewed your entitlement after April 2026, your credentials are for the Harbor registry, and no action is required. Your username should start with `carbide-`. If you are an existing customer still using a license key for the Azure Container Registry (ACR), your credentials will be updated on renewal to the Harbor registry, or you can [contact support](https://support.rancherfederal.com/) to start using the benefits of the new registry sooner.
 
-## Benefits of Harbor-based Carbide Secured Regsity
+## Benefits of Harbor-based Carbide Secured Registry
 
 Transitioning to the Harbor registry provides several performance and feature improvements:
 
