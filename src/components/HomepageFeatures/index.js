@@ -13,15 +13,6 @@ const FeatureList = [
     ),
   },
   {
-    title: 'STIGATRON',
-    Svg: require('@site/static/img/stigatron_logo_full_black.svg').default,
-    description: (
-      <>
-        Compliance and Observability tool for Day 2 Operations, tactically built to validate downstream clusters against the <a href="https://public.cyber.mil/stigs/downloads">published DISA STIGs</a>.
-      </>
-    ),
-  },
-  {
     title: 'World Class Support',
     Svg: require('@site/static/img/rancher-logo-stacked-color-svg.svg').default,
     description: (
@@ -34,7 +25,7 @@ const FeatureList = [
 
 function Feature({Svg, title, description}) {
   return (
-    <div className={clsx('col col--4')}>
+    <div className={clsx('col col--6')}>
       <div className="text--center">
         <Svg className={styles.featureSvg} role="img" />
       </div>
