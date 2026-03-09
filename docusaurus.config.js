@@ -66,6 +66,13 @@ const config = {
         disableSwitch: true,
         respectPrefersColorScheme: false,
       },
+      announcementBar: {
+        id: 'url_change',
+        content: '⚠️ Carbide Docs will be changing its URL to <a href="https://docs.ranchercarbide.dev" target="_blank" rel="noopener noreferrer">https://docs.ranchercarbide.dev</a> in the near future. Please update your bookmarks. ⚠️',
+        backgroundColor: '#ffff92',
+        textColor: '#000000',
+        isCloseable: true,
+      },
       navbar: {
         // https://docusaurus.io/docs/api/themes/configuration
         title: '',
@@ -79,7 +86,7 @@ const config = {
             type: 'doc',
             docId: 'intro',
             position: 'left',
-            label: 'Documentation',
+            label: 'Carbide Docs',
           },
           {
             href: 'https://ranchergovernment.com/contact',
@@ -97,7 +104,7 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Documentation',
+            title: 'Carbide Docs',
             items: [
               {
                 label: 'Carbide Registry Docs',
