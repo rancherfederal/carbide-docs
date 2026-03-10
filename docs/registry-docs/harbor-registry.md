@@ -7,7 +7,8 @@ RGS is transitioning the Carbide Secured Registry to be based on `Harbor`. If yo
 Transitioning to the Harbor registry provides several performance and feature improvements:
 
 * Increased rate limits to speed up pulling large batches of images from the Carbide Registry
-* Simple configuration of registry replication rules to seed private Harbor registries (see steps below) 
+* Simple configuration of registry replication rules to seed private Harbor registries (see steps below)
+* IPv6 support for pulling artifacts
 * Carbide Portal login with username and password instead of token
 
 ## Setting Up a Harbor Replication of Carbide to Private Registry
