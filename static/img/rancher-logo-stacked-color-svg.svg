@@ -2,12 +2,13 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="148.76245mm"
-   height="97.573425mm"
-   viewBox="0 0 148.76245 97.573425"
+   width="148.76257mm"
+   height="97.573418mm"
+   viewBox="0 0 148.76257 97.573418"
    version="1.1"
    id="svg11196"
    xml:space="preserve"
+   sodipodi:docname="rancher-logo-stacked-color-svg.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -21,12 +22,19 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     showgrid="false" /><defs
+     showgrid="false"><inkscape:page
+       x="0"
+       y="7.902554e-21"
+       width="148.76257"
+       height="97.573425"
+       id="page2"
+       margin="0"
+       bleed="0" /></sodipodi:namedview><defs
      id="defs11193" /><g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-32.38942,-58.394102)"><g
+     transform="translate(-32.389421,-58.394101)"><g
        id="Layer_2_1_"
        transform="matrix(0.26458333,0,0,0.26458333,13.884503,134.16099)">
 	<g
@@ -53,13 +61,13 @@
    style="fill:#000000;fill-opacity:1;stroke-width:1.38634" />
 		<polygon
    class="st0"
-   points="532.8,70.6 532.8,1.2 549.9,1.2 549.9,27.4 571,27.4 571,1.2 588.1,1.2 588.1,70.6 571,70.6 571,41.2 549.9,41.2 549.9,70.6 "
+   points="571,27.4 571,1.2 588.1,1.2 588.1,70.6 571,70.6 571,41.2 549.9,41.2 549.9,70.6 532.8,70.6 532.8,1.2 549.9,1.2 549.9,27.4 "
    id="polygon12118"
    style="fill:#000000;fill-opacity:1"
    transform="matrix(1.3863398,0,0,1.3863398,-337.08949,-73.992832)" />
 		<polygon
    class="st0"
-   points="593,70.6 593,1.2 638.9,1.2 638.9,14 610.2,14 610.2,28.9 634.3,28.9 634.3,41.6 610.2,41.6 610.2,57.8 639.9,57.8 639.9,70.6 "
+   points="610.2,14 610.2,28.9 634.3,28.9 634.3,41.6 610.2,41.6 610.2,57.8 639.9,57.8 639.9,70.6 593,70.6 593,1.2 638.9,1.2 638.9,14 "
    id="polygon12120"
    style="fill:#000000;fill-opacity:1"
    transform="matrix(1.3863398,0,0,1.3863398,-337.08949,-73.992832)" />
@@ -131,7 +139,16 @@
      x="351.69388"
      y="81.957588"
      style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Poppins;-inkscape-font-specification:Poppins;fill:#000000;fill-opacity:1;stroke-width:0">Government Solutions</tspan></text></g>
-</g></g><style
+</g><path
+       style="opacity:1;fill:#f9f9f9;stroke:#856f00;stroke-width:0"
+       d="m 103.39687,65.420557 v 6.9874 h 54.45499 v -6.9874 z"
+       id="path1" /><path
+       style="opacity:1;fill:#f9f9f9;stroke:#856f00;stroke-width:0"
+       d="m 103.39687,79.395373 v 6.987425 h 54.45497 l 2e-5,-6.987425 z"
+       id="path2" /><path
+       style="opacity:1;fill:#f9f9f9;stroke:#856f00;stroke-width:0"
+       d="m 55.265681,93.370214 v 7.026446 H 157.85184 v -7.026446 z"
+       id="path3" /></g><style
      type="text/css"
      id="style12108">
 	.st0{fill:#59595B;}
