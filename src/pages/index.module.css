@@ -1,23 +1,158 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
-
+/* ── Hero ─────────────────────────────────────────────────── */
 .heroBanner {
-  padding: 4rem 0;
-  text-align: center;
   position: relative;
+  padding: 6rem 0 5rem;
   overflow: hidden;
-}
-
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
-}
-
-.buttons {
+  background: linear-gradient(135deg, #0d1b2e 0%, #152060 50%, #1634a0 100%);
+  min-height: 420px;
   display: flex;
   align-items: center;
-  justify-content: center;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(192, 57, 43, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(26, 43, 74, 0.8) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* subtle grid lines */
+.heroGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+}
+
+.heroBadge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #e62837;
+  border: 1px solid rgba(192, 57, 43, 0.4);
+  padding: 0.25rem 0.75rem;
+  border-radius: 2px;
+  margin-bottom: 1.25rem;
+  text-transform: uppercase;
+}
+
+.heroWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.heroLogo {
+  height: 180px; /* tweak this to match your actual 3-line title height */
+  width: auto;
+  filter: drop-shadow(0 0 2px white);
+}
+
+.heroTitle {
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* or flex-start, depending on your layout */
+}
+
+.heroLine {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+/* .heroTitle {
+
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+} */
+
+.carbideAccent {
+  color: #ffffff;
+  font-family: nasalization;
+}
+
+.carbideRed {
+  color: #e62837;
+}
+
+.heroSubtitle {
+  font-size: 1.15rem;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 2rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.heroActions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.primaryButton {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.75rem;
+  background: #c0392b;
+  color: #ffffff !important;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 3px;
+  text-decoration: none !important;
+  transition: background 0.2s, transform 0.15s;
+  letter-spacing: 0.02em;
+}
+
+.primaryButton:hover {
+  background: #e62837;
+  transform: translateY(-1px);
+  color: #ffffff !important;
+}
+
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.75rem;
+  background: transparent;
+  color: rgba(255,255,255,0.8) !important;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 3px;
+  border: 1px solid rgba(255,255,255,0.25);
+  text-decoration: none !important;
+  transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  letter-spacing: 0.02em;
+}
+
+.secondaryButton:hover {
+  border-color: rgba(255,255,255,0.6);
+  color: #ffffff !important;
+  transform: translateY(-1px);
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 2.2rem;
+  }
+  .heroBanner {
+    padding: 4rem 0 3rem;
+  }
 }
