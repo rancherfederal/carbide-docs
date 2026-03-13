@@ -2,12 +2,17 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="15.230471mm"
-   height="18.151825mm"
-   viewBox="0 0 15.230471 18.151825"
+   width="15.230474mm"
+   height="18.151846mm"
+   viewBox="0 0 15.230475 18.151846"
    version="1.1"
    id="svg5"
    xml:space="preserve"
+   sodipodi:docname="carbide-logo.svg"
+   inkscape:version="1.4 (e7c3feb1, 2024-10-09)"
+   inkscape:export-filename="carbide-logo.svg"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -21,13 +26,29 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     showgrid="false" /><defs
+     showgrid="false"
+     inkscape:zoom="12.603863"
+     inkscape:cx="9.0448463"
+     inkscape:cy="46.771376"
+     inkscape:window-width="1920"
+     inkscape:window-height="1142"
+     inkscape:window-x="1920"
+     inkscape:window-y="30"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="Layer_1-2"><inkscape:page
+       x="1.5698454e-22"
+       y="0"
+       width="15.230474"
+       height="18.151846"
+       id="page2"
+       margin="0"
+       bleed="0" /></sodipodi:namedview><defs
      id="defs2"><style
        id="style4808">.cls-1{fill:none;stroke:#0375a8;stroke-miterlimit:10;stroke-width:8.72px;}.cls-2{fill:#f05455;}.cls-3{fill:#0375a8;}.cls-4{fill:#fff;}</style></defs><g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-31.006552,-154.20553)"><g
+     transform="translate(-31.006551,-154.20552)"><g
        id="g1251"
        transform="matrix(0.26458333,0,0,0.26458333,23.510443,136.5276)"><g
          id="padding"
@@ -62,19 +83,7 @@
 	
 	
 	
-<text
-   xml:space="preserve"
-   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:62.7016px;font-family:Poppins;-inkscape-font-specification:'Poppins Bold';text-align:center;text-anchor:middle;fill:#040404;fill-opacity:1;stroke-width:0"
-   x="239.96623"
-   y="122.6553"
-   id="text2610"><tspan
-     sodipodi:role="line"
-     id="tspan2608"
-     x="239.96623"
-     y="122.6553"
-     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Nasalization;-inkscape-font-specification:'Nasalization Bold';stroke-width:0">C<tspan
-   style="fill:#ea282f;fill-opacity:1;stroke-width:0"
-   id="tspan2832">A</tspan>RBIDE</tspan></text><g
+<g
    id="Layer_1-2"
    data-name="Layer 1"
    transform="matrix(0.21864173,0,0,0.21864173,-13.847216,71.769978)"><path
@@ -107,7 +116,19 @@
      id="path4826" /><path
      class="cls-4"
      d="m 375.8536,16.703721 h -15.4 -0.37 -15.77 a 4.9,4.9 0 0 0 -0.54,0 v -1.43 c 0,-3.14 -0.78,-5.6999998 -1.74,-5.6999998 -0.96,0 -2.18,2.5499998 -2.68,5.6999998 l -1.61,9.64 a 4.69,4.69 0 0 0 4.77,5.64 h 9.49 a 8.9,8.9 0 0 0 2.71,-0.42 3.49,3.49 0 0 1 -3.43,2.84 h -13.31 a 3.49,3.49 0 0 1 -3.44,-4.06 l 1.32,-8.13 a 3.48,3.48 0 0 0 -3.44,-4.06 h -66.21 a 3.49,3.49 0 0 0 -3.18,2 l -12.47,19 a 0.86,0.86 0 0 0 0.06,1 l 2.42,2.86 a 0.86,0.86 0 0 0 1.2,0.12 l 8.48,-6.69 v 40.61 a 3.48,3.48 0 0 0 3.49,3.48 h 18.8 a 3.48,3.48 0 0 0 3.49,-3.48 v -14.07 a 3.48,3.48 0 0 1 3.48,-3.48 h 46.95 a 3.48,3.48 0 0 1 3.49,3.48 v 14.13 a 3.48,3.48 0 0 0 3.49,3.48 h 18.8 a 3.48,3.48 0 0 0 3.49,-3.48 v -15.2 h -10 a 5.73,5.73 0 0 1 -5.71,-5.71 v -9.77 a 5.72,5.72 0 0 1 2.29,-4.56 v 11.66 a 5.73,5.73 0 0 0 5.71,5.71 h 15.37 a 5.72,5.72 0 0 0 5.7,-5.71 v -29.69 a 5.72,5.72 0 0 0 -5.7,-5.71"
-     id="path4828" /></g><text
+     id="path4828" /><path
+     style="opacity:1;fill:#ffffff;stroke:#856f00;stroke-width:0"
+     d="m 229.3136,238.06372 21.14,18.91 V 88.523723 h -21.14 z"
+     id="path1" /><path
+     style="opacity:1;fill:#f9f9f9;stroke:#856f00;stroke-width:0"
+     d="M 285.7436,88.523723 V 275.27372 l 21.11001,8.14 V 88.523723 Z"
+     id="path2" /><path
+     style="opacity:1;fill:#ffffff;stroke:#856f00;stroke-width:0"
+     d="M 342.1636,88.523723 V 283.45372 l 21.14,-8.18 V 88.523723 Z"
+     id="path3" /><path
+     style="opacity:1;fill:#f9f9f9;stroke:#856f00;stroke-width:0"
+     d="M 398.59361,88.523723 V 257.03372 l 21.12999,-18.87 V 88.523723 Z"
+     id="path4" /></g><text
    xml:space="preserve"
    style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:20px;font-family:Nasalization;-inkscape-font-specification:'Nasalization Bold';text-align:center;text-anchor:middle;fill:#cf0000;fill-opacity:1;stroke-width:0"
    x="415.32419"
@@ -119,7 +140,7 @@
      sodipodi:role="line"
      id="tspan5220"
      x="415.32419"
-     y="-101.0105"></tspan><tspan
+     y="-101.0105" /><tspan
      sodipodi:role="line"
      id="tspan5224"
      x="415.32419"
