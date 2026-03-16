@@ -21,6 +21,8 @@ Transitioning to the Harbor registry provides several performance and feature im
 
 3. Select Replications > New Replication Rule. 
 
-4. Name your replication rule and select `Pull-based`. Set `Source registry` to the registry endpoint you just configured. Set the rest of the rule to your desired configuration. See the [Harbor documentation](https://goharbor.io/docs/2.2.0/administration/configuring-replication/create-replication-rules/) for additional information.
+4. Name your replication rule and select `Pull-based`. Set `Source registry` to the registry endpoint you just configured. Set the rest of the rule to your desired configuration. See the [Harbor documentation](https://goharbor.io/docs/2.2.0/administration/configuring-replication/create-replication-rules/) for additional information on replication rules.
+
+> **Warning:** We recommend setting replication rules to narrow down the scope of your sync. The Carbide registry contains many TBs of data, and complete replication would consume considerable resources. 
 
 ![Replication Rule](/img/ReplicationRule.png)
