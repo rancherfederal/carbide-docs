@@ -38,7 +38,7 @@ npm run start # this will open your default browser to http://localhost:3000
 [Official Docusaurus Documentation](https://docusaurus.io/docs/creating-pages)
 
 ## Publishing Content
-This docs site is served using github-pages. There is an [action](.github/workflows/deploy.yml) that will trigger upon commit to the `main` branch and deploy the new build to https://rancherfederal.github.io/carbide-docs/.
+This docs site is served using github-pages. There is an [action](.github/workflows/deploy.yml) that will trigger upon commit to the `main` branch and deploy the new build to https://docs.ranchercarbide.dev.
 
 
 ## Contributing
