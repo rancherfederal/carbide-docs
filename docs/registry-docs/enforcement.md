@@ -1,3 +1,6 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Enforcement
 
 Policy enforcement engines can be used to validate your cluster images against our public key. This will ensure only the images from our hardened registry are allowed to run.
@@ -44,10 +47,18 @@ If your Rancher system images are in a private registry requiring authentication
 ### Copying Policy Artifact to a Registry (Connected Environments)
 
 1. Fetch the image from the Carbide Secured Registry.
-
-```bash
-hauler store add image rgcrprod.azurecr.us/policies/verify-image-signatures:v0.1.7 --key carbide-key.pub --platform linux/amd64
-```
+<Tabs groupId="registry">
+   <TabItem value="harbor" label="Harbor Registry (Standard)" default>
+    ```bash
+    hauler store add image registry.ranchercarbide.dev/policies/verify-image-signatures:v0.1.7 --key carbide-key.pub --platform linux/amd64
+    ```
+    </TabItem>
+    <TabItem value="ACR" label="Azure Container Registry (Legacy)">
+    ```bash
+    hauler store add image rgcrprod.azurecr.us/policies/verify-image-signatures:v0.1.7 --key carbide-key.pub --platform linux/amd64
+    ```
+    </TabItem>
+</Tabs>
 
 2. Copy the content from the Hauler store to your registry.
 
@@ -63,9 +74,18 @@ Use the below steps, substituting your registry, to validate and locally save th
 
 1. Fetch the image from the Carbide Secured Registry.
 
-```bash
-hauler store add image rgcrprod.azurecr.us/policies/verify-image-signatures:v0.1.7 --key carbide-key.pub --platform linux/amd64
-```
+<Tabs groupId="registry">
+   <TabItem value="harbor" label="Harbor Registry (Standard)" default>
+    ```bash
+    hauler store add image registry.ranchercarbide.dev/policies/verify-image-signatures:v0.1.7 --key carbide-key.pub --platform linux/amd64
+    ```
+    </TabItem>
+    <TabItem value="ACR" label="Azure Container Registry (Legacy)">
+    ```bash
+    hauler store add image rgcrprod.azurecr.us/policies/verify-image-signatures:v0.1.7 --key carbide-key.pub --platform linux/amd64
+    ```
+    </TabItem>
+</Tabs>
 
 2. Save and output the content from the Hauler store to tarball.
 

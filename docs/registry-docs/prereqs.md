@@ -1,8 +1,11 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Prerequisites
 
 Below are all the things you need to get started with the Carbide Secured Registry (CSR). As we improve and streamline the process, this list could evolve.
 
->**Registry Disclaimer:** The Carbide Secured Registry (rgcrprod.azurecr.us) is _not_ intended to be used as the primary registry for running Kubernetes clusters. It is only intended as the acquisition point to obtain the Carbide images. Customers should seed their own private registries, and use that registry for their Kubernetes clusters.
+>**Registry Disclaimer:** The Carbide Secured Registry is _not_ intended to be used as the primary registry for running Kubernetes clusters. It is only intended as the acquisition point to obtain the Carbide images. Customers should seed their own private registries, and use that registry for their Kubernetes clusters.
 
 ## Required Tooling
 
@@ -59,11 +62,25 @@ tCAZva7CLlk/6gxvCM0QkIKznfaGTRMMYTaHMdQSau6yulDLlpokA++i8Q==
 
 Log in to the Carbide Secured Registry.
 
-Using Hauler (recommended):
-```bash
-hauler login -u <redacted> -p <redacted> rgcrprod.azurecr.us
-```
-Using Docker: 
-```bash
-docker login -u <redacted> -p <redacted> rgcrprod.azurecr.us
-```
+<Tabs groupId="registry">
+    <TabItem value="harbor" label="Harbor Registry (Standard)" default>
+        Using Hauler (recommended):
+        ```bash
+        hauler login -u <redacted> -p <redacted> registry.ranchercarbide.dev
+        ```
+        Using Docker: 
+        ```bash
+        docker login -u <redacted> -p <redacted> registry.ranchercarbide.dev
+        ```
+    </TabItem>
+    <TabItem value="ACR" label="Azure Container Registry (Legacy)">
+        Using Hauler (recommended):
+        ```bash
+        hauler login -u <redacted> -p <redacted> rgcrprod.azurecr.us
+        ```
+        Using Docker: 
+        ```bash
+        docker login -u <redacted> -p <redacted> rgcrprod.azurecr.us
+        ```
+    </TabItem>
+</Tabs>

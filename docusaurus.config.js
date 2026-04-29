@@ -8,8 +8,8 @@ const darkCodeTheme = require('prism-react-renderer').themes.dracula;
 const config = {
   title: 'Rancher Government Carbide',
   tagline: 'Securing Cloud Native Missions',
-  url: 'https://rancherfederal.github.io',
-  baseUrl: '/carbide-docs/',
+  url: 'https://docs.ranchercarbide.dev',
+  baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/carbide-logo.ico',
@@ -78,8 +78,7 @@ const config = {
         title: '',
         logo: {
           alt: 'Carbide Logo',
-          // src: 'img/rgs_navbar_spaced.svg',
-          src: 'img/rancher_carbide_long_light_bg.svg',
+          src: 'img/rgs_logo_dev_site_48x32.svg',
         },
         items: [
           {

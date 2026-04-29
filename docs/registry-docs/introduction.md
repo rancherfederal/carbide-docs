@@ -15,4 +15,4 @@ In comparison to upstream-hosted images from Docker Hub, CSR images come with th
 
 The Carbide Secured Registry (CSR) will evolve with the standards and best practices around software supply chain security, so we can continue to deliver the highest levels of software security. If you see areas for improvement, please submit Github issues [here](https://github.com/rancherfederal/carbide-docs/issues).
 
-> **DISCLAIMER**:  The Carbide Secured Registry (rgcrprod.azurecr.us) is _not_ intended to be used as the primary registry for running Kubernetes clusters. It is only intended as the acquisition point to obtain the Carbide-secured images. Customers should seed their own private OCI registries, and use that registry for their Kubernetes clusters.
+> **DISCLAIMER**:  The Carbide Secured Registry is _not_ intended to be used as the primary registry for running Kubernetes clusters. It is only intended as the acquisition point to obtain the Carbide-secured images. Customers should seed their own private OCI registries, and use that registry for their Kubernetes clusters.
