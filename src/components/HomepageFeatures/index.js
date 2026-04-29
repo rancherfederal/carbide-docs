@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 const FeatureList = [
   {
     title: 'Carbide Secured Registry (CSR)',
-    Svg: require('@site/static/img/carbide-logo.svg').default,
+    Svg: require('@site/static/img/rgs_carbide_secured_registry_100x100.svg').default,
     description: (
       <>
         Centralized Secure SLSA 3 Compliant Container Registry, with SBOMs, CVEs, Image Attestations, and verifiable digital signatures.
@@ -14,7 +14,7 @@ const FeatureList = [
   },
   {
     title: 'World Class Support',
-    Svg: require('@site/static/img/rancher-logo-stacked-color-svg.svg').default,
+    Svg: require('@site/static/img/rgs_world_class_support_100x100.svg').default,
     description: (
       <>
         Rancher Government Solutions is your trusted provider of Rancher, Kubernetes, and Cloud Native support. Learn more on our <a href="https://ranchergovernment.com">website</a>.

@@ -26,6 +26,7 @@
 .featureIconWrap {
   background: #d9dbdf;
   border-radius: 50%;
+  overflow: hidden;
   width: 150px;
   height: 150px;
   display: flex;
@@ -33,11 +34,12 @@
   justify-content: center;
   margin-bottom: 1.5rem;
   flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .featureSvg {
-  height: 100px;
-  width: 100px;
+  height: 150px;
+  width: 150px;
 }
 
 .featureBody {

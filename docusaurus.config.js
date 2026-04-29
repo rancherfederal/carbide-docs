@@ -78,8 +78,7 @@ const config = {
         title: '',
         logo: {
           alt: 'Carbide Logo',
-          // src: 'img/rgs_navbar_spaced.svg',
-          src: 'img/rancher_carbide_long_light_bg.svg',
+          src: 'img/rgs_logo_dev_site_48x32.svg',
         },
         items: [
           {
