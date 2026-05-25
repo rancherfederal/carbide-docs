@@ -1,0 +1,79 @@
+.features {
+  padding: 4rem 0;
+  background: #f7f8fa;
+  border-top: 1px solid #e8eaed;
+}
+
+.featureCard {
+  background: #ffffff;
+  border: 1px solid #e2e5ea;
+  border-radius: 6px;
+  padding: 2.5rem 2rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: box-shadow 0.2s, transform 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.featureCard:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  transform: translateY(-3px);
+}
+
+.featureIconWrap {
+  background: #d9dbdf;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  flex-shrink: 0;
+}
+
+.featureSvg {
+  height: 100px;
+  width: 100px;
+}
+
+.featureBody {
+  flex: 1;
+}
+
+.featureTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #152060;
+  margin-bottom: 0.6rem;
+  letter-spacing: -0.01em;
+}
+
+.featureDesc {
+  font-size: 0.95rem;
+  color: #555e6d;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.featureDesc a {
+  color: #e62837;
+  font-weight: 500;
+}
+
+.featureDesc a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .features {
+    padding: 2.5rem 0;
+  }
+}
+
+.box-shadow {
+  box-shadow: 1px 1px;
+}

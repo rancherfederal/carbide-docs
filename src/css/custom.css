@@ -79,3 +79,15 @@ table td{
   text-align: center;
   font-weight: bold;
 }
+
+.small-image {
+  width: 50%;
+}
+
+.indented-image {
+  margin-left: 45px;
+}
+
+.box-shadow {
+  box-shadow: 0 2px 5px rgba(0,0,0,0.45);
+}
