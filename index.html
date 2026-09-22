@@ -1,10 +1,129 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta http-equiv="refresh" content="dev">
+    <meta charset="UTF-8">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    >
+    <meta
+      http-equiv="refresh"
+      content="5; url=https://docs.ranchercarbide.dev"
+    >
     <link rel="canonical" href="https://docs.ranchercarbide.dev">
+
+    <title>Carbide Documentation Has Moved</title>
+
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 24px;
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background: linear-gradient(135deg, #0d1b36, #203b91);
+      }
+
+      main {
+        width: 100%;
+        max-width: 1000px;
+      }
+
+      h1 {
+        margin-bottom: 16px;
+        font-size: 48px;
+        white-space: nowrap;
+      }
+
+      p {
+        color: #d3d8e6;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .destination {
+        display: block;
+        margin: 8px 0 28px;
+        color: #ffffff;
+        font-size: 24px;
+        font-weight: bold;
+        text-decoration: none;
+      }
+
+      .destination:hover {
+        text-decoration: underline;
+      }
+
+      #countdown {
+        color: #ffffff;
+        font-weight: bold;
+      }
+
+      .button {
+        display: inline-block;
+        margin-top: 16px;
+        padding: 14px 24px;
+        border-radius: 4px;
+        color: #ffffff;
+        font-weight: bold;
+        text-decoration: none;
+        background: #ef2938;
+      }
+
+      .button:hover {
+        background: #d91f2e;
+      }
+
+      @media (max-width: 850px) {
+        h1 {
+          font-size: 36px;
+          white-space: normal;
+        }
+      }
+    </style>
   </head>
+
   <body>
-    <script>window.location.replace("https://docs.ranchercarbide.dev")</script>
+    <main>
+      <h1>Carbide Documentation Has Moved</h1>
+
+      <p>Our documentation is now available at:</p>
+
+      <a
+        class="destination"
+        href="https://docs.ranchercarbide.dev"
+      >
+        docs.ranchercarbide.dev
+      </a>
+
+      <p>
+        You will be redirected in
+        <span id="countdown">5</span>
+        <span id="seconds-label">seconds</span>.
+      </p>
+    </main>
+
+    <script>
+      const destination = "https://docs.ranchercarbide.dev";
+      const countdown = document.getElementById("countdown");
+      const secondsLabel = document.getElementById("seconds-label");
+      let secondsRemaining = 5;
+
+      const timer = setInterval(() => {
+        secondsRemaining -= 1;
+        countdown.textContent = secondsRemaining;
+        secondsLabel.textContent =
+          secondsRemaining === 1 ? "second" : "seconds";
+
+        if (secondsRemaining <= 0) {
+          clearInterval(timer);
+          window.location.replace(destination);
+        }
+      }, 1000);
+    </script>
   </body>
 </html>
